@@ -1,7 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.public.master')
 
 @section('content')
-
     <div id="banner-area" class="banner-area" style="background-image:url({{ url('assets/images/banner/banner1.jpg') }})">
         <div class="banner-text">
             <div class="container">
@@ -30,11 +29,13 @@
                 <div class="col-lg-8">
                     <div id="page-slider" class="page-slider small-bg">
                         <div class="item">
-                            <img loading="lazy" class="img-fluid" src="{{ url('assets/images/projects/project5.jpg') }}" alt="project-image" />
+                            <img loading="lazy" class="img-fluid" src="{{ url('assets/images/projects/project5.jpg') }}"
+                                alt="project-image" />
                         </div>
 
                         <div class="item">
-                            <img loading="lazy" class="img-fluid" src="{{ url('assets/images/projects/project4.jpg') }}" alt="project-image" />
+                            <img loading="lazy" class="img-fluid" src="{{ url('assets/images/projects/project4.jpg') }}"
+                                alt="project-image" />
                         </div>
                     </div><!-- Page slider end -->
                 </div><!-- Slider col end -->
@@ -77,5 +78,4 @@
 
         </div><!-- Conatiner end -->
     </section><!-- Main container end -->
-
 @endsection
