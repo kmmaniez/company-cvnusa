@@ -1,7 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.public.master')
 
 @section('content')
-
     <div id="banner-area" class="banner-area" style="background-image:url({{ url('assets/images/banner/banner1.jpg') }})">
         <div class="banner-text">
             <div class="container">
@@ -30,11 +29,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service1.jpg') }}" alt="service-image">
+                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service1.jpg') }}"
+                                alt="service-image">
                         </div>
                         <div class="d-flex">
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon1.png') }}" alt="service-icon">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon1.png') }}"
+                                    alt="service-icon">
                             </div>
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">Zero Harm Everyday</a></h3>
@@ -48,11 +49,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service2.jpg') }}" alt="service-image">
+                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service2.jpg') }}"
+                                alt="service-image">
                         </div>
                         <div class="d-flex">
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon2.png') }}" alt="service-icon">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon2.png') }}"
+                                    alt="service-icon">
                             </div>
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">Virtual Construction</a></h3>
@@ -66,11 +69,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service3.jpg') }}" alt="service-image">
+                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service3.jpg') }}"
+                                alt="service-image">
                         </div>
                         <div class="d-flex">
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon3.png') }}" alt="service-icon">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon3.png') }}"
+                                    alt="service-icon">
                             </div>
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">Build To Last</a></h3>
@@ -84,11 +89,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service4.jpg') }}" alt="service-image">
+                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service4.jpg') }}"
+                                alt="service-image">
                         </div>
                         <div class="d-flex">
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon4.png') }}" alt="service-icon">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon4.png') }}"
+                                    alt="service-icon">
                             </div>
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">EXTERIOR DESIGN</a></h3>
@@ -102,11 +109,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service5.jpg') }}" alt="service-image">
+                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service5.jpg') }}"
+                                alt="service-image">
                         </div>
                         <div class="d-flex">
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon5.png') }}" alt="service-icon">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon5.png') }}"
+                                    alt="service-icon">
                             </div>
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">RENOVATION</a></h3>
@@ -120,11 +129,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service6.jpg') }}" alt="service-image">
+                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service6.jpg') }}"
+                                alt="service-image">
                         </div>
                         <div class="d-flex">
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon6.png') }}" alt="service-icon">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon6.png') }}"
+                                    alt="service-icon">
                             </div>
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">SAFETY MANAGEMENT</a></h3>
@@ -138,5 +149,4 @@
             </div><!-- Main row end -->
         </div><!-- Conatiner end -->
     </section><!-- Main container end -->
-
 @endsection
