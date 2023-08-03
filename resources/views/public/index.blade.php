@@ -1,4 +1,15 @@
-@extends('layouts.master')
+@extends('layouts.public.master')
+@push('stylesheet')
+    <style>
+        .ts-service-box:hover {
+            transition: transform;
+            transition-duration: 200ms;
+            transition-delay: 50ms;
+            transform: translateY(-12px);
+            cursor: pointer;
+        }
+    </style>
+@endpush
 
 @section('content')
     <x-public.carousel></x-public.carousel>
@@ -167,6 +178,7 @@
             <!--/ Title row end -->
 
             <div class="row">
+
                 <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
@@ -178,7 +190,8 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 1 end -->
-
+                </div>
+                <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
                             <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon2.png') }}"
@@ -189,7 +202,8 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 2 end -->
-
+                </div>
+                <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
                             <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon3.png') }}"
@@ -200,15 +214,8 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 3 end -->
-
-                </div><!-- Col end -->
-
-                <div class="col-lg-4 text-center">
-                    <img loading="lazy" class="img-fluid" src="{{ url('assets/images/services/service-center.jpg') }}"
-                        alt="service-avater-image">
-                </div><!-- Col end -->
-
-                <div class="col-lg-4 mt-5 mt-lg-0 mb-4 mb-lg-0">
+                </div>
+                <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
                             <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon4.png') }}"
@@ -219,7 +226,8 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 4 end -->
-
+                </div>
+                <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
                             <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon5.png') }}"
@@ -230,7 +238,8 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 5 end -->
-
+                </div>
+                <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
                             <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon6.png') }}"
@@ -241,7 +250,8 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 6 end -->
-                </div><!-- Col end -->
+                </div>
+
             </div><!-- Content row end -->
 
         </div>
@@ -258,7 +268,7 @@
                 </div>
             </div>
             <!--/ Title row end -->
-    
+
             <div class="row">
                 <div class="col-12">
                     <div class="shuffle-btn-group">
@@ -267,41 +277,37 @@
                                 checked="checked">Show All
                         </label>
                         <label for="commercial">
-                            <input type="radio" name="shuffle-filter" id="commercial"
-                                value="commercial">Commercial
+                            <input type="radio" name="shuffle-filter" id="commercial" value="commercial">Commercial
                         </label>
                         <label for="education">
-                            <input type="radio" name="shuffle-filter" id="education"
-                                value="education">Education
+                            <input type="radio" name="shuffle-filter" id="education" value="education">Education
                         </label>
                         <label for="government">
-                            <input type="radio" name="shuffle-filter" id="government"
-                                value="government">Government
+                            <input type="radio" name="shuffle-filter" id="government" value="government">Government
                         </label>
                         <label for="infrastructure">
                             <input type="radio" name="shuffle-filter" id="infrastructure"
                                 value="infrastructure">Infrastructure
                         </label>
                         <label for="residential">
-                            <input type="radio" name="shuffle-filter" id="residential"
-                                value="residential">Residential
+                            <input type="radio" name="shuffle-filter" id="residential" value="residential">Residential
                         </label>
                         <label for="healthcare">
-                            <input type="radio" name="shuffle-filter" id="healthcare"
-                                value="healthcare">Healthcare
+                            <input type="radio" name="shuffle-filter" id="healthcare" value="healthcare">Healthcare
                         </label>
                     </div><!-- project filter end -->
-    
-    
+
+
                     <div class="row shuffle-wrapper">
                         <div class="col-1 shuffle-sizer"></div>
-    
+
                         <div class="col-lg-4 col-md-6 shuffle-item"
                             data-groups="[&quot;government&quot;,&quot;healthcare&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ url('assets/images/projects/project1.jpg') }}"
                                     aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project1.jpg') }}" alt="project-img">
+                                    <img class="img-fluid" src="{{ url('assets/images/projects/project1.jpg') }}"
+                                        alt="project-img">
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
                                 <div class="project-item-info">
@@ -314,93 +320,98 @@
                                 </div>
                             </div>
                         </div><!-- shuffle item 1 end -->
-    
+
                         <div class="col-lg-4 col-md-6 shuffle-item" data-groups="[&quot;healthcare&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ url('assets/images/projects/project2.jpg') }}"
                                     aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project2.jpg') }}" alt="project-img">
+                                    <img class="img-fluid" src="{{ url('assets/images/projects/project2.jpg') }}"
+                                        alt="project-img">
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="projects-single.html">Ghum Touch Hospital</a>
+                                            <a href="{{ url('/project/id') }}">Ghum Touch Hospital</a>
                                         </h3>
                                         <p class="project-cat">Healthcare</p>
                                     </div>
                                 </div>
                             </div>
                         </div><!-- shuffle item 2 end -->
-    
+
                         <div class="col-lg-4 col-md-6 shuffle-item"
                             data-groups="[&quot;infrastructure&quot;,&quot;commercial&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ url('assets/images/projects/project3.jpg') }}"
                                     aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project3.jpg') }}" alt="project-img">
+                                    <img class="img-fluid" src="{{ url('assets/images/projects/project3.jpg') }}"
+                                        alt="project-img">
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="projects-single.html">TNT East Facility</a>
+                                            <a href="{{ url('/project/id') }}">TNT East Facility</a>
                                         </h3>
                                         <p class="project-cat">Government</p>
                                     </div>
                                 </div>
                             </div>
                         </div><!-- shuffle item 3 end -->
-    
+
                         <div class="col-lg-4 col-md-6 shuffle-item"
                             data-groups="[&quot;education&quot;,&quot;infrastructure&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ url('assets/images/projects/project4.jpg') }}"
                                     aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project4.jpg') }}" alt="project-img">
+                                    <img class="img-fluid" src="{{ url('assets/images/projects/project4.jpg') }}"
+                                        alt="project-img">
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="projects-single.html">Narriot Headquarters</a>
+                                            <a href="{{ url('/project/id') }}">Narriot Headquarters</a>
                                         </h3>
                                         <p class="project-cat">Infrastructure</p>
                                     </div>
                                 </div>
                             </div>
                         </div><!-- shuffle item 4 end -->
-    
+
                         <div class="col-lg-4 col-md-6 shuffle-item"
                             data-groups="[&quot;infrastructure&quot;,&quot;education&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ url('assets/images/projects/project5.jpg') }}"
                                     aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project5.jpg') }}" alt="project-img">
+                                    <img class="img-fluid" src="{{ url('assets/images/projects/project5.jpg') }}"
+                                        alt="project-img">
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="projects-single.html">Kalas Metrorail</a>
+                                            <a href="{{ url('/project/id') }}">Kalas Metrorail</a>
                                         </h3>
                                         <p class="project-cat">Infrastructure</p>
                                     </div>
                                 </div>
                             </div>
                         </div><!-- shuffle item 5 end -->
-    
+
                         <div class="col-lg-4 col-md-6 shuffle-item" data-groups="[&quot;residential&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ url('assets/images/projects/project6.jpg') }}"
                                     aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project6.jpg') }}" alt="project-img">
+                                    <img class="img-fluid" src="{{ url('assets/images/projects/project6.jpg') }}"
+                                        alt="project-img">
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="projects-single.html">Ancraft Avenue House</a>
+                                            <a href="{{ url('/project/id') }}">Ancraft Avenue House</a>
                                         </h3>
                                         <p class="project-cat">Residential</p>
                                     </div>
@@ -409,13 +420,13 @@
                         </div><!-- shuffle item 6 end -->
                     </div><!-- shuffle end -->
                 </div>
-    
+
                 <div class="col-12">
                     <div class="general-btn text-center">
-                        <a class="btn btn-primary" href="projects.html">View All Projects</a>
+                        <a class="btn btn-primary" href="{{ route('public.projects') }}">View All Projects</a>
                     </div>
                 </div>
-    
+
             </div><!-- Content row end -->
         </div>
         <!--/ Container end -->
