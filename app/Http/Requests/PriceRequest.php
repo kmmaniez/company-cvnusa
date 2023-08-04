@@ -24,7 +24,8 @@ class PriceRequest extends FormRequest
         return [
             'judul' => ['required', 'string' ], 
             'harga' => ['required', 'numeric' ],
-            'keterangan' => ['required', 'string' ]
+            'keterangan' => ['required', 'string' ],
+            'is_featured' => ['nullable' ]
         ];
     }
 }
