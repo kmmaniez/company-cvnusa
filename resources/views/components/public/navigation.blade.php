@@ -55,31 +55,19 @@
                         <ul class="nav navbar-nav mr-auto">
                             <li class="nav-item {{ (request()->routeIs('public.index') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.index') }}">Home</a></li>
 
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Company <i
-                                        class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ route('public.about') }}">About Us</a></li>
-                                    <li><a href="{{ route('login') }}">Faq</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item {{ (request()->routeIs('public.about') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.about') }}">About Us</a></li>
 
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <i
-                                        class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="projects.html">Projects All</a></li>
-                                    <li><a href="projects-single.html">Projects Single</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item {{ (request()->routeIs('public.projects') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.projects') }}">Projects</a></li>
 
                             <li class="nav-item {{ (request()->routeIs('public.pricing') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.pricing') }}">Pricing</a></li>
                             
                             <li class="nav-item {{ (request()->routeIs('public.services') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.services') }}">Services</a></li>
                             
-                            <li class="nav-item {{ (request()->routeIs('public.testimonials') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.testimonials') }}">Testimonial</a></li>
+                            <li class="nav-item {{ (request()->routeIs('public.testimonials') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.testimonials') }}">Clients</a></li>
 
-                            <li class="nav-item {{ (request()->routeIs('public.contact') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.contact') }}">Hubungi Kami</a></li>
+                            <li class="nav-item {{ (request()->routeIs('public.contact') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.contact') }}">Contact Us</a></li>
+                            
+                            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                         </ul>
                     </div>
                 </nav>
