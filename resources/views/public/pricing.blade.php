@@ -4,6 +4,9 @@
         .ts-pricing-featured{
             transform:translateY(-48px); box-shadow: 0px 0px 30px #eaeaea;
         }
+        .ts-pricing-features ul{
+            list-style-type: none;
+        }
     </style>
 @endpush
 
@@ -51,7 +54,7 @@
                                 </h2>
                             </div><!-- Pricing header -->
                             <div class="ts-pricing-features">
-                                {{ $price->keterangan }}
+                                {!! $price->keterangan !!}
                                 {{-- <ul class="list-unstyled">
                                     <li>Project Management for Owners</li>
                                     <li>Pre-construction feasibility</li>
