@@ -26,28 +26,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>Who We Are</h3>
-                    <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
+                    <h3>{{ isset($data[0]['tagline_title']) ? $data[0]['tagline_title'] : '-' }}</h3>
+                    {!! isset($data[0]['tagline_content']) ? $data[0]['tagline_content'] : '.' !!}
+                    {{-- <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
                         horrible vermin.</p>
                     <p>He lay on his armour-like back, and if he lifted. ultrices ultrices sapien, nec tincidunt
                         nunc posuere ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. If you are going
-                        to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing.</p>
+                        to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing.</p> --}}
                 </div>
                 <div class="col-lg-12 mt-5 text-justify">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h3>Our Vision</h3>
+                            <h3>{{ isset($data[0]['title_vision']) ? $data[0]['title_vision'] : '-' }}</h3>
+                            {!! isset($data[0]['content_vision']) ? $data[0]['content_vision'] : '.' !!}
+                            {{-- <hr>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus accusamus adipisci
                                 sapiente earum, voluptate qui consequuntur quae voluptates cupiditate molestias delectus
                                 harum magni velit nulla itaque ab ullam dolore? Suscipit ipsa impedit illo tempore cum
                                 provident ducimus fugit at laboriosam?</p>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum aliquam nihil, aliquid
-                                asperiores cupiditate doloribus? Eum iure nemo ab quos!</p>
+                                asperiores cupiditate doloribus? Eum iure nemo ab quos!</p> --}}
                         </div>
                         <div class="col-lg-6">
-                            <h3>Our Mission</h3>
+                            <h3>{{ isset($data[0]['title_mision']) ? $data[0]['title_mision'] : '-' }}</h3>
                             <div class="content">
-                                <ul>
+                                {!! isset($data[0]['content_mision']) ? $data[0]['content_mision'] : '.' !!}
+                                {{-- <ul>
                                     <li style="font-size: 1rem;">Lorem ipsum dolor sit amet.</li>
                                     <li style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Delectus officiis ad eligendi, deserunt quos omnis.</li>
@@ -56,7 +60,7 @@
                                     <li style="font-size: 1rem">Lorem ipsum dolor sit amet consectetur adipisicing.</li>
                                     <li style="font-size: 1rem">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Nesciunt.</li>
-                                </ul>
+                                </ul> --}}
                             </div>
                         </div>
                     </div>
