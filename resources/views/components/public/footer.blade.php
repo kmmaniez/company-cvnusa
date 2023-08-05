@@ -6,9 +6,11 @@
                     <h3 class="widget-title">Tentang Kami</h3>
                     <img loading="lazy" width="200px" class="footer-logo" src="{{ url('assets/images/footer-logo.pn') }}"
                         alt="Constra">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done
-                        idunt ut
-                        labore et dolore magna aliqua.</p>
+                    <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
+                        horrible vermin.</p>
+                    <p>He lay on his armour-like back, and if he lifted. ultrices ultrices sapien, nec tincidunt
+                        nunc posuere ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. If you are going
+                        to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing.</p>
                     <div class="footer-social">
                         <ul>
                             <li><a href="https://facebook.com/themefisher" aria-label="Facebook"><i
@@ -87,9 +89,11 @@
 
 
 <!-- Google Map API Key-->
+@if (Request::routeIs('public.contact'))
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
 <!-- Google Map Plugin-->
 <script src="{{ url('assets/plugins/google-map/map.js') }}" defer></script>
+@endif
 
 <!-- Template custom -->
 <script src="{{ url('assets/js/script.js') }}"></script>
