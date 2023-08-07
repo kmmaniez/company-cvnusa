@@ -1,3 +1,5 @@
+@props(['dataclient'])
+
 <section class="content">
     <div class="container">
         <div class="row">
@@ -7,14 +9,17 @@
                 <h3 class="column-title">Our Clients</h3>
 
                 <div class="row all-clients">
+
+                    @foreach ($dataclient as $client)
                     <div class="col-sm-3 col-6">
                         <figure class="clients-logo">
                             <a href="#!"><img loading="lazy" class="img-fluid"
-                                    src="{{ url('assets/images/clients/client1.png') }}" alt="clients-logo" /></a>
+                                    src="{{ asset('client-logo') }}/{{ $client->logo }}" alt="clients-logo" /></a>
                         </figure>
-                    </div><!-- Client 1 end -->
+                    </div>
+                    @endforeach
 
-                    <div class="col-sm-3 col-6">
+                    {{-- <div class="col-sm-3 col-6">
                         <figure class="clients-logo">
                             <a href="#!"><img loading="lazy" class="img-fluid"
                                     src="{{ url('assets/images/clients/client2.png') }}" alt="clients-logo" /></a>
@@ -68,7 +73,7 @@
                             <a href="#!"><img loading="lazy" class="img-fluid"
                                     src="{{ url('assets/images/clients/client1.png') }}" alt="clients-logo" /></a>
                         </figure>
-                    </div><!-- Client 6 end -->
+                    </div><!-- Client 6 end --> --}}
 
                 </div><!-- Clients row end -->
 
