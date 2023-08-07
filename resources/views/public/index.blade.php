@@ -433,5 +433,5 @@
     </section><!-- Project area end -->
 
     <!-- Testimonial -->
-    <x-public.testimonial></x-public.testimonial>
+    <x-public.testimonial :dataclient="$client"></x-public.testimonial>
 @endsection
