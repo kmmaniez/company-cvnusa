@@ -7,10 +7,12 @@
                         <h2 class="slide-title" data-animation-in="slideInLeft">17 Years of excellence in</h2>
                         <h3 class="slide-sub-title" data-animation-in="slideInRight">Construction Industry
                         </h3>
-                        <p data-animation-in="slideInLeft" data-duration-in="1.2">
+                        <p class="slider-description lead" data-animation-in="slideInRight">We will deal with
+                            your failure that determines how you achieve success.</p>
+                        {{-- <p data-animation-in="slideInLeft" data-duration-in="1.2">
                             <a href="{{ route('public.services') }}" class="slider btn btn-primary">Our Services</a>
                             <a href="{{ route('public.contact') }}" class="slider btn btn-primary border">Contact Now</a>
-                        </p>
+                        </p> --}}
                     </div>
                 </div>
             </div>
@@ -22,12 +24,14 @@
             <div class="container h-100">
                 <div class="row align-items-center h-100">
                     <div class="col-md-12">
-                        <h2 class="slide-title-box" data-animation-in="slideInDown">World Class Service</h2>
+                        {{-- <h2 class="slide-title-box" data-animation-in="slideInDown">World Class Service</h2> --}}
                         <h3 class="slide-title" data-animation-in="fadeIn">When Service Matters</h3>
                         <h3 class="slide-sub-title" data-animation-in="slideInLeft">Your Choice is Simple</h3>
-                        <p data-animation-in="slideInRight">
+                        <p class="slider-description lead" data-animation-in="slideInRight">We will deal with
+                            your failure that determines how you achieve success.</p>
+                        {{-- <p data-animation-in="slideInRight">
                             <a href="{{ route('public.services') }}" class="slider btn btn-primary border">Our Services</a>
-                        </p>
+                        </p> --}}
                     </div>
                 </div>
             </div>
@@ -43,10 +47,10 @@
                         <h3 class="slide-sub-title" data-animation-in="fadeIn">We believe sustainability</h3>
                         <p class="slider-description lead" data-animation-in="slideInRight">We will deal with
                             your failure that determines how you achieve success.</p>
-                        <div data-animation-in="slideInLeft">
+                        {{-- <div data-animation-in="slideInLeft">
                             <a href="{{ route('public.about') }}" class="slider btn btn-primary border"
                                 aria-label="learn-more-about-us">Learn more</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
