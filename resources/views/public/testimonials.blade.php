@@ -7,12 +7,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="banner-heading">
-                            <h1 class="banner-title">Clients</h1>
+                            <h1 class="banner-title">{{ request()->route()->uri() }}</h1>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">company</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Clients</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ request()->route()->uri() }}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -22,5 +22,5 @@
         </div><!-- Banner text end -->
     </div><!-- Banner area end -->
 
-    <x-public.testimonial></x-public.testimonial>
+    <x-public.testimonial :dataclient="$data"></x-public.testimonial>
 @endsection
