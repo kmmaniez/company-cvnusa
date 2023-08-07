@@ -24,21 +24,33 @@ class RoleSeeder extends Seeder
         try {
             // create writer role and assign the permissions
             $role1 = Role::create(['name' => 'writer']);
-            $role1->givePermissionTo([
-                'manage-project',
-                'manage-price',
-                'manage-service',
-            ]);
+            foreach ($permission_lists as $key => $value) {
+                if ($key == 0 || $key == 4 || $key == 5 ) {
+                    continue;
+                }
+                $role1->givePermissionTo([$value]);
+            }
+            // $role1->givePermissionTo([
+            //     'manage-project',
+            //     'manage-price',
+            //     'manage-service',
+            // ]);
 
             // create admin role and assign the permissions
             $role2 = Role::create(['name' => 'admin']);
-            $role2->givePermissionTo([
-                'manage-project',
-                'manage-price',
-                'manage-service',
-                'manage-team',
-                'manage-website',
-            ]);
+            foreach ($permission_lists as $key => $value) {
+                if ($key == 0) {
+                    continue;
+                }
+                $role2->givePermissionTo([$value]);
+            }
+            // $role2->givePermissionTo([
+            //     'manage-project',
+            //     'manage-price',
+            //     'manage-service',
+            //     'manage-team',
+            //     'manage-website',
+            // ]);
 
             // create super role and assign the permissions
             $role3 = Role::create(['name' => 'super']);
