@@ -23,6 +23,7 @@ class PermissionSeeder extends Seeder
             'manage-service',
             'manage-team',
             'manage-website',
+            'manage-blog',
         ];
         try {
             foreach ($permission_lists as $key) {
