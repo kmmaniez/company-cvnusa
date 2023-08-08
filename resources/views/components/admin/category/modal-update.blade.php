@@ -26,7 +26,7 @@
         $('body').on('click', '#btnKatEdit', function(){
             $('#modal-update').modal('show');
             let id = $(this).data('kat');
-            const url = '{{ route('kategori.index') }}'
+            const url = '{{ route('categories.index') }}'
             $.get(url+'/'+id, 
                 function ({data}, success) {
                     $('#update_nama_kat').val(data.nama_kategori)
@@ -38,7 +38,7 @@
         $('#btnUpdateKat').click(function (e){
             e.preventDefault()
             const id = $(this).data('kat')
-            $.post(`/kategori/${id}`, {
+            $.post(`${window.location.pathname}/${id}`, {
                 _token: '{{ csrf_token() }}',
                 _method: 'PUT',
                 nama_kategori : $('#update_nama_kat').val()

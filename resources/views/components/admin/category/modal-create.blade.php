@@ -32,7 +32,7 @@
             $('#btnSimpanKat').click(function(e) {
                 e.preventDefault()
                 e.stopImmediatePropagation();
-                $.post('{{ route('kategori.store') }}', {
+                $.post('{{ route('categories.store') }}', {
                     _token: '{{ csrf_token() }}',
                     nama_kategori: $('#nama_kategori').val(),
                 }, function(data, status) {
