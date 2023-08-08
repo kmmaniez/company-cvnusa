@@ -46,6 +46,12 @@
             <i class="fas fa-fw fa-user-plus"></i>
             <span>Manage User</span></a>
     </li>
+    
+    <li class="nav-item {{ (request()->routeIs('users.index') ? 'active' : '') }}">
+        <a class="nav-link" href="{{ route('users.index') }}">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Manage Blog</span></a>
+    </li>
 
     <!-- Nav Item - Website Settings -->
     <li class="nav-item {{ (request()->routeIs('website.*') || request()->routeIs('projects.index') ? 'active' : '') }}">
@@ -54,11 +60,11 @@
             <i class="fas fa-fw fa-book"></i>
             <span>Projects & Client</span></a>
         </a>
-        <div id="projectCategory" class="collapse {{ (request()->routeIs('kategori.index') || request()->routeIs('projects.index') ? 'show' : '') }}" aria-labelledby="headingUtilities"
+        <div id="projectCategory" class="collapse {{ (request()->routeIs('categories.index') || request()->routeIs('projects.index') ? 'show' : '') }}" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Website:</h6>
-                <a class="collapse-item {{ (request()->routeIs('kategori.index') ? 'bg-primary text-white active' : '') }} " href="{{ route('kategori.index') }}"><i class="fas fa-fw fa-list"></i> Project & Category</a>
+                <a class="collapse-item {{ (request()->routeIs('categories.index') ? 'bg-primary text-white active' : '') }} " href="{{ route('categories.index') }}"><i class="fas fa-fw fa-list"></i> Project & Category</a>
                 {{-- <a class="collapse-item {{ (request()->routeIs('projects.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('projects.index') }}"><i class="fas fa-fw fa-book"></i> Projects</a> --}}
                 <a class="collapse-item {{ (request()->routeIs('clients.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('clients.index') }}"><i class="fas fa-fw fa-book"></i> Clients</a>
             </div>
@@ -69,15 +75,15 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pricing -->
-    <li class="nav-item {{ (request()->routeIs('prices.index') ? 'active' : '') }}">
+    {{-- <li class="nav-item {{ (request()->routeIs('prices.index') ? 'active' : '') }}">
         <a class="nav-link" href="{{ route('prices.index') }}">
             <i class="fas fa-fw fa-dollar-sign"></i>
             <span>Pricing</span></a>
-    </li>
+    </li> --}}
 
     <!-- Nav Item - Services -->
     <li class="nav-item {{ (request()->routeIs('services.index') ? 'active' : '') }}">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('services.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Services</span></a>
     </li>
