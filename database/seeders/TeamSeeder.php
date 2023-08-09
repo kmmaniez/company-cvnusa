@@ -7,6 +7,7 @@ use App\Models\Jabatan;
 use App\Models\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Testing\Fakes\Fake;
 
 class TeamSeeder extends Seeder
@@ -27,7 +28,7 @@ class TeamSeeder extends Seeder
             try {
                 Anggota::create([
                         'nama_anggota'  => $faker->name(),
-                        'id_jabatan'    =>  $i + 1,
+                        'jabatan_id'    =>  $i + 1,
                         'url_facebook'  => 'https://fb.com/jajajaj',
                         'url_twitter'   => '@elonmusk',
                         'url_linkedin'  => 'https://linkedin.com/jajaja',
