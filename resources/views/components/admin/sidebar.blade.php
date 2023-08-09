@@ -47,20 +47,21 @@
             <span>Manage User</span></a>
     </li>
     
-    <li class="nav-item {{ (request()->routeIs('users.index') ? 'active' : '') }}">
+    <!-- Nav Item - Manage Blog -->
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-fw fa-list"></i>
             <span>Manage Blog</span></a>
-    </li>
+    </li> --}}
 
     <!-- Nav Item - Website Settings -->
-    <li class="nav-item {{ (request()->routeIs('website.*') || request()->routeIs('projects.index') ? 'active' : '') }}">
+    <li class="nav-item {{ (request()->routeIs('categories.*') || request()->routeIs('clients.index') ? 'active' : '') }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#projectCategory"
             aria-expanded="true" aria-controls="projectCategory">
             <i class="fas fa-fw fa-book"></i>
             <span>Projects & Client</span></a>
         </a>
-        <div id="projectCategory" class="collapse {{ (request()->routeIs('categories.index') || request()->routeIs('projects.index') ? 'show' : '') }}" aria-labelledby="headingUtilities"
+        <div id="projectCategory" class="collapse {{ (request()->routeIs('categories.index') || request()->routeIs('clients.index') ? 'show' : '') }}" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Website:</h6>
@@ -109,7 +110,6 @@
                 {{-- <a class="collapse-item {{ (request()->routeIs('website.indexabout') ? 'bg-primary text-white active' : '') }} " href="{{ route('website.indexabout') }}"><i class="fas fa-fw fa-info"></i> About Us</a> --}}
                 <a class="collapse-item {{ (request()->routeIs('website.indexcarousel') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexcarousel') }}"><i class="fas fa-fw fa-image"></i> Carousel Image</a>
                 <a class="collapse-item {{ (request()->routeIs('website.indexwallpaper') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexwallpaper') }}"><i class="fas fa-fw fa-image"></i> Wallpaper Menu</a>
-                {{-- <a class="collapse-item" href=""><i class="fas fa-fw fa-image"></i> Sosial Media</a> --}}
             </div>
         </div>
     </li>
