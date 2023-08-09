@@ -28,39 +28,17 @@
                 <div class="col-lg-12 text-center">
                     <h3>{{ isset($data[0]['tagline_title']) ? $data[0]['tagline_title'] : '-' }}</h3>
                     {!! isset($data[0]['tagline_content']) ? $data[0]['tagline_content'] : '.' !!}
-                    {{-- <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
-                        horrible vermin.</p>
-                    <p>He lay on his armour-like back, and if he lifted. ultrices ultrices sapien, nec tincidunt
-                        nunc posuere ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. If you are going
-                        to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing.</p> --}}
                 </div>
                 <div class="col-lg-12 mt-5 text-justify">
                     <div class="row">
                         <div class="col-lg-6">
                             <h3>{{ isset($data[0]['title_vision']) ? $data[0]['title_vision'] : '-' }}</h3>
                             {!! isset($data[0]['content_vision']) ? $data[0]['content_vision'] : '.' !!}
-                            {{-- <hr>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus accusamus adipisci
-                                sapiente earum, voluptate qui consequuntur quae voluptates cupiditate molestias delectus
-                                harum magni velit nulla itaque ab ullam dolore? Suscipit ipsa impedit illo tempore cum
-                                provident ducimus fugit at laboriosam?</p>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum aliquam nihil, aliquid
-                                asperiores cupiditate doloribus? Eum iure nemo ab quos!</p> --}}
                         </div>
                         <div class="col-lg-6">
                             <h3>{{ isset($data[0]['title_mision']) ? $data[0]['title_mision'] : '-' }}</h3>
                             <div class="content">
                                 {!! isset($data[0]['content_mision']) ? $data[0]['content_mision'] : '.' !!}
-                                {{-- <ul>
-                                    <li style="font-size: 1rem;">Lorem ipsum dolor sit amet.</li>
-                                    <li style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Delectus officiis ad eligendi, deserunt quos omnis.</li>
-                                    <li style="font-size: 1rem">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                        Recusandae, quaerat.</li>
-                                    <li style="font-size: 1rem">Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-                                    <li style="font-size: 1rem">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Nesciunt.</li>
-                                </ul> --}}
                             </div>
                         </div>
                     </div>
@@ -71,6 +49,7 @@
         </div><!-- Container end -->
     </section><!-- Main container end -->
 
+    <!-- ANGGOTA TEAM -->
     <section id="ts-team" class="ts-team">
         <div class="container">
             <div class="row text-center">
@@ -81,120 +60,31 @@
             </div>
             <!--/ Title row end -->
 
+            <!-- SLIDER -->
             <div class="row">
                 <div class="col-lg-12">
                     <div id="team-slide" class="team-slide">
-                        <div class="item">
-                            <div class="ts-team-wrapper">
-                                <div class="team-img-wrapper">
-                                    <img loading="lazy" class="w-100" src="{{ url('assets/images/team/team1.jpg') }}"
-                                        alt="team-img">
-                                </div>
-                                <div class="ts-team-content">
-                                    <h3 class="ts-name">Nats Stenman</h3>
-                                    <p class="ts-designation">Chief Operating Officer</p>
-                                    <p class="ts-description">Nats Stenman began his career in construction with
-                                        boots on the ground</p>
-                                    <div class="team-social-icons">
-                                        <a target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-google-plus"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
-                                    </div>
-                                    <!--/ social-icons-->
-                                </div>
-                            </div>
-                            <!--/ Team wrapper end -->
-                        </div><!-- Team 1 end -->
 
+                        @foreach ($teams as $anggota)
                         <div class="item">
                             <div class="ts-team-wrapper">
                                 <div class="team-img-wrapper">
-                                    <img loading="lazy" class="w-100" src="{{ url('assets/images/team/team2.jpg') }}"
+                                    <img loading="lazy" class="w-100" src="{{ $anggota->gambar_anggota ? url("photos/teams/$anggota->gambar_anggota") : url('assets/images/team/team1.jpg') }}"
                                         alt="team-img">
                                 </div>
                                 <div class="ts-team-content">
-                                    <h3 class="ts-name">Angela Lyouer</h3>
-                                    <p class="ts-designation">Innovation Officer</p>
-                                    <p class="ts-description">Nats Stenman began his career in construction with
-                                        boots on the ground</p>
+                                    <h3 class="ts-name">{{ $anggota->nama_anggota }}</h3>
+                                    <p class="ts-designation">{{ $anggota->jabatan_id }}</p>
                                     <div class="team-social-icons">
-                                        <a target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
+                                        <a target="_blank" href="https://www.facebook.com/{{ $anggota->url_facebook }}"><i class="fab fa-facebook-f"></i></a>
+                                        <a target="_blank" href="https://www.twitter.com/{{ $anggota->url_twitter }}"><i class="fab fa-twitter"></i></a>
+                                        <a target="_blank" href="{{ $anggota->url_linkedin }}"><i class="fab fa-linkedin"></i></a>
+                                        <a target="_blank" href="https://www.instagram.com/{{ $anggota->url_instagram }}"><i class="fab fa-instagram"></i></a>
                                     </div>
-                                    <!--/ social-icons-->
                                 </div>
                             </div>
-                            <!--/ Team wrapper end -->
-                        </div><!-- Team 2 end -->
-
-                        <div class="item">
-                            <div class="ts-team-wrapper">
-                                <div class="team-img-wrapper">
-                                    <img loading="lazy" class="w-100" src="{{ url('assets/images/team/team3.jpg') }}"
-                                        alt="team-img">
-                                </div>
-                                <div class="ts-team-content">
-                                    <h3 class="ts-name">Mark Conter</h3>
-                                    <p class="ts-designation">Safety Officer</p>
-                                    <p class="ts-description">Nats Stenman began his career in construction with
-                                        boots on the ground</p>
-                                    <div class="team-social-icons">
-                                        <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-google-plus"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
-                                    </div>
-                                    <!--/ social-icons-->
-                                </div>
-                            </div>
-                            <!--/ Team wrapper end -->
-                        </div><!-- Team 3 end -->
-
-                        <div class="item">
-                            <div class="ts-team-wrapper">
-                                <div class="team-img-wrapper">
-                                    <img loading="lazy" class="w-100" src="{{ url('assets/images/team/team4.jpg') }}"
-                                        alt="team-img">
-                                </div>
-                                <div class="ts-team-content">
-                                    <h3 class="ts-name">Ayesha Stewart</h3>
-                                    <p class="ts-designation">Finance Officer</p>
-                                    <p class="ts-description">Nats Stenman began his career in construction with
-                                        boots on the ground</p>
-                                    <div class="team-social-icons">
-                                        <a target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-google-plus"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
-                                    </div>
-                                    <!--/ social-icons-->
-                                </div>
-                            </div>
-                            <!--/ Team wrapper end -->
-                        </div><!-- Team 4 end -->
-
-                        <div class="item">
-                            <div class="ts-team-wrapper">
-                                <div class="team-img-wrapper">
-                                    <img loading="lazy" class="w-100" src="{{ url('assets/images/team/team5.jpg') }}"
-                                        alt="team-img">
-                                </div>
-                                <div class="ts-team-content">
-                                    <h3 class="ts-name">Dave Clarkte</h3>
-                                    <p class="ts-designation">Civil Engineer</p>
-                                    <p class="ts-description">Nats Stenman began his career in construction with
-                                        boots on the ground</p>
-                                    <div class="team-social-icons">
-                                        <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-google-plus"></i></a>
-                                        <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
-                                    </div>
-                                    <!--/ social-icons-->
-                                </div>
-                            </div>
-                            <!--/ Team wrapper end -->
-                        </div><!-- Team 5 end -->
+                        </div>
+                        @endforeach
 
                     </div><!-- Team slide end -->
                 </div>
