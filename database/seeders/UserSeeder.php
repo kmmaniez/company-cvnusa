@@ -14,6 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = fake('id_ID');
+
         $data = [
             [
                 'username'  => 'writerlorem',
@@ -47,6 +49,16 @@ class UserSeeder extends Seeder
             } catch (\Throwable $th) {
                 throw $th;
             }
+        }
+
+        for ($i=0; $i < 8; $i++) { 
+            $users = User::create([
+                'username'  => $faker->userName(),
+                'name'      => $faker->name(),
+                'email'     => $faker->email(),
+                'password'  => Hash::make('password')
+            ]);
+            $users->assignRole('writer');
         }
 
     }
