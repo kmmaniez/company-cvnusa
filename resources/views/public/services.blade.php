@@ -7,12 +7,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="banner-heading">
-                            <h1 class="banner-title">Service</h1>
+                            <h1 class="banner-title">{{ request()->route()->uri() }}</h1>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Services</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">All Services</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('public.index') }}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ request()->route()->uri() }}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -25,28 +24,29 @@
     <section id="main-container" class="main-container pb-2">
         <div class="container">
             <div class="row">
-
+                @foreach ($services as $service)
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service1.jpg') }}"
+                            <img loading="lazy" class="" style="width: 100%; height: 250px; object-fit: cover;" src="{{ $service->logo ? url("photos/services/image/$service->logo") : url("assets/images/services/service1.jpg") }}"
                                 alt="service-image">
                         </div>
                         <div class="d-flex">
+                            @if ($service->icon)
                             <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon1.png') }}"
-                                    alt="service-icon">
+                                <img loading="lazy" src="{{ url("photos/services/icon/$service->icon") }}">
                             </div>
+                            @endif
                             <div class="ts-service-info">
-                                <h3 class="service-box-title"><a href="#">Zero Harm Everyday</a></h3>
-                                <p>You have ideas, goals, and dreams. We have a culturally diverse, forward thinking
-                                    team looking for talent like. Lorem ipsum dolor suscipit.</p>
+                                <h3 class="service-box-title"><a href="#">{{ $service->title }}</a></h3>
+                                <p>{{ $service->description }}</p>
                             </div>
                         </div>
                     </div><!-- Service1 end -->
                 </div><!-- Col 1 end -->
+                @endforeach
 
-                <div class="col-lg-4 col-md-6 mb-5">
+                {{-- <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
                             <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service2.jpg') }}"
@@ -144,7 +144,7 @@
                             </div>
                         </div>
                     </div><!-- Service3 end -->
-                </div><!-- Col 6 end -->
+                </div><!-- Col 6 end --> --}}
 
             </div><!-- Main row end -->
         </div><!-- Conatiner end -->
