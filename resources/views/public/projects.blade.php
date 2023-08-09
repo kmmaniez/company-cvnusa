@@ -7,12 +7,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="banner-heading">
-                            <h1 class="banner-title">Project</h1>
+                            <h1 class="banner-title">{{ request()->route()->uri() }}</h1>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Project</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">All Projects</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('public.index') }}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ request()->route()->uri() }}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -24,9 +23,18 @@
 
     <section id="main-container" class="main-container">
         <div class="container">
+            {{-- @dump($req) --}}
+            @if (request()->has('kategori'))
+                punya
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="shuffle-btn-group">
+                        {{-- @foreach ($kategoris as $kategori)
+                        <label for="commercial">
+                            <input type="radio" name="shuffle-filter" id="commercial" value="commercial">{{ $kategori->nama_kategori }}
+                        </label>
+                        @endforeach --}}
                         <label class="active" for="all">
                             <input type="radio" name="shuffle-filter" id="all" value="all" checked="checked">Show
                             All
@@ -172,7 +180,7 @@
 
                 <div class="col-12">
                     <div class="general-btn text-center">
-                        <a class="btn btn-primary" href="projects.html">View All Projects</a>
+                        <a class="btn btn-primary" id="btnAllProject" href="?all">View All Projects</a>
                     </div>
                 </div>
 
@@ -181,3 +189,19 @@
         </div><!-- Conatiner end -->
     </section><!-- Main container end -->
 @endsection
+@push('javascript')
+    <script>
+        // window.onscroll = function(e){
+        //     console.log(e);
+        // }
+        const btn = document.getElementById('btnAllProject')
+        $('#shuffle-filter').each(idx => {
+            console.log(idx);
+        })
+        $('#btnAllProject').on('click', function(e){
+            e.preventDefault()
+            btn.offsetTop = 100;
+            console.log(e);
+        })
+    </script>
+@endpush
