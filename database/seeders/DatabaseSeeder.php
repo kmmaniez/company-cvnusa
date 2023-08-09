@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TeamSeeder::class,
             WallpaperSeeder::class,
+            ServiceSeeder::class,
+            TeamSeeder::class,
+            CarouselSeeder::class,
         ]);
     }
 }
