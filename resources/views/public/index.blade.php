@@ -12,7 +12,7 @@
 @endpush
 
 @section('content')
-    <x-public.carousel></x-public.carousel>
+    <x-public.carousel :datacarousel="$carousels"></x-public.carousel>
 
     <section class="call-to-action-box no-padding">
         <div class="container">
@@ -167,6 +167,7 @@
     <!-- Detail Project Company -->
     <x-public.detail-project></x-public.detail-project>
 
+    <!-- Service -->
     <section id="ts-service-area" class="ts-service-area pb-0">
         <div class="container">
             <div class="row text-center">
@@ -176,9 +177,9 @@
                 </div>
             </div>
             <!--/ Title row end -->
-
             <div class="row">
 
+                @foreach ($services as $service)
                 <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
@@ -186,12 +187,13 @@
                                 alt="service-icon">
                         </div>
                         <div class="ts-service-box-info">
-                            <h3 class="service-box-title"><a href="#">Home Construction</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
+                            <h3 class="service-box-title">{{ $service->title }}</h3>
+                            <p>{{ $service->description }}</p>
                         </div>
                     </div><!-- Service 1 end -->
                 </div>
-                <div class="col-lg-4">
+                @endforeach
+                {{-- <div class="col-lg-4">
                     <div class="ts-service-box d-flex">
                         <div class="ts-service-box-img">
                             <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon2.png') }}"
@@ -250,13 +252,13 @@
                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
                         </div>
                     </div><!-- Service 6 end -->
-                </div>
+                </div> --}}
 
             </div><!-- Content row end -->
 
         </div>
         <!--/ Container end -->
-    </section><!-- Service end -->
+    </section>
 
     <!-- List Project -->
     <section id="project-area" class="project-area solid-bg">
