@@ -22,10 +22,10 @@ class PriceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => ['required', 'string' ], 
-            'harga' => ['required', 'numeric' ],
-            'keterangan' => ['required', 'string' ],
-            'is_featured' => ['nullable' ]
+            'judul' => ['required', 'string'], 
+            'harga' => ['required', 'integer'],
+            'keterangan' => ['required', 'string'],
+            'is_featured' => ['nullable']
         ];
     }
 }
