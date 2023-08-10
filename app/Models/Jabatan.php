@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Jabatan extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    // public function anggota()
+    // {
+    //     return $this->belongsToMany(Anggota::class);
+    // }
 }
