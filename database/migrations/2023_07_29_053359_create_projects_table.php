@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kategori_id');
             $table->string('nama_project');
-            $table->string('keterangan_project');
+            $table->string('keterangan_project')->nullable();
             $table->date('start_project')->nullable();
             $table->date('finish_project');
-            $table->text('gambar_project');
+            $table->text('gambar_project')->nullable();
             $table->timestamps();
         });
     }
