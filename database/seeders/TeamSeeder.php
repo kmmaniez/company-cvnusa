@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Anggota;
 use App\Models\Jabatan;
-use App\Models\Team;
+use App\Models\Team\Anggota;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Testing\Fakes\Fake;
 
 class TeamSeeder extends Seeder
 {
