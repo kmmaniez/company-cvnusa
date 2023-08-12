@@ -22,7 +22,7 @@ class BlogSeeder extends Seeder
 
         for ($i=0; $i < 10; $i++) { 
             Blog::create([
-                'category_id' => rand(1,5),
+                'kategori_id' => rand(1,5),
                 'user_id' => rand(1,8),
                 'title' => fake()->text('20'),
                 'slug' => fake()->text('20'),
