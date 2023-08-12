@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('anggotas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_anggota');
-            $table->foreignId('jabatan_id')->references('id')->on('jabatans')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('jabatan_id');
+            // $table->foreignId('jabatan_id')->references('id')->on('jabatans')->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('foto_anggota')->nullable();
             $table->string('url_facebook')->nullable();
             $table->string('url_twitter')->nullable();
