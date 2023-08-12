@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriBlog;
+use App\Http\Requests\Blog\KategoriRequest;
+use App\Models\Blog\KategoriBlog;
 use Illuminate\Http\Request;
 
 class KategoriBlogController extends Controller
@@ -26,7 +27,7 @@ class KategoriBlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KategoriRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class KategoriBlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KategoriBlog $kategoriBlog)
+    public function update(KategoriRequest $request, KategoriBlog $kategoriBlog)
     {
         //
     }
