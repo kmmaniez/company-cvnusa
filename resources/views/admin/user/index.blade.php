@@ -119,6 +119,7 @@
             })
         });
 
+        /* EVENT KETIK PASSWORD KONFIRMASI */
         $('#password_conf').on('keyup', function(e) {
             if ($(this).val() !== $('#password').val()) {
                 $('#password_conf').addClass('is-invalid');
@@ -324,7 +325,7 @@
                         }
                     });
                     }
-                })
+            })
         })
 
         /* FUNGSI RESET INPUT */
@@ -434,6 +435,6 @@
               "language": {
                     "processing": "<div class=\"spinner-border bg-transparent\" role=\"status\"></div>"
                 }
-          });
+        });
     </script>
 @endpush
