@@ -21,7 +21,7 @@ class PriceController extends Controller
     {
         return view('admin.price.index',[
             'title' => 'Pricing',
-            'prices' => $this->_price->all()
+            'prices' => Price::all()
         ]);
     }
 
@@ -35,7 +35,7 @@ class PriceController extends Controller
             'is_featured' => ($request['is_featured'] === "true") ? true : false
         ];
 
-        $createData = $this->_price->create($data);
+        $createData = Price::create($data);
         if ($createData) {
             return response()->json([
                 'message'   => 'Harga Created Successfully',
@@ -65,7 +65,7 @@ class PriceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Price $price)
+    public function update(PriceRequest $request, Price $price)
     {
         $data = $price->update([
             ...$request->all(),
