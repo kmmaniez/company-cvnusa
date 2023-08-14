@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Blog\Blog;
 use App\Models\Blog\KategoriBlog;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Blog\KategoriPost;
+use App\Models\Blog\Post;
 use Illuminate\Database\Seeder;
 
 class BlogSeeder extends Seeder
@@ -14,15 +15,19 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
+        /* 
+            SEEDER KHUSUS BLOG 
+            (KATEGORI POST & POST)
+        */
         $kategori = ['Bangunan','Arsitektur','Desain','Minimalis','Modern'];
 
         foreach ($kategori as $nama) {
-            KategoriBlog::create(['nama_kategori' => $nama]);
+            KategoriPost::create(['nama_kategori' => $nama]);
         }
 
         for ($i=0; $i < 10; $i++) { 
-            Blog::create([
-                'kategori_id' => rand(1,5),
+            Post::create([
+                'kategoripost_id' => rand(1,5),
                 'user_id' => rand(1,8),
                 'title' => fake()->text('20'),
                 'slug' => fake()->text('20'),
