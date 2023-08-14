@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Project;
 use App\Models\Project\KategoriProject;
+use App\Models\Project\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
