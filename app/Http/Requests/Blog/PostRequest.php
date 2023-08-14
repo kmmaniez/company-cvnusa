@@ -4,7 +4,7 @@ namespace App\Http\Requests\Blog;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class BlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kategori_id' => ['required'], 
+            'kategoripost_id' => ['required'], 
             'user_id' => ['required'], 
             'title' => ['required','string','max:50'],
             'slug' => ['required','string','max:50'],
