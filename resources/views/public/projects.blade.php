@@ -1,7 +1,7 @@
 @extends('layouts.public.master')
 
 @section('content')
-    <div id="banner-area" class="banner-area" style="background-image:url({{ url('assets/images/banner/banner1.jpg') }})">
+    <div id="banner-area" class="banner-area" style="background-image:url({{ ($wallpaper[0]->wallpaper_image == NULL) ? url('assets/images/banner/banner1.jpg') : Storage::url($wallpaper[0]->wallpaper_image) }})">
         <div class="banner-text">
             <div class="container">
                 <div class="row">
@@ -11,7 +11,8 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="{{ route('public.index') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{ request()->route()->uri() }}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ request()->route()->uri() }}
+                                    </li>
                                 </ol>
                             </nav>
                         </div>
@@ -75,7 +76,7 @@
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="{{ url('projects-list/id') }}">Capital Teltway Building</a>
+                                            <a href="{{ url('projects/id') }}">Capital Teltway Building</a>
                                         </h3>
                                         <p class="project-cat">Commercial, Interiors</p>
                                     </div>
@@ -93,7 +94,7 @@
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="{{ url('projects-list/id') }}">Ghum Touch Hospital</a>
+                                            <a href="{{ url('projects/id') }}">Ghum Touch Hospital</a>
                                         </h3>
                                         <p class="project-cat">Healthcare</p>
                                     </div>
@@ -112,7 +113,7 @@
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="{{ url('projects-list/id') }}">TNT East Facility</a>
+                                            <a href="{{ url('projects/id') }}">TNT East Facility</a>
                                         </h3>
                                         <p class="project-cat">Government</p>
                                     </div>
@@ -120,7 +121,7 @@
                             </div>
                         </div><!-- shuffle item 3 end -->
 
-                        <div class="col-lg-4 col-md-6 shuffle-item"
+                        {{-- <div class="col-lg-4 col-md-6 shuffle-item"
                             data-groups="[&quot;education&quot;,&quot;infrastructure&quot;]">
                             <div class="project-img-container">
                                 <a class="gallery-popup" href="{{ asset('assets') }}/images/projects/project4.jpg">
@@ -131,7 +132,7 @@
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="{{ url('projects-list/id') }}">Narriot Headquarters</a>
+                                            <a href="{{ url('projects/id') }}">Narriot Headquarters</a>
                                         </h3>
                                         <p class="project-cat">Infrastructure</p>
                                     </div>
@@ -150,7 +151,7 @@
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="{{ url('projects-list/id') }}">Kalas Metrorail</a>
+                                            <a href="{{ url('projects/id') }}">Kalas Metrorail</a>
                                         </h3>
                                         <p class="project-cat">Infrastructure</p>
                                     </div>
@@ -168,13 +169,13 @@
                                 <div class="project-item-info">
                                     <div class="project-item-info-content">
                                         <h3 class="project-item-title">
-                                            <a href="{{ url('projects-list/id') }}">Ancraft Avenue House</a>
+                                            <a href="{{ url('projects/id') }}">Ancraft Avenue House</a>
                                         </h3>
                                         <p class="project-cat">Residential</p>
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- shuffle item 6 end -->
+                        </div><!-- shuffle item 6 end --> --}}
                     </div><!-- shuffle end -->
                 </div>
 
@@ -198,7 +199,7 @@
         $('#shuffle-filter').each(idx => {
             console.log(idx);
         })
-        $('#btnAllProject').on('click', function(e){
+        $('#btnAllProject').on('click', function(e) {
             e.preventDefault()
             btn.offsetTop = 100;
             console.log(e);
