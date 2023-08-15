@@ -1,7 +1,7 @@
 @extends('layouts.public.master')
 
 @section('content')
-    <div id="banner-area" class="banner-area" style="background-image:url({{ url('assets/images/banner/banner1.jpg') }})">
+    <div id="banner-area" class="banner-area" style="background-image:url({{ ($wallpaper[0]->wallpaper_image == NULL) ? url('assets/images/banner/banner1.jpg') : Storage::url($wallpaper[0]->wallpaper_image) }})">
         <div class="banner-text">
             <div class="container">
                 <div class="row">
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="ts-team-content">
                                     <h3 class="ts-name">{{ $anggota->nama_anggota }}</h3>
-                                    <p class="ts-designation">{{ $anggota->jabatan_id }}</p>
+                                    <p class="ts-designation">{{ $anggota->jabatans->nama_jabatan }}</p>
                                     <div class="team-social-icons">
                                         <a target="_blank" href="https://www.facebook.com/{{ $anggota->url_facebook }}"><i class="fab fa-facebook-f"></i></a>
                                         <a target="_blank" href="https://www.twitter.com/{{ $anggota->url_twitter }}"><i class="fab fa-twitter"></i></a>
