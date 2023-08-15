@@ -11,6 +11,6 @@ class KategoriPost extends Model
     
     public function posts()
     {
-        return $this->hasMany(Post::class, 'kategori_id');
+        return $this->hasMany(Post::class, 'kategoripost_id');
     }
 }
