@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Jabatan;
 use App\Models\Team\Anggota;
+use App\Models\Team\KategoriJabatan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,10 +16,10 @@ class TeamSeeder extends Seeder
     public function run(): void
     {
         $faker = fake('id_ID');
-        $jabatan = ['CEO','CTO','Manager','Accountant','Marketing'];
+        $jabatan = ['CEO','CTO','Manager','Accountant','Marketing','Supervisor'];
         
         for ($i=0; $i < count($jabatan); $i++) { 
-            Jabatan::create(['nama_jabatan' => $jabatan[$i]]);
+            KategoriJabatan::create(['nama_jabatan' => $jabatan[$i]]);
         }
 
         for ($i=0; $i < 5; $i++) { 
