@@ -11,7 +11,7 @@
 @endpush
 
 @section('content')
-    <div id="banner-area" class="banner-area" style="background-image:url({{ url('assets/images/banner/banner1.jpg') }})">
+    <div id="banner-area" class="banner-area" style="background-image:url({{ ($wallpaper[0]->wallpaper_image == NULL) ? url('assets/images/banner/banner1.jpg') : Storage::url($wallpaper[0]->wallpaper_image) }})">
         <div class="banner-text">
             <div class="container">
                 <div class="row">
@@ -55,14 +55,6 @@
                             </div><!-- Pricing header -->
                             <div class="ts-pricing-features">
                                 {!! $price->keterangan !!}
-                                {{-- <ul class="list-unstyled">
-                                    <li>Project Management for Owners</li>
-                                    <li>Pre-construction feasibility</li>
-                                    <li>On-site representation</li>
-                                    <li>Quality control inspections</li>
-                                    <li>Schedule claim preparation/defense</li>
-                                    <li>Project phasing development</li>
-                                </ul> --}}
                             </div><!-- Features end -->
                             <div class="plan-action">
                                 <a href="#" class="btn btn-dark">{{ $price->custom_text_button ?? 'Order Now' }}</a>
@@ -70,54 +62,6 @@
                         </div><!-- Plan 1 end -->
                     </div>
                 @endforeach
-
-                {{-- <div class="col-lg-3 col-md-6">
-                    <div class="ts-pricing-box">
-                        <div class="ts-pricing-header">
-                            <h2 class="ts-pricing-name">Building Remodels</h2>
-                            <h2 class="ts-pricing-price">
-                                <span class="currency">$</span><strong>89.9</strong><small>/Month</small>
-                            </h2>
-                        </div><!-- Pricing header -->
-                        <div class="ts-pricing-features">
-                            <ul class="list-unstyled">
-                                <li>Project Management for Owners</li>
-                                <li>Pre-construction feasibility</li>
-                                <li>On-site representation</li>
-                                <li>Quality control inspections</li>
-                                <li>Schedule claim preparation/defense</li>
-                                <li>Project phasing development</li>
-                            </ul>
-                        </div><!-- Features end -->
-                        <div class="plan-action">
-                            <a href="#" class="btn btn-dark">Order Now</a>
-                        </div>
-                    </div><!-- Plan 1 end -->
-                </div><!-- Col end -->  --}}
-                
-                {{-- <div class="col-lg-3 col-md-6">
-                    <div class="ts-pricing-box ts-pricing-featured" style="transform:translateY(-48px); box-shadow: 0px 0px 30px #eaeaea;">
-                        <div class="ts-pricing-header">
-                            <h2 class="ts-pricing-name">Renovation</h2>
-                            <h2 class="ts-pricing-price">
-                                <span class="currency">$</span><strong>179.9</strong><small>/Month</small>
-                            </h2>
-                        </div><!-- Pricing header -->
-                        <div class="ts-pricing-features">
-                            <ul class="list-unstyled">
-                                <li>Project Management for Owners</li>
-                                <li>Pre-construction feasibility</li>
-                                <li>On-site representation</li>
-                                <li>Quality control inspections</li>
-                                <li>Schedule claim preparation/defense</li>
-                                <li>Project phasing development</li>
-                            </ul>
-                        </div><!-- Features end -->
-                        <div class="plan-action">
-                            <a href="#" class="btn btn-primary">Order Now</a>
-                        </div>
-                    </div><!-- Plan 2 end -->
-                </div><!-- Col end --> --}}
 
             </div>
             <!--/ Content row end -->
