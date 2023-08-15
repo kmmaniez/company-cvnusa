@@ -1,7 +1,7 @@
 @extends('layouts.public.master')
 
 @section('content')
-    <div id="banner-area" class="banner-area" style="background-image:url({{ asset('assets/images/banner/banner1.jpg') }})">
+    <div id="banner-area" class="banner-area" style="background-image:url({{ ($wallpaper[0]->wallpaper_image == NULL) ? url('assets/images/banner/banner1.jpg') : Storage::url($wallpaper[0]->wallpaper_image) }})">
         <div class="banner-text">
             <div class="container">
                 <div class="row">
