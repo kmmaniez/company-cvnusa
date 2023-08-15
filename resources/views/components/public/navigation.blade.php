@@ -63,7 +63,7 @@
                             
                             <li class="nav-item {{ (request()->routeIs('public.services') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.services') }}">Services</a></li>
                             
-                            <li class="nav-item {{ (request()->routeIs('public.testimonials') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.testimonials') }}">Clients</a></li>
+                            <li class="nav-item {{ (request()->routeIs('public.clientpublic') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.clientpublic') }}">Clients</a></li>
 
                             <li class="nav-item {{ (request()->routeIs('public.contact') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.contact') }}">Contact Us</a></li>
                             
