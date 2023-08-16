@@ -74,39 +74,45 @@ class UserController extends Controller
     /* FUNGSI SIMPAN USER */
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->except('role'));
-        $user->assignRole($request->role);
-        if ($user) {
-            return response()->json([
-                'message' => 'Data created successfully'
-            ]);
+        if ($request->ajax()) {
+            $user = User::create($request->except('role'));
+            $user->assignRole($request->role);
+            if ($user) {
+                return response()->json([
+                    'message' => 'Data created successfully'
+                ]);
+            }
         }
+        abort(404);
     }
 
     /* FUNGSI UPDATE USER */
     public function update(UpdateUserRequest $request, User $user)
     {
-        if ($request->has('password') && isset($request->password)) {
-            $user->assignRole($request->role);
+        if ($request->ajax()) {
+            if ($request->has('password') && isset($request->password)) {
+                $user->syncRoles($request->role);
+                $user->update([
+                    ...$request->except('role'),
+                    'password' => Hash::make($request->password)
+                ]);
+                return response()->json([
+                    'message'   => 'Data Berhasil diubah',
+                    'status'    => 200
+                ]);
+            }
+
             $user->update([
-                ...$request->except('role'),
-                'password' => Hash::make($request->password)
+                ...$request->except(['role']), 
+                'password' => $user->password
             ]);
+            $user->syncRoles($request->role);
             return response()->json([
                 'message'   => 'Data Berhasil diubah',
                 'status'    => 200
             ]);
         }
-
-        $user->update([
-            ...$request->except(['role']), 
-            'password' => $user->password
-        ]);
-        $user->syncRoles($request->role);
-        return response()->json([
-            'message'   => 'Data Berhasil diubah',
-            'status'    => 200
-        ]);
+        abort('404');
     }
 
     /* FUNGSI DELETE USER */
