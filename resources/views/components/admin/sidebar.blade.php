@@ -9,11 +9,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ (request()->routeIs('dashboard') ? 'active' : '') }}">
+    {{-- <li class="nav-item {{ (request()->routeIs('dashboard') ? 'active' : '') }}">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-desktop"></i>
             <span>Dashboard</span></a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -41,18 +41,19 @@
         </div>
     </li> --}}
 
-    <li class="nav-item {{ (request()->routeIs('users.index') ? 'active' : '') }}">
+    <!-- Nav Item - Manage Users -->
+    {{-- <li class="nav-item {{ (request()->routeIs('users.index') ? 'active' : '') }}">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-fw fa-user-plus"></i>
             <span>Manage User</span></a>
-    </li>
+    </li> --}}
     
     <!-- Nav Item - Manage Blog -->
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('users.index') }}">
-            <i class="fas fa-fw fa-list"></i>
+    <li class="nav-item {{ (request()->routeIs('posts.index') ? 'active' : '') }}">
+        <a class="nav-link" href="{{ route('posts.index') }}">
+            <i class="fas fa-fw fa-pen"></i>
             <span>Manage Blog</span></a>
-    </li> --}}
+    </li>
 
     <!-- Nav Item - Website Settings -->
     <li class="nav-item {{ (request()->routeIs('categories.*') || request()->routeIs('clients.index') ? 'active' : '') }}">
@@ -109,7 +110,7 @@
                 <h6 class="collapse-header">Website:</h6>
                 {{-- <a class="collapse-item {{ (request()->routeIs('website.indexabout') ? 'bg-primary text-white active' : '') }} " href="{{ route('website.indexabout') }}"><i class="fas fa-fw fa-info"></i> About Us</a> --}}
                 <a class="collapse-item {{ (request()->routeIs('website.indexcarousel') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexcarousel') }}"><i class="fas fa-fw fa-image"></i> Carousel Image</a>
-                <a class="collapse-item {{ (request()->routeIs('website.indexwallpaper') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexwallpaper') }}"><i class="fas fa-fw fa-image"></i> Wallpaper Menu</a>
+                {{-- <a class="collapse-item {{ (request()->routeIs('website.indexwallpaper') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexwallpaper') }}"><i class="fas fa-fw fa-images"></i> Wallpaper Menu</a> --}}
             </div>
         </div>
     </li>
