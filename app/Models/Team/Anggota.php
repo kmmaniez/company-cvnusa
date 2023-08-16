@@ -9,10 +9,10 @@ class Anggota extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    // protected $with = ['jabatans'];
+    protected $with = ['jabatans'];
 
-    // public function jabatans()
-    // {
-    //     return $this->hasMany(Jabatan::class,'id');
-    // }
+    public function jabatans()
+    {
+        return $this->belongsTo(KategoriJabatan::class,'jabatan_id');
+    }
 }
