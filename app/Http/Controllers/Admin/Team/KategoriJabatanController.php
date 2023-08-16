@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Team;
 
-use App\Models\KategoriJabatan;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Team\KategoriJabatanRequest;
+use App\Models\Team\KategoriJabatan;
 use Illuminate\Http\Request;
 
 class KategoriJabatanController extends Controller
@@ -26,9 +28,18 @@ class KategoriJabatanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KategoriJabatanRequest $request)
     {
-        //
+        try {
+            KategoriJabatan::create($request->all());
+            return response()->json([
+                'messages' => 'Data Created Successfully',
+                'data' => $request->all(),
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
