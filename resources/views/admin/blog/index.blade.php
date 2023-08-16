@@ -16,7 +16,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('blogs.create') }}" id="btnTambahTeam" class="btn btn-md btn-primary mb-3"><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
+                    <a href="{{ route('posts.create') }}" id="btnTambahTeam" class="btn btn-md btn-primary mb-3"><i
+                            class="fas fa-fw fa-plus"></i> Tambah Data</a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="DTPosts" width="100%" cellspacing="0">
                             <thead>
@@ -27,24 +28,11 @@
                                     <th>Thumbnail</th>
                                     <th>Penulis</th>
                                     <th>Kategori</th>
-                                    <th>Dibuat | Diupdate</th>
-                                    <th>Aksi</th>
+                                    <th style="width: 184px;">Keterangan</th>
+                                    <th style="width: 184px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @dump($blog) --}}
-                                {{-- @forelse ($blog as $data)
-                                <tr>
-                                    <td>{{ $data->title }}</td>
-                                    <td>{{ $data->slug }}</td>
-                                    <td>{{ $data->thumbnail }}</td>
-                                    <td><span class="badge badge-primary p-2" style="border-radius: 0%">{{ $data->users->name }}</span></td>
-                                    <td>{{ $data->kategoris->nama_kategori }}</td>
-                                    <td>{{ $data->title }}</td>
-                                </tr>
-                                @empty
-                                    
-                                @endforelse --}}
                             </tbody>
                         </table>
                     </div>
@@ -55,7 +43,6 @@
 
 
     </div>
-
 @endsection
 @push('scripts')
     <script src="{{ url('sb-admin') }}/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -65,27 +52,52 @@
     <script>
         /* INISIALISASI DATATABLE */
         $('#DTPosts').DataTable({
-              processing: true,
-              serverSide: true,
-              ajax: "{{ route('blogs.getdataposts') }}",
-              columns: [
-                  {data: 'DT_RowIndex', name: 'id'},
-                  {data: 'title', name: 'title'},
-                  {data: 'slug', name: 'slug'},
-                  {data: 'thumbnail', name: 'thumbnail'},
-                  {data: 'user_id', name: 'user'},
-                  {data: 'kategori_id', name: 'kategori'},
-                  {data: 'updated_at', name: 'published_at'},
-                  {
-                      data: 'action', 
-                      name: 'action', 
-                      orderable: false, 
-                      searchable: false
-                  },
-              ],
-              "language": {
-                    "processing": "<div class=\"spinner-border bg-transparent\" role=\"status\"></div>"
-                }
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('posts.getallposts') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'id'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'slug',
+                    name: 'slug',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'thumbnail',
+                    name: 'thumbnail',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'user_id',
+                    name: 'user'
+                },
+                {
+                    data: 'kategoripost_id',
+                    name: 'kategori'
+                },
+                {
+                    data: 'updated_at',
+                    name: 'published_at'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            lengthMenu: [5,10,25,50,100],
+            "language": {
+                "processing": "<div class=\"spinner-border bg-transparent\" role=\"status\"></div>"
+            }
         });
     </script>
 @endpush
