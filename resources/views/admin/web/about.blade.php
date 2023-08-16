@@ -65,16 +65,15 @@
                             <trix-editor input="content_mision"></trix-editor>
                         </div>
                         @if ($jmlhdata > 0)
-                            <button class="btn btn-success">Ubah Data</button>
+                            <button class="btn btn-success"><i class="fas fa-fw fa-edit"></i>Ubah Data</button>
                         @else
-                            <button class="btn btn-primary">Simpan Data</button>
+                            <button class="btn btn-primary"><i class="fas fa-fw fa-save"></i>Simpan Data</button>
                         @endif
                     </form>
                 </div>
             </div>
 
         </div>
-        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit culpa praesentium consequuntur veniam fugit possimus delectus facere, exercitationem amet. Ipsa illum laborum tempora, natus molestias ab doloribus aspernatur maiores minima repudiandae, explicabo corrupti, dicta incidunt! Voluptate, aperiam aliquid hic sit, porro accusantium minima itaque expedita atque exercitationem vero ea adipisci!</p> --}}
 
         <!-- Referensi -->
         <div class="col-xl-6 col-lg-6">
@@ -98,12 +97,6 @@
 @endsection
 @push('scripts')
     <script>
-        // $('#btnSimpanAbout').on('click', e => {
-        //     e.preventDefault();
-        //     // alert('e')
-        //     $('#vision_content').val('sad')
-        //     console.log($('#vision_content').val());
-        // })
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         });
