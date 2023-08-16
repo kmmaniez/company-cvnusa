@@ -9,6 +9,7 @@ use App\Models\Kategori;
 use App\Models\Price;
 use App\Models\Project\Project;
 use App\Models\Service;
+use App\Models\Wallpaper;
 use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,7 @@ class PublicController extends Controller
     {
         return view('public.about',[
             'data' => WebsiteSetting::all(),
+            'wallpaper' => Wallpaper::where('section_name','LIKE','about')->get('wallpaper_image'),
             'teams' => Anggota::all()
         ]);
     }
@@ -44,6 +46,7 @@ class PublicController extends Controller
     {
         return view('public.pricing',[
             'title' => 'Harga',
+            'wallpaper' => Wallpaper::where('section_name','LIKE','pricing')->get('wallpaper_image'),
             'prices' => Price::all()
         ]);
     }
@@ -51,14 +54,17 @@ class PublicController extends Controller
     public function services()
     {
         return view('public.services',[
+            'title' => 'ea',
+            'wallpaper' => Wallpaper::where('section_name','LIKE','services')->get('wallpaper_image'),
             'services' => Service::all()
         ]);
     }
 
-    public function testimonials()
+    public function clients()
     {
-        return view('public.testimonials',[
-            'data' => Clients::all()
+        return view('public.clients',[
+            'data' => Clients::all(),
+            'wallpaper' => Wallpaper::where('section_name','LIKE','clients')->get('wallpaper_image'),
         ]);
     }
 
@@ -69,12 +75,15 @@ class PublicController extends Controller
 
     public function projects(Request $request)
     {
+        $wallpaper = Wallpaper::where('section_name','LIKE','projects')->get('wallpaper_image');
+
         if ($request->has('lists')) {
-            // echo 'projectss';
+            echo 'projectss';
         }
         return view('public.projects',[
             // 'kategoris' => Kategor::all(),
-            'req' => $request
+            'req' => $request,
+            'wallpaper' => $wallpaper
         ]);
     }
 
