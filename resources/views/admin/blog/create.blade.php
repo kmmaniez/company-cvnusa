@@ -1,6 +1,10 @@
 @extends('layouts.admin.master')
 @push('assets')
-    <link href="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<!-- summernote -->
+<link href="{{ asset('plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+<script src="{{ asset('plugins/summernote/summernote.min.js') }}"></script>
+
     <style>
         trix-editor {
             min-height: 180px;
@@ -111,7 +115,7 @@
                                         <td>{{ $data->nama_kategori }}</td>
                                         <td class="d-flex flex-column" style="gap: 4px;">
                                             <a href="#" id="btnEditKategori" class="btn btn-sm btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                                            <a href="#" data-kat="{{ $data->id }}" id="btnHapusKategori" class="btn btn-sm btn-danger"><i class="fas fa-fw fa-edit"></i> Hapus</a>
+                                            {{-- <a href="#" data-kat="{{ $data->id }}" id="btnHapusKategori" class="btn btn-sm btn-danger"><i class="fas fa-fw fa-edit"></i> Hapus</a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -126,7 +130,7 @@
 
     </div>
 
-    <!-- Modal Client -->
+    <!-- Modal Kategori -->
     <div class="modal fade" id="modalKategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -168,7 +172,7 @@
                 e.stopImmediatePropagation();
 
                 $.ajax({
-                    url: '{{ route('katblog.store') }}',
+                    url: '{{ route('katpost.store') }}',
                     method: 'POST',
                     data:{
                         _token: '{{ csrf_token() }}',
@@ -191,47 +195,50 @@
             })
         })
 
-        /* FUNGSI HAPUS KATEGORI */
-        $('body').on('click', '#btnHapusKategori', function(e) {
-            e.preventDefault()
-            let url = window.location.pathname;
-            let replaceUrl = url.replace('posts/create','kategori')
-            Swal.fire({
-                title: 'Anda yakin?',
-                text: "Apakah anda ingin menghapus data ini ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus data!',
-                cancelButtonText: 'Tidak',
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                    $.ajax({
-                        // url: window.location.pathname+'/destroy/'+$(this).data('user'),
-                        url: replaceUrl+'/destroy/'+$(this).data('kat'),
-                        method: 'GET',
-                        cache: false,
-                        data:{
-                            _token: '{{ csrf_token() }}',
-                            id: $(this).data('kat')
-                        },
-                        success:function(res){ 
-                            console.log(res);
-                            Swal.fire({
-                                type: 'success',
-                                icon: 'success',
-                                title: res.message,
-                                showConfirmButton: false,
-                                timer: 2000,
-                            });
-                            // displaySweetAlert('success','success', response.message, 2500)
-                            // $('#DTUsers').DataTable().ajax.reload();
-                        }
-                    });
-                    }
-            })
-        })
+        // /* FUNGSI HAPUS KATEGORI */
+        // $('body').on('click', '#btnHapusKategori', function(e) {
+        //     e.preventDefault()
+        //     let url = window.location.pathname;
+        //     let replaceUrl = url.replace('posts/create','kategori')
+        //     Swal.fire({
+        //         title: 'Anda yakin?',
+        //         text: "Apakah anda ingin menghapus data ini ?",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Ya, hapus data!',
+        //         cancelButtonText: 'Tidak',
+        //         })
+        //         .then((result) => {
+        //             if (result.isConfirmed) {
+        //             $.ajax({
+        //                 // url: window.location.pathname+'/destroy/'+$(this).data('user'),
+        //                 url: replaceUrl+'/destroy/'+$(this).data('kat'),
+        //                 method: 'GET',
+        //                 cache: false,
+        //                 data:{
+        //                     _token: '{{ csrf_token() }}',
+        //                     id: $(this).data('kat')
+        //                 },
+        //                 success:function(res){ 
+        //                     console.log(res);
+        //                     Swal.fire({
+        //                         type: 'success',
+        //                         icon: 'success',
+        //                         title: res.message,
+        //                         showConfirmButton: false,
+        //                         timer: 2000,
+        //                     });
+        //                     // displaySweetAlert('success','success', response.message, 2500)
+        //                     // $('#DTUsers').DataTable().ajax.reload();
+        //                 }
+        //             });
+        //             }
+        //     })
+        // })
+$('#editor').summernote({
+			  	height: 500
+			  });
     </script>
 @endpush
