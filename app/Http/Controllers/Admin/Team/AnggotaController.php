@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Team;
 
-use App\Models\Anggota;
+use App\Http\Controllers\Controller;
 use App\Models\Jabatan;
+use App\Models\Team\Anggota;
+use App\Models\Team\KategoriJabatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
 {
@@ -15,8 +18,8 @@ class AnggotaController extends Controller
     {
         return view('admin.team.index',[
             'title' => 'Teams',
-            'teams' => Anggota::all(),
-            'jabatans' => Jabatan::all()
+            'teams' => Anggota::with('jabatans')->get(),
+            'jabatans' => KategoriJabatan::all()
         ]);
     }
 
@@ -34,30 +37,24 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         if ($request->has('foto_anggota')) {
-            $imageName = time().'.'.$request->foto_anggota->extension();  
-            $request->foto_anggota->move(public_path('photos/teams'), $imageName);
+            $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_anggota)).'.'.$request->foto_anggota->extension();
+            $pathName = Storage::putFileAs('public/teams', $request->file('foto_anggota'), $imgName);
+            try {
+                Anggota::create([
+                    ...$request->all(),
+                    'jabatan_id' => (int) $request->jabatan_id,
+                    'foto_anggota' => $pathName,
+                ]);
 
-            $data = Anggota::create([
-                ...$request->all(),
-                'jabatan_id' => $request->jabatan,
-                'gambar_anggota' => $imageName,
-            ]);
+                return response()->json([
+                    'message' => 'Data Created Successfully',
+                    'data' => $request->all(),
+                ]);
 
-            return response()->json([
-                'message' => 'with image',
-                'data' => $request->all(),
-                'datas' => $data,
-            ]);
-        }
-
-        $data = Anggota::create($request->all());
-
-        if ($data) {
-            return response()->json([
-                'message' => 'success',
-                'data' => $request->all(),
-                'datas' => $data,
-            ]);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            
         }
     }
 
