@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         return view('admin.service.index',[
@@ -18,25 +17,31 @@ class ServiceController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
+    /* FUNGSI TAMBAH SERVICE */
     public function store(Request $request)
     {
-        //
+        $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_service)).'.'.$request->gambar_service->extension();
+        $pathName = Storage::putFileAs('public/services', $request->file('gambar_service'), $imgName);
+
+        $data = Service::create([
+            'title' => $request->nama_service,
+            'gambar' => $pathName,
+            'description' => $request->description,
+        ]);
+        
+
+        return response()->json([
+            'data' => $data,
+            'message' => 'Data created successfully'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    /* FUNGSI GET SERVICE BY ID */
     public function show($service)
     {
         $data = Service::findOrfail($service);
@@ -45,27 +50,49 @@ class ServiceController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Service $service)
+    /* FUNGSI UPDATE SERVICE */
+    public function update(Request $request, $service)
     {
-        //
+        if ($request->ajax()) {
+            $service = Service::findOrfail($service);
+            if ($request->has('gambar_service')) {
+
+                if ($service->gambar != NULL) {
+                    Storage::delete($service->gambar); // HAPUS FOTO LAMA
+                }
+
+                $imgName = date('His_dmY').'_'.strtolower($request->nama_service).'.'.$request->gambar_service->extension();
+                $pathName = Storage::putFileAs('public/services', $request->file('gambar_service'), $imgName);
+                
+                $data = $service->update([
+                    'title' => $request->nama_service,
+                    'gambar' => $pathName,
+                    'description' => $request->description,
+                ]);
+
+                if ($data) {
+                    return response()->json([
+                        'data' => $service,
+                        'message' => 'Data successfully changed',
+                        'req' => $request->all()
+                    ]);
+                }
+            }
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Service $service)
+    /* FUNGSI HAPUS SERVICE */
+    public function destroy($service)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Service $service)
-    {
-        //
+        $data = Service::findOrfail($service);
+        if ($data) {
+            if ($data->logo) {
+                Storage::delete($data->logo);
+            }
+            $data->delete();
+            return response()->json([
+                'message'   => 'Data Berhasil dihapus',
+            ]);
+        }
     }
 }
