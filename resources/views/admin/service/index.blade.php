@@ -4,12 +4,11 @@
 @endpush
 @section('konten')
     <x-admin.page-heading>{{ $title }}</x-admin.page-heading>
-    {{-- @dump($data) --}}
     <!-- Content Row -->
 
     <div class="row">
 
-        <!-- Area Chart -->
+
         <div class="col-xl-12 col-lg-12">
 
             <div class="card shadow mb-4">
@@ -17,15 +16,12 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <a href="" id="btnTambahJabatan" class="btn btn-md btn-primary mb-3" data-toggle="modal"
-                        data-target="#modalService"><i class="fas fa-fw fa-plus"></i> Tambah {{ $title }}</a>
-                        <a href="http://" id="tested">test</a>
+                    <a href="" id="btnTambahService" class="btn btn-md btn-primary mb-3"><i class="fas fa-fw fa-plus"></i> Tambah {{ $title }}</a>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="DTService" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Nama Service</th>
-                                    <th>Icon Service</th>
                                     <th>Gambar Service</th>
                                     <th>Deskripsi</th>
                                     <th>Aksi</th>
@@ -33,16 +29,25 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $service)
-                                <tr>
-                                    <td>{{ $service->title }}</td>
-                                    <td>{{ $service->icon }}</td>
-                                    <td><img src="{{ $service->logo ? url("photos/services/image/$service->logo") : url("assets/images/services/service1.jpg") }}" style="object-fit: cover;" width="auto" height="100" alt="gambar-service"></td>
-                                    <td style="max-width: 300px;">{{ $service->description }}</td>
-                                    <td>
-                                        <a href="" class="btn btn-md btn-info" data-toggle="modal" data-target="#modalService" data-serv="{{ $service->id }}" id="btnServEdit"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                                        <a href="" class="btn btn-md btn-danger" data-serv="{{ $service->id }}"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $service->title }}</td>
+                                        <td>
+                                            @if (isset($service->gambar))
+                                            <img src="{{ Storage::url($service->gambar) }}" style="object-fit: cover;" width="auto" height="100" alt="gambar-service">
+                                            @else
+                                            <img src="{{ url('assets/images/services/service1.jpg') }}" style="object-fit: cover;" width="auto" height="100" alt="gambar-service">
+                                            @endif
+                                        </td>
+                                        <td style="max-width: 300px;">{{ $service->description }}</td>
+                                        <td>
+                                            <a href="" class="btn btn-md btn-info" data-toggle="modal"
+                                                data-target="#modalService" data-serv="{{ $service->id }}"
+                                                id="btnEditService"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                            <a href="" id="btnHapusService" class="btn btn-md btn-danger"
+                                                data-serv="{{ $service->id }}"><i class="fas fa-fw fa-trash-alt"></i>
+                                                Delete</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -66,26 +71,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="formClient" method="post">
-                        @csrf
+                    <form id="formService">
                         <div class="mb-3">
                             <label for="nama_service" class="form-label">Nama Service</label>
                             <input type="text" class="form-control" name="nama_service" id="nama_service"
                                 placeholder="cth: Desain Arsitektur">
                         </div>
                         <div class="mb-3">
-                            <label for="icon_service" class="form-label">Icon Service <small class="text-primary"><strong>opsional</strong></small></label>
-                            <img id="preview-icon" alt="" srcset="">
-                            <input type="file" class="form-control" name="icon_service"
-                                id="icon_service">
-                                <span class="text-danger" id="icon-input-error"></span>
-                        </div>
-                        <div class="mb-3">
                             <label for="gambar_service" class="form-label">Gambar Service</label>
                             <img id="preview-image" alt="" srcset="">
-                            <input type="file" class="form-control" name="gambar_service"
-                                id="gambar_service">
-                                <span class="text-danger" id="image-input-error"></span>
+                            <input type="file" class="form-control" name="gambar_service" id="gambar_service">
+                            <span class="text-danger" id="image-input-error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Deskripsi</label>
@@ -107,14 +103,17 @@
     <script src="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ url('sb-admin') }}/js/demo/datatables-demo.js"></script>
     <script>
+        let id;
         $(document).ready(function() {
 
-            $('#modalService').on('hidden.bs.modal', function (e) {
+            $('#modalService').on('hidden.bs.modal', function(e) {
                 $('#nama_service').val('')
                 $('#description').val('')
+                // $('#preview-image').attr('src', '{{ url('assets/images/services/service1.jpg') }}')
             })
         });
 
+        /* FUNGSI PREVIEW IMAGE */
         $('#gambar_service').change(function() {
             let reader = new FileReader();
             reader.onload = (e) => {
@@ -128,90 +127,179 @@
             }
             reader.readAsDataURL(this.files[0]);
         });
-        $('#icon_service').change(function() {
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                $('#preview-icon').attr('src', e.target.result);
-                $('#preview-icon').css({
-                    display: 'block',
-                    width: '64px',
-                    height: '64px',
-                    marginBottom: '8px',
-                })
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
 
-        $('#formClient').submit(function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            $('#image-input-error').text('');
-            // console.log(formData);
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('clients.store') }}',
-                headers :{
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: (response) => {
-                    if (response) {
-                        this.reset();
-                        console.log(response);
-                        $('#modalService').modal('hide');
-                        // alert('Image has been uploaded successfully');
-                    }
-                },
-                error: function(response) {
-                    // console.log(response.responseJSON.errors.nama_client[0]);
-                    $('#image-input-error').text(response.responseJSON.message);
-                }
-            });
-        });
-        
-        /* EDIT EVENT */
-        $('body').on('click', '#btnServEdit', function(e) {
+        /* FUNGSI TAMBAH SERVICE */
+        $('body').on('click','#btnTambahService', function(e) {
             e.preventDefault()
             $('#modalService').modal('show');
-            let id = $(this).data('serv');
 
-            $.get(window.location.pathname + '/' + id,
-                function({data}, success) {
-                    // console.log(data);
-                    $('#nama_service').val(data.title)
-                    $('#description').val(data.description)
-                }
-            )
+            $('#formService').submit(function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $('#image-input-error').text('');
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('services.store') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: (res) => {
+                        if (res) {
+                            this.reset();
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: res.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            $('#modalService').modal('hide');
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 2500);
+
+                        }
+                    },
+                    error: function(res) {
+                        // // console.log(response.responseJSON.errors.nama_client[0]);
+                        // $('#image-input-error').text(response.responseJSON.message);
+                    }
+                });
+            });
         })
 
-        $('#btnService').click(function(e) {
-            e.preventDefault()
-            const id = $(this).data('kat')
+        /* FUNGSI EDIT SERVICE */
+        $(document).ready(function() {
 
-            $.ajax({
-                url: window.location.pathname + '/' + id,
-                method: 'PATCH',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    nama_kategori: $('#nama_kategori').val()
-                },
-                success: function(res) {
-                    console.log(res);
-                    // $('#nama_kategori').val('');
-                    // window.location.reload()
-                },
-                error: function(err) {
-                    console.log(err);
-                }
+            $('body').on('click', '#btnEditService', function(e) {
+                e.preventDefault()
+
+                $('#modalService').modal('show');
+                id = $(this).data('serv');
+
+                /* FUNGSI UNTUK GET SERVICE BY ID */
+                $.ajax({
+                    url: window.location.pathname + '/' + id,
+                    method: 'GET',
+                    success: (res) => {
+                        const {
+                            data
+                        } = res
+                        $('#nama_service').val(data.title)
+                        $('#description').val(data.description)
+                    },
+                    error: function(res) {
+                        const {
+                            errors
+                        } = res.responseJSON;
+
+                    }
+                })
+
+                /* FUNGSI UNTUK UPDATE SERVICE */
+                $('#formService').submit(function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    let formData = new FormData(this);
+                    $('#image-input-error').text('');
+
+                    formData.append('_method', 'PATCH')
+                    $.ajax({
+                        type: 'POST',
+                        url: window.location.pathname + '/' + id,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: (res) => {
+                            if (res) {
+                                this.reset();
+                                $('#modalService').modal('hide');
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: res.message,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 2500);
+                            }
+                        },
+                        error: function(res) {
+                            // const {
+                            //     errors
+                            // } = response.responseJSON;
+                            console.log(res);
+                            // if (errors.slide_title) {
+                            //     $('#title-input-error').text(errors.slide_title[0]);
+                            // }
+                            // if (errors.gambar_carousel) {
+                            //     $('#image-input-error').text(errors.gambar_carousel[0]);
+                            // }
+                        }
+                    });
+                });
             })
+
         })
 
-        // SWEETALER
-        $(function(){
+        /* FUNGSI HAPUS SERVICE */
+        $('body').on('click', '#btnHapusService', function(e) {
+            e.preventDefault()
+            Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Apakah anda ingin menghapus data ini ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus data!',
+                    cancelButtonText: 'Tidak',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: window.location.pathname + '/' + $(this).data('serv'),
+                            method: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: $(this).data('serv')
+                            },
+                            success: (res) => {
+                                console.log(res);
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: res.message,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000);
+                            }
+                        })
+                    }
+                })
+        })
 
-            $('#tested').on('click', function(e){
+        /* INISIALISASI DATATABLE */
+        $('#DTService').DataTable({
+            paging: false,
+            searching: false,
+        })
+        // SWEETALER
+        $(function() {
+
+            $('#tested').on('click', function(e) {
                 e.preventDefault()
                 Swal.fire({
                     title: 'Error!',
