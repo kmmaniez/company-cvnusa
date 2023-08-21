@@ -68,7 +68,7 @@
                         <div class="item">
                             <div class="ts-team-wrapper">
                                 <div class="team-img-wrapper">
-                                    <img loading="lazy" class="w-100" src="{{ $anggota->gambar_anggota ? url("photos/teams/$anggota->gambar_anggota") : url('assets/images/team/team1.jpg') }}"
+                                    <img loading="lazy" class="w-100" src="{{ $anggota->gambar_anggota ? url("photos/teams/$anggota->gambar_anggota") : asset('assets/images/team/team1.jpg') }}"
                                         alt="team-img">
                                 </div>
                                 <div class="ts-team-content">
