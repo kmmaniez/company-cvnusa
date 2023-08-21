@@ -23,9 +23,7 @@ class CarouselRequest extends FormRequest
     {
         return [
             'slide_title' => ['required','string'],
-            'slide_subtitle'=> ['required','string'],
-            'description' => ['nullable'],
-            'image' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
+            'gambar_carousel' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
         ];
     }
 }
