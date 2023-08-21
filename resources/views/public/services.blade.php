@@ -1,7 +1,7 @@
 @extends('layouts.public.master')
 
 @section('content')
-    <div id="banner-area" class="banner-area" style="background-image:url({{ url('assets/images/banner/banner1.jpg') }})">
+    <div id="banner-area" class="banner-area" style="background-image:url({{ ($wallpaper[0]->wallpaper_image == NULL) ? url('assets/images/banner/banner1.jpg') : Storage::url($wallpaper[0]->wallpaper_image) }})">
         <div class="banner-text">
             <div class="container">
                 <div class="row">
@@ -28,15 +28,10 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="ts-service-box">
                         <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="" style="width: 100%; height: 250px; object-fit: cover;" src="{{ $service->logo ? url("photos/services/image/$service->logo") : url("assets/images/services/service1.jpg") }}"
+                            <img loading="lazy" class="" style="width: 100%; height: 250px; object-fit: cover;" src="{{ $service->gambar ? Storage::url($service->gambar) : url("assets/images/services/service1.jpg") }}"
                                 alt="service-image">
                         </div>
                         <div class="d-flex">
-                            @if ($service->icon)
-                            <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url("photos/services/icon/$service->icon") }}">
-                            </div>
-                            @endif
                             <div class="ts-service-info">
                                 <h3 class="service-box-title"><a href="#">{{ $service->title }}</a></h3>
                                 <p>{{ $service->description }}</p>
@@ -45,106 +40,6 @@
                     </div><!-- Service1 end -->
                 </div><!-- Col 1 end -->
                 @endforeach
-
-                {{-- <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="ts-service-box">
-                        <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service2.jpg') }}"
-                                alt="service-image">
-                        </div>
-                        <div class="d-flex">
-                            <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon2.png') }}"
-                                    alt="service-icon">
-                            </div>
-                            <div class="ts-service-info">
-                                <h3 class="service-box-title"><a href="#">Virtual Construction</a></h3>
-                                <p>You have ideas, goals, and dreams. We have a culturally diverse, forward thinking
-                                    team looking for talent like. Lorem ipsum dolor suscipit.</p>
-                            </div>
-                        </div>
-                    </div><!-- Service2 end -->
-                </div><!-- Col 2 end -->
-
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="ts-service-box">
-                        <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service3.jpg') }}"
-                                alt="service-image">
-                        </div>
-                        <div class="d-flex">
-                            <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon3.png') }}"
-                                    alt="service-icon">
-                            </div>
-                            <div class="ts-service-info">
-                                <h3 class="service-box-title"><a href="#">Build To Last</a></h3>
-                                <p>You have ideas, goals, and dreams. We have a culturally diverse, forward thinking
-                                    team looking for talent like. Lorem ipsum dolor suscipit.</p>
-                            </div>
-                        </div>
-                    </div><!-- Service3 end -->
-                </div><!-- Col 3 end -->
-
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="ts-service-box">
-                        <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service4.jpg') }}"
-                                alt="service-image">
-                        </div>
-                        <div class="d-flex">
-                            <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon4.png') }}"
-                                    alt="service-icon">
-                            </div>
-                            <div class="ts-service-info">
-                                <h3 class="service-box-title"><a href="#">EXTERIOR DESIGN</a></h3>
-                                <p>You have ideas, goals, and dreams. We have a culturally diverse, forward thinking
-                                    team looking for talent like. Lorem ipsum dolor suscipit.</p>
-                            </div>
-                        </div>
-                    </div><!-- Service1 end -->
-                </div><!-- Col 4 end -->
-
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="ts-service-box">
-                        <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service5.jpg') }}"
-                                alt="service-image">
-                        </div>
-                        <div class="d-flex">
-                            <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon5.png') }}"
-                                    alt="service-icon">
-                            </div>
-                            <div class="ts-service-info">
-                                <h3 class="service-box-title"><a href="#">RENOVATION</a></h3>
-                                <p>You have ideas, goals, and dreams. We have a culturally diverse, forward thinking
-                                    team looking for talent like. Lorem ipsum dolor suscipit.</p>
-                            </div>
-                        </div>
-                    </div><!-- Service2 end -->
-                </div><!-- Col 5 end -->
-
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="ts-service-box">
-                        <div class="ts-service-image-wrapper">
-                            <img loading="lazy" class="w-100" src="{{ url('assets/images/services/service6.jpg') }}"
-                                alt="service-image">
-                        </div>
-                        <div class="d-flex">
-                            <div class="ts-service-box-img">
-                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon6.png') }}"
-                                    alt="service-icon">
-                            </div>
-                            <div class="ts-service-info">
-                                <h3 class="service-box-title"><a href="#">SAFETY MANAGEMENT</a></h3>
-                                <p>You have ideas, goals, and dreams. We have a culturally diverse, forward thinking
-                                    team looking for talent like. Lorem ipsum dolor suscipit.</p>
-                            </div>
-                        </div>
-                    </div><!-- Service3 end -->
-                </div><!-- Col 6 end --> --}}
 
             </div><!-- Main row end -->
         </div><!-- Conatiner end -->
