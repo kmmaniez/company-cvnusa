@@ -3,7 +3,7 @@
 <div class="banner-carousel banner-carousel-1 mb-0">
 
     @foreach ($datacarousel as $carousel)
-    <div class="banner-carousel-item" style="background-image:url({{ ($carousel->image) ? url('assets/images/slider-main/', $carousel->image) : url('assets/images/slider-main/bg1.jpg') }})">
+    <div class="banner-carousel-item" style="background-image:url({{ ($carousel->image) ? Storage::url($carousel->image) : url('assets/images/slider-main/bg1.jpg') }})">
         <div class="slider-content">
             <div class="container h-100">
                 <div class="row align-items-center h-100">
