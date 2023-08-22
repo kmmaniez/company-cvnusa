@@ -16,11 +16,6 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
 
-    public function __construct()
-    {
-        
-    }
-
     public function index()
     {
         return view('public.index',[
@@ -36,6 +31,7 @@ class PublicController extends Controller
     public function about()
     {
         return view('public.about',[
+            'title' => 'Halaman About',
             'data' => WebsiteSetting::all(),
             'wallpaper' => Wallpaper::where('section_name','LIKE','about')->get('wallpaper_image'),
             'teams' => Anggota::all()
@@ -45,7 +41,7 @@ class PublicController extends Controller
     public function pricing()
     {
         return view('public.pricing',[
-            'title' => 'Harga',
+            'title' => 'Halaman Harga',
             'wallpaper' => Wallpaper::where('section_name','LIKE','pricing')->get('wallpaper_image'),
             'prices' => Price::all()
         ]);
@@ -54,7 +50,7 @@ class PublicController extends Controller
     public function services()
     {
         return view('public.services',[
-            'title' => 'ea',
+            'title' => 'Halaman Service ',
             'wallpaper' => Wallpaper::where('section_name','LIKE','services')->get('wallpaper_image'),
             'services' => Service::all()
         ]);
@@ -63,6 +59,7 @@ class PublicController extends Controller
     public function clients()
     {
         return view('public.clients',[
+            'title' => 'Halaman Client',
             'data' => Clients::all(),
             'wallpaper' => Wallpaper::where('section_name','LIKE','clients')->get('wallpaper_image'),
         ]);
@@ -70,7 +67,9 @@ class PublicController extends Controller
 
     public function contact()
     {
-        return view('public.contact');
+        return view('public.contact',[
+            'title' => 'Halaman Contact',
+        ]);
     }
 
     public function projects(Request $request)
@@ -81,7 +80,7 @@ class PublicController extends Controller
             echo 'projectss';
         }
         return view('public.projects',[
-            // 'kategoris' => Kategor::all(),
+            'title' => 'Halaman Projects',
             'req' => $request,
             'wallpaper' => $wallpaper
         ]);
