@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
-use App\Http\Requests\StoreClientRequest;
 use App\Models\Clients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ClientsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    /* FUNGSI VIEW INDEX CLIENTS */
     public function index()
     {
         return view('admin.client.index',[
@@ -21,21 +18,10 @@ class ClientsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    /* FUNGSI TAMBAH CLIENTS */
     public function store(ClientRequest $request)
     {
-
-        $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_client)).'.'.$request->logo->extension();
+        $imgName = date('HisdmY').'_'.strtolower(str_replace(' ','_',$request->nama_client)).'.'.$request->logo->extension();
         $pathName = Storage::putFileAs('public/clients', $request->file('logo'), $imgName);
 
         Clients::create([
@@ -46,43 +32,56 @@ class ClientsController extends Controller
 
         return response()->json([
             'data' => $request->all(),
-            'path' => $pathName
+            'path' => $pathName,
+            'messages' => 'Data created successfully'
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($clients)
+    /* FUNGSI LIHAT DATA CLIENTS */
+    public function show($client)
     {
-        $data = Clients::findOrfail($clients);
+        $data = Clients::findOrfail($client);
         return response()->json([
             'data' => $data
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Clients $clients)
+    /* FUNGSI UPDATE CLIENTS */
+    public function update(Request $request, $client)
     {
-        //
+        if ($request->ajax()) {
+            // $client = Clients::firstWhere('id', $client);
+            $data = Clients::findOrfail($client);
+            if ($request->has('logo')) {
+
+                if ($data->logo != NULL) {
+                    Storage::delete($data->logo); // HAPUS FOTO LAMA
+                }
+
+                $imgName = date('His_dmY').'-'.strtolower(str_replace(' ','_',$request->nama_client)).'.'.$request->logo->extension();
+                $pathName = Storage::putFileAs('public/clients', $request->file('logo'), $imgName);
+                
+                $update = $data->update([
+                    'nama' => $request->nama_client,
+                    'logo' => $pathName,
+                    'telepon' => $request->telepon_client,
+                ]);
+
+                if ($update) {
+                    return response()->json([
+                        'data' => $update,
+                        'messages' => 'Data successfully changed',
+                        'client' => $request->all()
+                    ]);
+                }
+            }
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Clients $clients)
+    /* FUNGSI HAPUS CLIENTS */
+    public function destroy($client)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($clients)
-    {
-        $data = Clients::findOrfail($clients);
+        $data = Clients::findOrfail($client);
         if ($data) {
             Storage::delete($data->logo);
             $data->delete();
