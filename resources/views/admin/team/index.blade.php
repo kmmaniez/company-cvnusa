@@ -17,7 +17,6 @@
                 </div>
                 <div class="card-body">
                     <a href="" id="btnTambahTeam" class="btn btn-md btn-primary mb-3" ><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
-                    <a href="" id="btnTambahJabatan" class="btn btn-md btn-secondary mb-3" data-toggle="modal" data-target="#tambahJabatanModal">Tambah Jabatan</a>
                     <p>Lihat contoh teams <a href="http://">disini</a></p>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="DTAnggota" width="100%" cellspacing="0">
@@ -47,8 +46,8 @@
                                         </div>
                                     </td>
                                     <td style="width: 160px;">
-                                        <a href="" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                                        <a href="" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
+                                        <a href="" data-anggota="{{ $team->id }}" id="btnEditAnggota" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                        <a href="" data-anggota="{{ $team->id }}" id="btnHapusAnggota" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
                                     </td>
                                 </tr>
                                     
@@ -70,6 +69,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Tabel Data Jabatan</h6>
                         </div>
                         <div class="card-body">
+                            <a href="" id="btnTambahJabatan" class="btn btn-md btn-primary mb-3" data-toggle="modal" data-target="#jabatanModal"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</a>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="DTJabatan" width="100%" cellspacing="0">
                                     <thead>
@@ -110,12 +110,12 @@
     </div>
 
     <!-- Modal Team -->
-    <div class="modal fade" id="tambahTeamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="teamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Anggota Team</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -137,6 +137,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="foto_anggota" class="form-label">Foto</label>
+                            <img id="preview-foto" loading="lazy" alt="" srcset="">
                             <input type="file" class="form-control" name="foto_anggota" id="foto_anggota">
                         </div>
                         <div class="row mb-3" style="row-gap: 8px;">
@@ -174,7 +175,7 @@
     </div>
 
     <!-- Modal Jabatan -->
-    <div class="modal fade" id="tambahJabatanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="jabatanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -209,10 +210,25 @@
             $('#DTJabatan').DataTable();
         });
 
+        /* EVENT DISPLAY GAMBAR */
+        $('#foto_anggota').change(function() {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#preview-foto').attr('src', e.target.result);
+                $('#preview-foto').css({
+                    display: 'block',
+                    width: '200px',
+                    height: '200px',
+                    marginBottom: '8px',
+                })
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
         /* EVENT TAMBAH ANGGOTA TEAM */
         $('body').on('click', '#btnTambahTeam', function (e) {
             e.preventDefault()
-            $('#tambahTeamModal').modal('show')
+            $('#teamModal').modal('show')
 
             $('#formTeams').on('submit', function(e){
                 e.preventDefault()
@@ -228,18 +244,135 @@
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: (response) => {
-                        if (response) {
-                            // this.reset();
-                            console.log(response);
-                            // $('#tambahTeamModal').modal('hide');
+                    success: (res) => {
+                        if (res) {
+                            this.reset();
+                            $('#teamModal').modal('hide');
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: res.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 2500);
                         }
                     },
                 });
             })
 
-
         })
+
+
+        /* FUNGSI UPDATE TEAM */
+        $('body').on('click', '#btnEditAnggota', function (e) {
+            e.preventDefault()
+            $('#teamModal').modal('show')
+            let idAnggota = $(this).data('anggota')
+
+            /* FUNGSI GET ANGGOTA */
+            $.ajax({
+                url: window.location.pathname+'/'+idAnggota,
+                method: 'GET',
+                success: function(res){
+                    const {data} = res
+                    let url = data.foto_anggota
+                    let replaceUrl = url.replace('public/teams','storage/teams')
+
+                    $('#nama_anggota').val(data.nama_anggota);
+                    $('#jabatan_id').val(data.jabatan_id);
+                    $('#url_facebook').val(data.url_facebook);
+                    $('#url_twitter').val(data.url_twitter);
+                    $('#url_linkedin').val(data.url_linkedin);
+                    $('#url_instagram').val(data.url_instagram);
+                    $('#preview-foto').attr('src', `${window.location.origin}/${replaceUrl}`)
+                    $('#preview-foto').css({
+                        display: 'block',
+                        width: '200px',
+                        height: '200px',
+                        marginBottom: '8px',
+                    })
+                }
+            })
+            
+            /* FUNGSI UPDATE ANGGOTA */
+            $('#formTeams').on('submit', function(e){
+                e.preventDefault()
+                e.stopImmediatePropagation()
+                
+                let formData = new FormData(this)
+                formData.append('_method','PATCH')
+                $.ajax({
+                    url: window.location.pathname+'/'+idAnggota,
+                    method: 'POST',
+                    headers :{
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: (res) => {
+                        if (res) {
+                            this.reset();
+                            $('#teamModal').modal('hide');
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: res.message,
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 2500);
+                        }
+                    },
+                });
+            })
+        })
+
+        /* HAPUS CLIENT */
+        $('body').on('click', '#btnHapusAnggota', function(e) {
+            e.preventDefault()
+            Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Apakah anda ingin menghapus data ini ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus data!',
+                    cancelButtonText: 'Tidak',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: window.location.pathname + '/' + $(this).data('anggota'),
+                            method: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: $(this).data('anggota')
+                            },
+                            success: (res) => {
+                                $('#teamModal').modal('hide');
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: res.message,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 2500);
+                            }
+                        })
+                    }
+                })
+        })
+
 
         /* EVENT TAMBAH JABATAN */
         $('body').on('click', '#btnTambahJabatan', function(e) {
@@ -249,14 +382,14 @@
                 e.preventDefault()
                 e.stopImmediatePropagation()
                 $.ajax({
-                    url: '{{ route('katjab.store') }}',
+                    url: '{{ route('kategorijabatan.store') }}',
                     method: 'POST',
                     data:{
                         _token: '{{ csrf_token() }}',
                         nama_jabatan: $('#nama_jabatan').val()
                     },success: (res) => {
                         $('#nama_jabatan').val('')
-                        $('#tambahJabatanModal').modal('hide')
+                        $('#jabatanModal').modal('hide')
                         Swal.fire({
                             type: 'success',
                             icon: 'success',
