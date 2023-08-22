@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Website\UpdateWallpaperRequest;
+use App\Http\Requests\Website\CarouselRequest;
+use App\Models\Carousel;
 use App\Models\Wallpaper;
 use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
@@ -27,14 +28,6 @@ class WebsiteSettingController extends Controller
             'title'     => 'About Us Settings',
             'jmlhdata'  => $this->_website->count(),
             'data'      => $this->_website->all(),
-        ]);
-    }
-
-    /* FUNGSI VIEWS HALAMAN CAROUSEL */
-    public function indexCarousel()
-    {
-        return view('admin.web.carousel', [
-            'title' => 'Carousel Image'
         ]);
     }
 
@@ -91,6 +84,7 @@ class WebsiteSettingController extends Controller
         return redirect()->back();
     }
 
+
     /**
      * Display the specified resource.
      */
@@ -107,13 +101,6 @@ class WebsiteSettingController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(WebsiteSetting $websiteSetting)
-    {
-        //
-    }
 
     /* FUNGSI UPDATE ABOUT US */
     public function update(Request $request, $id)
@@ -152,12 +139,10 @@ class WebsiteSettingController extends Controller
             }
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(WebsiteSetting $websiteSetting)
     {
         //
     }
+
 }
