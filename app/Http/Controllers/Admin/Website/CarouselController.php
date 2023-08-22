@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\CarouselRequest;
-use App\Http\Requests\Website\StoreCarouselRequest;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -42,7 +41,7 @@ class CarouselController extends Controller
         }
     }
 
-    /* FUNGSI UNTUK UPDATE CAROUSEL */
+    /* FUNGSI UNTUK LIHAT DATA CAROUSEL */
     public function show($carousels)
     {
         $data = Carousel::findOrfail($carousels);
