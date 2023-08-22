@@ -7,62 +7,91 @@ use App\Http\Requests\Website\CarouselRequest;
 use App\Http\Requests\Website\StoreCarouselRequest;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarouselController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    /* FUNGSI VIEWS HALAMAN CAROUSEL */
     public function index()
     {
-        //
+        echo strtolower(str_replace(' ','-','When Service Matters'));
+        return view('admin.web.carousel', [
+            'title' => 'Carousel Image',
+            'carousels' => Carousel::all(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    /* FUNGSI UNTUK UPDATE CAROUSEL */
     public function store(CarouselRequest $request)
     {
-        //
+        if ($request->has('gambar_carousel')) {
+            $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->slide_title)).'.'.$request->gambar_carousel->extension();
+            $pathName = Storage::putFileAs('public/carousels', $request->file('gambar_carousel'), $imgName);
+            
+            $data = Carousel::create([
+                ...$request->all(),
+                'image' => $pathName
+            ]);
+
+            if ($data) {
+                return response()->json([
+                   'message' => 'Data created successfully'
+                ]);
+            }
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Carousel $carousel)
+    /* FUNGSI UNTUK UPDATE CAROUSEL */
+    public function show($carousels)
     {
-        //
+        $data = Carousel::findOrfail($carousels);
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Carousel $carousel)
+    /* FUNGSI UNTUK UPDATE CAROUSEL */
+    public function update(Request $request, $carousels)
     {
-        //
+        if ($request->ajax()) {
+            
+            $data = Carousel::findOrfail($carousels);
+            if ($request->has('gambar_carousel')) {
+
+                if ($data->gambar_carousel != NULL) {
+                    Storage::delete($data->gambar_carousel); // HAPUS FOTO LAMA
+                }
+
+                $imgName = date('His_dmY').'-'.strtolower(str_replace(' ','_',$data->slide_title)).'.'.$request->gambar_carousel->extension();
+                $pathName = Storage::putFileAs('public/carousels', $request->file('gambar_carousel'), $imgName);
+                
+                $update = $data->update([
+                    ...$request->all(),
+                    'image' => $pathName
+                ]);
+
+                if ($update) {
+                    return response()->json([
+                        'message' => 'Data successfully changed',
+                    ]);
+                }
+            }
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Carousel $carousel)
+    /* FUNGSI UNTUK HAPUS CAROUSEL */
+    public function destroy($carousels)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Carousel $carousel)
-    {
-        //
+        $data = Carousel::findOrfail($carousels);
+        if ($data) {
+            if ($data->image) {
+                Storage::delete($data->image);
+            }
+            $data->delete();
+            return response()->json([
+                'message'   => 'Data Berhasil dihapus',
+            ]);
+        }
     }
 }
