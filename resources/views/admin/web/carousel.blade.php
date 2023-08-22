@@ -123,7 +123,7 @@
                 // console.log(formData);
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('website.storecarousel') }}',
+                    url: '{{ route('carousels.store') }}',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
