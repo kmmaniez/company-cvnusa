@@ -15,7 +15,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <a href="" id="btnTambahClient" class="btn btn-md btn-primary mb-3"><i class="fas fa-fw fa-plus"></i> Tambah Client</a>
+                    <a href="" id="btnTambahClient" class="btn btn-md btn-primary mb-3"><i
+                            class="fas fa-fw fa-plus"></i> Tambah Client</a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="DTClients" width="100%" cellspacing="0">
                             <thead>
@@ -67,8 +68,10 @@
                             <input type="number" class="form-control" name="telepon_client" id="telepon_client"
                                 placeholder="08xx-xxxx-xxx">
                         </div>
-                        <button class="btn btn-md btn-primary" id="btnSimpanClient"><i class="fas fa-fw fa-save"></i>Simpan</button>
-                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i>Reset</button>
+                        <button class="btn btn-md btn-primary" id="btnSimpanClient"><i
+                                class="fas fa-fw fa-save"></i>Simpan</button>
+                        <button class="btn btn-md btn-secondary" type="reset"><i
+                                class="fas fa-fw fa-undo"></i>Reset</button>
                     </form>
                 </div>
             </div>
@@ -88,7 +91,7 @@
             $('#telepon_client').val('')
             $('#nama-input-error').text('')
             $('#image-input-error').text('')
-            $('#preview-logo').css('display','none');
+            $('#preview-logo').css('display', 'none');
         })
 
         /* EVENT DISPLAY GAMBAR */
@@ -134,7 +137,7 @@
                             Swal.fire({
                                 type: 'success',
                                 icon: 'success',
-                                title: res.messages,
+                                title: res.message,
                                 showConfirmButton: false,
                                 timer: 2000,
                             });
@@ -164,16 +167,18 @@
         /* EVENT GET DATA BY ID */
         $('body').on('click', '#btnEditClient', function(e) {
             e.preventDefault()
-            
+
             $('#modalClient').modal('show');
             $.ajax({
                 url: window.location.pathname + '/' + $(this).data('client'),
                 method: 'GET',
                 success: (res) => {
-                    const { data } = res
+                    const {
+                        data
+                    } = res
                     idClient = data.id
                     let url = data.logo
-                    let replaceUrl = url.replace('public/clients','storage/clients')
+                    let replaceUrl = url.replace('public/clients', 'storage/clients')
                     console.log(idClient);
 
                     $('#nama_client').val(data.nama);
@@ -193,11 +198,11 @@
                 e.stopImmediatePropagation();
 
                 let formData = new FormData(this);
-                formData.append('_method','PATCH')
+                formData.append('_method', 'PATCH')
                 $('#image-input-error').text('');
 
                 $.ajax({
-                    url: window.location.pathname + '/' +idClient,
+                    url: window.location.pathname + '/' + idClient,
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -211,7 +216,7 @@
                             Swal.fire({
                                 type: 'success',
                                 icon: 'success',
-                                title: res.messages,
+                                title: res.message,
                                 showConfirmButton: false,
                                 timer: 2000,
                             });
@@ -264,7 +269,7 @@
                                 Swal.fire({
                                     type: 'success',
                                     icon: 'success',
-                                    title: res.messages,
+                                    title: res.message,
                                     showConfirmButton: false,
                                     timer: 2000,
                                 });
