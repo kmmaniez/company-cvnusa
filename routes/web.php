@@ -1,25 +1,30 @@
 <?php
 
-use App\Http\Controllers\Admin\Blog\KategoriBlogController;
 use App\Http\Controllers\Admin\Blog\KategoriPostController;
 use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Team\AnggotaController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PriceController;
-use App\Http\Controllers\Admin\Projects\KategoriController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\Projects\ProjectController;
 use App\Http\Controllers\Admin\Team\KategoriJabatanController;
-use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
+use App\Http\Controllers\Admin\Projects\KategoriProjectController;
+use App\Http\Controllers\Admin\Website\AboutController;
+use App\Http\Controllers\Admin\Website\CarouselController;
+use App\Http\Controllers\Admin\Website\WallpaperController;
 use App\Models\Clients;
 use App\Models\Kategori;
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+
+use function PHPUnit\Framework\directoryExists;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,20 +37,6 @@ use Yajra\DataTables\Facades\DataTables;
 |
 */
 
-/* PUBLIC ROUTES */
-
-Route::controller(PublicController::class)->as('public.')->group(function () {
-
-    Route::get('/', 'index')->name('index');
-    Route::get('/about', 'about')->name('about');
-    Route::get('/pricing', 'pricing')->name('pricing');
-    Route::get('/services', 'services')->name('services');
-    Route::get('/clients', 'clients')->name('clientpublic');
-    Route::get('/contact-us', 'contact')->name('contact');
-
-    Route::get('/projects', 'projects')->name('projects');
-    Route::get('/projects/id', 'project_details')->name('project-single');
-});
 
 /* PRIVATE ROUTES (WITH AUTH) */
 // Route::middleware(['auth'])->group(function () {
@@ -58,33 +49,43 @@ Route::prefix('settings')->group(function () {
     // ROUTE RESOURCE CLIENT,KATEGORI,PROJECT,TEAM,PRICE
     /* accessed with ex: localhost/settings/clients/index */
     Route::resources([
-        'clients'       => ClientsController::class,
-        'categories'    => KategoriController::class,
-        'projects'      => ProjectController::class,
-        'teams'         => AnggotaController::class,
-        'katjab'        => KategoriJabatanController::class,
-        'prices'        => PriceController::class,
-        'services'      => ServiceController::class,
+        'kategoriproject'   => KategoriProjectController::class,
+        'projects'          => ProjectController::class,
+        'teams'             => AnggotaController::class,
+        'kategorijabatan'   => KategoriJabatanController::class,
+        'prices'            => PriceController::class,
+        'services'          => ServiceController::class,
+    ]);
+
+    Route::resource('clients', ClientsController::class)->only([
+        'index','store','show','update','destroy'
     ]);
 
 
     // ROUTE GROUP WEBSITE SETTING
-    /* accessed with prefix website, ex: localhost/settings/website/about-us */
-    Route::controller(WebsiteSettingController::class)->prefix('website')->as('website.')->group(function () {
+    /* accessed with prefix website, ex: localhost/settings/landing-page/about-us */
+    Route::controller(WebsiteSettingController::class)->prefix('landing-page')->group(function () {
 
         // MENU ABOUT-US
-        Route::get('/about-us', 'index')->name('indexabout');
-        Route::get('/carousel-image', 'indexCarousel')->name('indexcarousel');
-
+        Route::controller(AboutController::class)->prefix('about-us')->group(function(){
+            Route::get('/', 'index')->name('about.index');
+            Route::post('/', 'store')->name('about.store');
+            Route::put('/{id}', 'update')->name('about.update');
+        });
+        
         // MENU CAROUSEL
-        Route::post('/about-us', 'store')->name('storeabout');
-        Route::put('/about-us/{id}', 'update')->name('updateabout');
+        Route::resource('carousels', CarouselController::class)->only([
+            'index','store','show','update','destroy'
+        ]);
 
         // MENU WALLPAPER
-        Route::get('/wallpaper-menu', 'indexWallpaper')->name('indexwallpaper');
-        Route::get('/getallwallpaper', 'getAllWallpaper')->name('getallwallpaper'); // DATATABLES
-        Route::get('/wallpaper-menu/{wallpaper}', 'showWallpaperById')->name('showwallpaper');
-        Route::patch('/wallpaper-menu/{id}', 'updateWallpaper')->name('updatewallpaper');
+        Route::controller(WallpaperController::class)->prefix('wallpapers')->group(function(){
+            Route::get('/','index')->name('wallpaper.index');
+            Route::get('/getallwallpaper','getAllWallpaper')->name('wallpaper.getallwallpaper');
+            Route::get('/{wallpaper}','show')->name('wallpaper.show');
+            Route::patch('/{wallpaper}','update')->name('wallpaper.update');
+        });
+
     });
 
 
@@ -106,37 +107,7 @@ Route::prefix('settings')->group(function () {
 
     // ROUTE GROUP BLOG
     /* acessed with prefix blogs, ex: localhost/settings/blogs/posts/index */
-    Route::prefix('blog')->group(function () {
-
-        // ROUTE POST BLOG
-        Route::prefix('posts')->as('posts.')->group(function () {
-
-            Route::controller(PostController::class)->group(function () {
-                Route::get('/', 'index')->name('index');
-                Route::get('/create', 'create')->name('create');
-                Route::post('/', 'store')->name('store');
-
-                Route::get('/{post}/edit', 'edit')->name('edit');
-                Route::patch('/{post}', 'update')->name('update');
-                Route::delete('/destroy/{post}', 'destroy')->name('destroy');
-
-                Route::get('/getallposts', 'getAllPosts')->name('getallposts');
-            });
-        });
-
-        // ROUTE KATEGORI BLOG
-        Route::prefix('kategori')->as('katpost.')->group(function () {
-
-            Route::controller(KategoriPostController::class)->group(function () {
-                Route::post('store', 'store')->name('store');
-                Route::get('destroy/{kategoriBlog}', 'destroy')->name('destroy');
-
-                Route::get('/getallkatpost', 'getAllKategoris')->name('getallkatposts');
-            });
-        });
-    });
-
-
+    require __DIR__ . '/web/blog.php'; // ROUTE BLOG
 
 });
 
@@ -189,17 +160,5 @@ Route::prefix('datatables')->group(function () {
     })->name('getdataclients');
 });
 
-// TESTING ROUTE ONLY!
-Route::get('/tes', function () {
-    // $jabatan = ['CEO','CTO','Manager','Accountant','Marketing'];
-
-    // foreach ($jabatan as $key) {
-    //     // Jabatan::create([$key]);
-    //     echo $key;
-    // }
-    $user = User::with('blogs')->get();
-    echo 'ea<br>';
-    dump($user);
-});
-
+require __DIR__ . '/web/public.php'; // ROUTE PUBLIC
 require __DIR__ . '/auth.php';
