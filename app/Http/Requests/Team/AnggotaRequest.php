@@ -24,7 +24,7 @@ class AnggotaRequest extends FormRequest
         return [
             'nama_anggota' => ['required','string'],
             'jabatan_id' => ['required'],
-            'thumbnail' => ['image','mimes:png,jpg,jpeg','max:2048'],
+            'foto_anggota' => ['image','mimes:png,jpg,jpeg','max:2048'],
         ];
     }
 }
