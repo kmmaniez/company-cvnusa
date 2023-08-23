@@ -16,7 +16,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <a href="" id="btnTambahTeam" class="btn btn-md btn-primary mb-3" ><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
+                    <a href="" id="btnTambahTeam" class="btn btn-md btn-primary mb-3"><i class="fas fa-fw fa-plus"></i>
+                        Tambah Data</a>
                     <p>Lihat contoh teams <a href="http://">disini</a></p>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="DTAnggota" width="100%" cellspacing="0">
@@ -31,26 +32,31 @@
                             </thead>
                             <tbody>
                                 @foreach ($teams as $team)
-                                <tr>
-                                    <td>{{ $team->nama_anggota }}</td>
-                                    <td>{{ $team->jabatans->nama_jabatan }}</td>
-                                    <td>
-                                        <img src="{{ (isset($team->foto_anggota)) ? Storage::url($team->foto_anggota) : asset('sb-admin/reference/user_profile.jpg') }}" style="object-fit: cover;" width="200" height="150" alt="client-logo">
-                                    </td>
-                                    <td style="width: 124px;">
-                                        <div>
-                                            <a href="{{ $team->url_facebook }}" target="_blank">Facebook</a>,
-                                            <a href="http://twitter.com/{{ $team->url_twitter }}" target="_blank">Twitter</a>,
-                                            <a href="http://instagram.com/{{ $team->url_instagram }}" target="_blank">Instagram</a>,
-                                            <a href="{{ $team->url_linkedin }}" target="_blank">LinkedIn</a>
-                                        </div>
-                                    </td>
-                                    <td style="width: 160px;">
-                                        <a href="" data-anggota="{{ $team->id }}" id="btnEditAnggota" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                                        <a href="" data-anggota="{{ $team->id }}" id="btnHapusAnggota" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
-                                    </td>
-                                </tr>
-                                    
+                                    <tr>
+                                        <td>{{ $team->nama_anggota }}</td>
+                                        <td>{{ $team->jabatans->nama_jabatan }}</td>
+                                        <td>
+                                            <img src="{{ isset($team->foto_anggota) ? Storage::url($team->foto_anggota) : asset('sb-admin/reference/user_profile.jpg') }}"
+                                                style="object-fit: cover;" width="200" height="150" alt="client-logo">
+                                        </td>
+                                        <td style="width: 124px;">
+                                            <div>
+                                                <a href="{{ $team->url_facebook }}" target="_blank">Facebook</a>,
+                                                <a href="http://twitter.com/{{ $team->url_twitter }}"
+                                                    target="_blank">Twitter</a>,
+                                                <a href="http://instagram.com/{{ $team->url_instagram }}"
+                                                    target="_blank">Instagram</a>,
+                                                <a href="{{ $team->url_linkedin }}" target="_blank">LinkedIn</a>
+                                            </div>
+                                        </td>
+                                        <td style="width: 160px;">
+                                            <a href="" data-anggota="{{ $team->id }}" id="btnEditAnggota"
+                                                class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                            <a href="" data-anggota="{{ $team->id }}" id="btnHapusAnggota"
+                                                class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i>
+                                                Delete</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -69,7 +75,8 @@
                             <h6 class="m-0 font-weight-bold text-primary">Tabel Data Jabatan</h6>
                         </div>
                         <div class="card-body">
-                            <a href="" id="btnTambahJabatan" class="btn btn-md btn-primary mb-3" data-toggle="modal" data-target="#jabatanModal"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</a>
+                            <a href="" id="btnTambahJabatan" class="btn btn-md btn-primary mb-3" data-toggle="modal"
+                                data-target="#jabatanModal"><i class="fas fa-fw fa-plus"></i> Tambah Jabatan</a>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="DTJabatan" width="100%" cellspacing="0">
                                     <thead>
@@ -79,9 +86,9 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($jabatans as $jabatan)
-                                        <tr>
-                                            <td>{{ $jabatan->nama_jabatan }}</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $jabatan->nama_jabatan }}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -96,14 +103,16 @@
                         </div>
                         <div class="card-body">
                             <figure class="text-center">
-                                <img src="{{ asset('sb-admin/reference/teams.png') }}" class="w-100" alt="" srcset="">
-                                <figcaption>*Settings akan berdampak ke <a href="{{ route('public.about') }}" target="_blank">sini</a></figcaption>
+                                <img src="{{ asset('sb-admin/reference/teams.png') }}" class="w-100" alt=""
+                                    srcset="">
+                                <figcaption>*Settings akan berdampak ke <a href="{{ route('public.about') }}"
+                                        target="_blank">sini</a></figcaption>
                             </figure>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
 
@@ -124,14 +133,15 @@
                     <form id="formTeams">
                         <div class="mb-3">
                             <label for="nama_anggota" class="form-label">Nama Anggota</label>
-                            <input type="text" class="form-control" name="nama_anggota" id="nama_anggota" placeholder="Nama Lengkap">
+                            <input type="text" class="form-control" name="nama_anggota" id="nama_anggota"
+                                placeholder="Nama Lengkap">
                         </div>
                         <div class="mb-3">
                             <label for="jabatan_id" class="form-label">Jabatan</label>
                             <select name="jabatan_id" class="form-control" id="jabatan_id">
                                 <option value="" style="display: none;">--- Pilih Jabatan ---</option>
                                 @foreach ($jabatans as $jabatan)
-                                <option value="{{ $jabatan->id }}">{{ $jabatan->nama_jabatan }}</option>
+                                    <option value="{{ $jabatan->id }}">{{ $jabatan->nama_jabatan }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -144,30 +154,36 @@
                             <div class="col-8">
                                 <div class="">
                                     <label for="url_facebook" class="form-label">Facebook</label>
-                                    <input type="text" class="form-control" name="url_facebook" id="url_facebook" placeholder="https://facebook.com/fbanda">
+                                    <input type="text" class="form-control" name="url_facebook" id="url_facebook"
+                                        placeholder="https://facebook.com/fbanda">
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="">
                                     <label for="url_twitter" class="form-label">Twitter</label>
-                                    <input type="text" class="form-control" name="url_twitter" id="url_twitter" placeholder="@username">
+                                    <input type="text" class="form-control" name="url_twitter" id="url_twitter"
+                                        placeholder="@username">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="">
                                     <label for="url_linkedin" class="form-label">LinkedIn</label>
-                                    <input type="text" class="form-control" name="url_linkedin" id="url_linkedin" placeholder="Link linkedin">
+                                    <input type="text" class="form-control" name="url_linkedin" id="url_linkedin"
+                                        placeholder="Link linkedin">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="">
                                     <label for="url_instagram" class="form-label">Instagram</label>
-                                    <input type="text" class="form-control" name="url_instagram" id="url_instagram" placeholder="@username">
+                                    <input type="text" class="form-control" name="url_instagram" id="url_instagram"
+                                        placeholder="@username">
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-md btn-primary" id="btnSimpanTeam"><i class="fas fa-fw fa-save"></i> Simpan</button>
-                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i>Reset</button>
+                        <button class="btn btn-md btn-primary" id="btnSimpanTeam"><i class="fas fa-fw fa-save"></i>
+                            Simpan</button>
+                        <button class="btn btn-md btn-secondary" type="reset"><i
+                                class="fas fa-fw fa-undo"></i>Reset</button>
                     </form>
                 </div>
             </div>
@@ -189,10 +205,13 @@
                     <form id="formJabatan">
                         <div class="mb-3">
                             <label for="nama_jabatan" class="form-label">Nama Jabatan</label>
-                            <input type="text" class="form-control" name="nama_jabatan" id="nama_jabatan" placeholder="cth: Manager">
+                            <input type="text" class="form-control" name="nama_jabatan" id="nama_jabatan"
+                                placeholder="cth: Manager">
                         </div>
-                        <button class="btn btn-md btn-primary" id="btnSimpanJabatan"><i class="fas fa-fw fa-save"></i> Simpan</button>
-                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i> Reset</button>
+                        <button class="btn btn-md btn-primary" id="btnSimpanJabatan"><i class="fas fa-fw fa-save"></i>
+                            Simpan</button>
+                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i>
+                            Reset</button>
                     </form>
                 </div>
             </div>
@@ -200,7 +219,6 @@
     </div>
 @endsection
 @push('scripts')
-    
     <script src="{{ url('sb-admin') }}/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ url('sb-admin') }}/js/demo/datatables-demo.js"></script>
@@ -209,7 +227,7 @@
         $(document).ready(function() {
             $('#DTJabatan').DataTable();
             /* EVENT MODAL DITUTUP */
-            $('#teamModal').on('hidden.bs.modal', function (e) {
+            $('#teamModal').on('hidden.bs.modal', function(e) {
                 $('#nama_anggota').val('')
                 $('#jabatan_id').val('')
                 $('#url_facebook').val('')
@@ -238,19 +256,19 @@
         });
 
         /* EVENT TAMBAH ANGGOTA TEAM */
-        $('body').on('click', '#btnTambahTeam', function (e) {
+        $('body').on('click', '#btnTambahTeam', function(e) {
             e.preventDefault()
             $('#teamModal').modal('show')
 
-            $('#formTeams').on('submit', function(e){
+            $('#formTeams').on('submit', function(e) {
                 e.preventDefault()
                 e.stopImmediatePropagation()
-                
+
                 let formData = new FormData(this)
                 $.ajax({
                     url: '{{ route('teams.store') }}',
                     method: 'POST',
-                    headers :{
+                    headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     data: formData,
@@ -279,17 +297,19 @@
 
 
         /* FUNGSI UPDATE TEAM */
-        $('body').on('click', '#btnEditAnggota', function (e) { 
+        $('body').on('click', '#btnEditAnggota', function(e) {
             e.preventDefault()
             $('#teamModal').modal('show')
             let idAnggota = $(this).data('anggota')
 
             /* FUNGSI GET ANGGOTA */
             $.ajax({
-                url: window.location.pathname+'/'+idAnggota,
+                url: window.location.pathname + '/' + idAnggota,
                 method: 'GET',
-                success: function(res){
-                    const {data} = res
+                success: function(res) {
+                    const {
+                        data
+                    } = res
                     let url, replaceUrl;
                     $('#nama_anggota').val(data.nama_anggota);
                     $('#jabatan_id').val(data.jabatan_id);
@@ -299,7 +319,7 @@
                     $('#url_instagram').val(data.url_instagram);
                     if (data.foto_anggota != null) {
                         url = data.foto_anggota
-                        replaceUrl = url.replace('public/teams','storage/teams')
+                        replaceUrl = url.replace('public/teams', 'storage/teams')
                         $('#preview-foto').attr('src', `${window.location.origin}/${replaceUrl}`)
                         $('#preview-foto').css({
                             display: 'block',
@@ -307,25 +327,25 @@
                             height: '200px',
                             marginBottom: '8px',
                         })
-                    }else{
+                    } else {
                         $('#preview-foto').css({
                             display: 'none',
                         })
                     }
                 }
             })
-            
+
             /* FUNGSI UPDATE ANGGOTA */
-            $('#formTeams').on('submit', function(e){
+            $('#formTeams').on('submit', function(e) {
                 e.preventDefault()
                 e.stopImmediatePropagation()
 
                 let formData = new FormData(this)
-                formData.append('_method','PATCH')
+                formData.append('_method', 'PATCH')
                 $.ajax({
-                    url: window.location.pathname+'/'+idAnggota,
+                    url: window.location.pathname + '/' + idAnggota,
                     method: 'POST',
-                    headers :{
+                    headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     data: formData,
@@ -401,28 +421,29 @@
                 $.ajax({
                     url: '{{ route('kategorijabatan.store') }}',
                     method: 'POST',
-                    data:{
+                    data: {
                         _token: '{{ csrf_token() }}',
                         nama_jabatan: $('#nama_jabatan').val()
-                    },success: (res) => {
+                    },
+                    success: (res) => {
                         $('#nama_jabatan').val('')
                         $('#jabatanModal').modal('hide')
                         Swal.fire({
                             type: 'success',
                             icon: 'success',
-                            title: res.messages,
+                            title: res.message,
                             showConfirmButton: false,
                             timer: 2000,
                         });
                         setTimeout(() => {
                             window.location.reload()
                         }, 2500);
-                    },error: (err) => {
+                    },
+                    error: (err) => {
                         console.log(err);
                     }
                 })
             })
         })
-
     </script>
 @endpush
