@@ -12,7 +12,7 @@ class ClientsController extends Controller
     /* FUNGSI VIEW INDEX CLIENTS */
     public function index()
     {
-        return view('admin.client.index',[
+        return view('admin.client.index', [
             'title' => 'Clients',
             'data' => Clients::all()
         ]);
@@ -21,7 +21,7 @@ class ClientsController extends Controller
     /* FUNGSI TAMBAH CLIENTS */
     public function store(ClientRequest $request)
     {
-        $imgName = date('HisdmY').'_'.strtolower(str_replace(' ','_',$request->nama_client)).'.'.$request->logo->extension();
+        $imgName = date('HisdmY') . '_' . strtolower(str_replace(' ', '_', $request->nama_client)) . '.' . $request->logo->extension();
         $pathName = Storage::putFileAs('public/clients', $request->file('logo'), $imgName);
 
         Clients::create([
@@ -33,7 +33,7 @@ class ClientsController extends Controller
         return response()->json([
             'data' => $request->all(),
             'path' => $pathName,
-            'messages' => 'Data created successfully'
+            'message' => 'Data created successfully'
         ]);
     }
 
@@ -50,7 +50,7 @@ class ClientsController extends Controller
     public function update(Request $request, $client)
     {
         if ($request->ajax()) {
-            
+
             $data = Clients::findOrfail($client);
             if ($request->has('logo')) {
 
@@ -58,9 +58,9 @@ class ClientsController extends Controller
                     Storage::delete($data->logo); // HAPUS FOTO LAMA
                 }
 
-                $imgName = date('His_dmY').'-'.strtolower(str_replace(' ','_',$request->nama_client)).'.'.$request->logo->extension();
+                $imgName = date('His_dmY') . '-' . strtolower(str_replace(' ', '_', $request->nama_client)) . '.' . $request->logo->extension();
                 $pathName = Storage::putFileAs('public/clients', $request->file('logo'), $imgName);
-                
+
                 $update = $data->update([
                     'nama' => $request->nama_client,
                     'logo' => $pathName,
@@ -70,11 +70,11 @@ class ClientsController extends Controller
                 if ($update) {
                     return response()->json([
                         'data' => $update,
-                        'messages' => 'Data successfully changed',
+                        'message' => 'Data successfully changed',
                         'client' => $request->all()
                     ]);
                 }
-            }else{
+            } else {
                 $update = $data->update([
                     'nama' => $request->nama_client,
                     'logo' => $data->logo,
@@ -84,7 +84,7 @@ class ClientsController extends Controller
                 if ($update) {
                     return response()->json([
                         'data' => $update,
-                        'messages' => 'Data successfully changed',
+                        'message' => 'Data successfully changed',
                         'client' => $request->all()
                     ]);
                 }
@@ -101,7 +101,7 @@ class ClientsController extends Controller
             $data->delete();
             return response()->json([
                 'data' => $data,
-                'messages' =>'sukses',
+                'message' => 'sukses',
             ]);
         }
     }
