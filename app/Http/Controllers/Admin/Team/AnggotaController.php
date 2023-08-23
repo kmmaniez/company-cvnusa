@@ -53,7 +53,7 @@ class AnggotaController extends Controller
         ]);
     }
 
-    /* FUNGSI TAMBAH ANGGOTA */
+    /* FUNGSI UPDATE ANGGOTA */
     public function update(Request $request, $anggota)
     {
         if ($request->ajax()) {
@@ -74,6 +74,16 @@ class AnggotaController extends Controller
                     'foto_anggota' => $pathName,
                 ]);
 
+                if ($update) {
+                    return response()->json([
+                        'message' => 'Data successfully changed',
+                    ]);
+                }
+            }else{
+                $update = $data->update([
+                    ...$request->all(),
+                    'jabatan_id' => (int) $request->jabatan_id,
+                ]);
                 if ($update) {
                     return response()->json([
                         'message' => 'Data successfully changed',
