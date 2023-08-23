@@ -50,7 +50,7 @@ class ClientsController extends Controller
     public function update(Request $request, $client)
     {
         if ($request->ajax()) {
-            // $client = Clients::firstWhere('id', $client);
+            
             $data = Clients::findOrfail($client);
             if ($request->has('logo')) {
 
@@ -64,6 +64,20 @@ class ClientsController extends Controller
                 $update = $data->update([
                     'nama' => $request->nama_client,
                     'logo' => $pathName,
+                    'telepon' => $request->telepon_client,
+                ]);
+
+                if ($update) {
+                    return response()->json([
+                        'data' => $update,
+                        'messages' => 'Data successfully changed',
+                        'client' => $request->all()
+                    ]);
+                }
+            }else{
+                $update = $data->update([
+                    'nama' => $request->nama_client,
+                    'logo' => $data->logo,
                     'telepon' => $request->telepon_client,
                 ]);
 
