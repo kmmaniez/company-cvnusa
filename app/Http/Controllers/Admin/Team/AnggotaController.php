@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Team;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Team\AnggotaRequest;
 use App\Models\Team\Anggota;
 use App\Models\Team\KategoriJabatan;
 use Illuminate\Http\Request;
@@ -21,26 +22,39 @@ class AnggotaController extends Controller
     }
 
     /* FUNGSI TAMBAH ANGGOTA */
-    public function store(Request $request)
+    public function store(AnggotaRequest $request)
     {
-        if ($request->has('foto_anggota')) {
-            $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_anggota)).'.'.$request->foto_anggota->extension();
-            $pathName = Storage::putFileAs('public/teams', $request->file('foto_anggota'), $imgName);
-            try {
-                Anggota::create([
-                    ...$request->all(),
-                    'jabatan_id' => (int) $request->jabatan_id,
-                    'foto_anggota' => $pathName,
-                ]);
+        if ($request->ajax()) {
+            # code...
+            if ($request->has('foto_anggota')) {
+                $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_anggota)).'.'.$request->foto_anggota->extension();
+                $pathName = Storage::putFileAs('public/teams', $request->file('foto_anggota'), $imgName);
+                // try {
+                    Anggota::create([
+                        ...$request->all(),
+                        'jabatan_id' => (int) $request->jabatan_id,
+                        'foto_anggota' => $pathName,
+                    ]);
+    
+                    return response()->json([
+                        'message' => 'Data Created Successfully',
+                        'data' => $request->all(),
+                    ]);
+    
+                // } catch (\Throwable $th) {
+                //     //throw $th;
+                // }
+        }else{
+            Anggota::create([
+                ...$request->all(),
+                'jabatan_id' => (int) $request->jabatan_id,
+            ]);
 
-                return response()->json([
-                    'message' => 'Data Created Successfully',
-                    'data' => $request->all(),
-                ]);
-
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+            return response()->json([
+                'message' => 'Data Created Successfully',
+                'data' => $request->all(),
+            ]);
+        }
             
         }
     }
