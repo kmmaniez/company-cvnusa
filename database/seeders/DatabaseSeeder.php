@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // DELETE SEMUA FOLDER & FILE PENYIMPANAN
+        $allDir = Storage::disk('public')->allDirectories();
+        for ($i=0; $i < count($allDir); $i++) { 
+            try {
+                Storage::disk('public')->deleteDirectory($allDir[$i]);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+
         $this->call([
             PermissionSeeder::class,
             RoleSeeder::class,
