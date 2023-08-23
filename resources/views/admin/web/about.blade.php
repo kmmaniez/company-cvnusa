@@ -25,7 +25,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Form Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ ($jmlhdata > 0) ? route('website.updateabout', $data[0]['id']) : route('website.storeabout')  }}" method="post">
+                    <form action="{{ ($jmlhdata > 0) ? route('about.update', $data[0]['id']) : route('about.store')  }}" method="post">
                         @csrf
                         @if ($jmlhdata > 0)
                             @method('PUT')
