@@ -141,13 +141,13 @@
                             <input type="file" class="form-control" name="foto_anggota" id="foto_anggota">
                         </div>
                         <div class="row mb-3" style="row-gap: 8px;">
-                            <div class="col-6">
+                            <div class="col-8">
                                 <div class="">
                                     <label for="url_facebook" class="form-label">Facebook</label>
-                                    <input type="text" class="form-control" name="url_facebook" id="url_facebook" placeholder="Link facebook">
+                                    <input type="text" class="form-control" name="url_facebook" id="url_facebook" placeholder="https://facebook.com/fbanda">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="">
                                     <label for="url_twitter" class="form-label">Twitter</label>
                                     <input type="text" class="form-control" name="url_twitter" id="url_twitter" placeholder="@username">
@@ -208,6 +208,18 @@
     <script>
         $(document).ready(function() {
             $('#DTJabatan').DataTable();
+            /* EVENT MODAL DITUTUP */
+            $('#teamModal').on('hidden.bs.modal', function (e) {
+                $('#nama_anggota').val('')
+                $('#jabatan_id').val('')
+                $('#url_facebook').val('')
+                $('#url_twitter').val('')
+                $('#url_linkedin').val('')
+                $('#url_instagram').val('')
+                $('#preview-foto').css({
+                    display: 'none',
+                })
+            })
         });
 
         /* EVENT DISPLAY GAMBAR */
@@ -267,7 +279,7 @@
 
 
         /* FUNGSI UPDATE TEAM */
-        $('body').on('click', '#btnEditAnggota', function (e) {
+        $('body').on('click', '#btnEditAnggota', function (e) { 
             e.preventDefault()
             $('#teamModal').modal('show')
             let idAnggota = $(this).data('anggota')
@@ -278,22 +290,28 @@
                 method: 'GET',
                 success: function(res){
                     const {data} = res
-                    let url = data.foto_anggota
-                    let replaceUrl = url.replace('public/teams','storage/teams')
-
+                    let url, replaceUrl;
                     $('#nama_anggota').val(data.nama_anggota);
                     $('#jabatan_id').val(data.jabatan_id);
                     $('#url_facebook').val(data.url_facebook);
                     $('#url_twitter').val(data.url_twitter);
                     $('#url_linkedin').val(data.url_linkedin);
                     $('#url_instagram').val(data.url_instagram);
-                    $('#preview-foto').attr('src', `${window.location.origin}/${replaceUrl}`)
-                    $('#preview-foto').css({
-                        display: 'block',
-                        width: '200px',
-                        height: '200px',
-                        marginBottom: '8px',
-                    })
+                    if (data.foto_anggota != null) {
+                        url = data.foto_anggota
+                        replaceUrl = url.replace('public/teams','storage/teams')
+                        $('#preview-foto').attr('src', `${window.location.origin}/${replaceUrl}`)
+                        $('#preview-foto').css({
+                            display: 'block',
+                            width: '200px',
+                            height: '200px',
+                            marginBottom: '8px',
+                        })
+                    }else{
+                        $('#preview-foto').css({
+                            display: 'none',
+                        })
+                    }
                 }
             })
             
@@ -301,7 +319,7 @@
             $('#formTeams').on('submit', function(e){
                 e.preventDefault()
                 e.stopImmediatePropagation()
-                
+
                 let formData = new FormData(this)
                 formData.append('_method','PATCH')
                 $.ajax({
@@ -373,7 +391,6 @@
                 })
         })
 
-
         /* EVENT TAMBAH JABATAN */
         $('body').on('click', '#btnTambahJabatan', function(e) {
             e.preventDefault()
@@ -406,8 +423,6 @@
                 })
             })
         })
-    
-        
-    // })
+
     </script>
 @endpush
