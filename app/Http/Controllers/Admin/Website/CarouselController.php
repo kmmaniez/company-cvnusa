@@ -14,7 +14,6 @@ class CarouselController extends Controller
     /* FUNGSI VIEWS HALAMAN CAROUSEL */
     public function index()
     {
-        echo strtolower(str_replace(' ','-','When Service Matters'));
         return view('admin.web.carousel', [
             'title' => 'Carousel Image',
             'carousels' => Carousel::all(),
