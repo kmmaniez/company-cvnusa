@@ -33,10 +33,9 @@ class KategoriJabatanController extends Controller
         try {
             KategoriJabatan::create($request->all());
             return response()->json([
-                'messages' => 'Data Created Successfully',
+                'message' => 'Data Created Successfully',
                 'data' => $request->all(),
             ]);
-
         } catch (\Throwable $th) {
             //throw $th;
         }
