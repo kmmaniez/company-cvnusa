@@ -78,9 +78,10 @@ class UserController extends Controller
             $user = User::create($request->except('role'));
             $user->assignRole($request->role);
             if ($user) {
-                return response()->json([
-                    'message' => 'Data created successfully'
-                ]);
+                return $this->sendResponse([
+                    'data'      => $user,
+                    'user_id'   => auth()->user()->id,
+                ],'created',201);
             }
         }
         abort(404);
@@ -96,10 +97,10 @@ class UserController extends Controller
                     ...$request->except('role'),
                     'password' => Hash::make($request->password)
                 ]);
-                return response()->json([
-                    'message'   => 'Data Berhasil diubah',
-                    'status'    => 200
-                ]);
+                return $this->sendResponse([
+                    'data'      => $user,
+                    'user_id'   => auth()->user()->id,
+                ],'updated',201);
             }
 
             $user->update([
@@ -107,10 +108,10 @@ class UserController extends Controller
                 'password' => $user->password
             ]);
             $user->syncRoles($request->role);
-            return response()->json([
-                'message'   => 'Data Berhasil diubah',
-                'status'    => 200
-            ]);
+            return $this->sendResponse([
+                'data'      => $user,
+                'user_id'   => auth()->user()->id,
+            ],'updated',201);
         }
         abort('404');
     }
@@ -121,10 +122,7 @@ class UserController extends Controller
         if (request()->ajax()) {
             $deleted = $user->delete();
             if ($deleted) {
-                return response()->json([
-                    'message'   => 'Data Berhasil dihapus',
-                    'status'    => 200
-                ]);
+                return $this->sendResponse([],'deleted',200);
             }
         }
         abort(404);
