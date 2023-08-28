@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/trix/trix.css') }}">
     <script type="text/javascript" src="{{ asset('assets/trix/trix.js') }}"></script>
 
+
     @stack('assets')
     {{-- @vite('resources/css/app.css') --}}
     <style>
