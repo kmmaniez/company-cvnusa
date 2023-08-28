@@ -23,7 +23,6 @@ class PostRequest extends FormRequest
     {
         return [
             'kategoripost_id' => ['required'], 
-            'user_id' => ['required'], 
             'title' => ['required','string','max:50'],
             'slug' => ['required','string','max:50'],
             'thumbnail' => ['image','mimes:png,jpg,jpeg','max:2048'],
