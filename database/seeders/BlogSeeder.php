@@ -30,7 +30,7 @@ class BlogSeeder extends Seeder
                 'kategoripost_id' => rand(1,5),
                 'user_id' => rand(1,8),
                 'title' => fake()->text('20'),
-                'slug' => fake()->text('20'),
+                'slug' => str_replace(' ','-',fake()->text('20')),
                 'content' => fake()->paragraph('5')
             ]);
         }
