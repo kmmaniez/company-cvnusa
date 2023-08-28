@@ -6,7 +6,9 @@
     <x-admin.page-heading>{{ $title }}</x-admin.page-heading>
 
     <!-- Content Row -->
-
+    @if (Session::has('success'))
+        <p>sukses</p>
+    @endif
     <div class="row">
 
         <div class="col-xl-12 col-lg-12">
