@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog\KategoriPost;
+use App\Models\Blog\Post;
 use App\Models\Team\Anggota;
 use App\Models\Carousel;
 use App\Models\Clients;
@@ -25,6 +27,7 @@ class PublicController extends Controller
             'totalproject' => Project::all()->count(),
             'totalstaff' => Anggota::all()->count(),
             'totalclient' => Clients::all()->count(),
+            'posts' => Post::latest('id')->limit(3)->get(['id','title','slug','thumbnail','created_at'])
         ]);
     }
     
@@ -89,5 +92,67 @@ class PublicController extends Controller
     public function project_details()
     {
         return view('public.projects-single');
+    }
+
+    /* FUNGSI TAMPIL SEMUA POST, POST BY KATEGORI & DETAIL POST */
+    public function posts(Post $post = null)
+    {
+        $kategoriParam = request('kategori');
+        $authorParam = request('penulis');
+        $kategoriAll = KategoriPost::all('nama_kategori');
+        $recentPosts = Post::with('users')->latest('id')->limit(5)->get(['id','title','slug','thumbnail','created_at']);
+
+        if ($kategoriParam || $authorParam) {
+
+            $postWithKategori = Post::with('kategoris')
+                    ->whereRelation('kategoris','nama_kategori','LIKE', $kategoriParam)
+                    ->get();
+            $postWithAuthor = Post::with('users')
+                    ->whereRelation('users','username','=', $authorParam)
+                    ->get();
+
+            if (isset($kategoriParam)) {
+                return view('public.blog.posts',[
+                    'posts'         => $postWithKategori,
+                    'kategori'      => $kategoriAll,
+                    'recentposts'   => $recentPosts
+                ]);
+            }
+            if (isset($authorParam)) {
+                return view('public.blog.posts',[
+                    'posts'         => $postWithAuthor,
+                    'kategori'      => $kategoriAll,
+                    'recentposts'   => $recentPosts
+                ]);
+            }
+
+
+        }else{
+            /* TAMPIL DETAIL POST & TAMPIL RECENT POST SELAIN POST YG DILIHAT */
+            if (isset($post)) {
+                $recentPosts = Post::with('users')
+                                ->where('id','!=', $post->id)->latest('id')
+                                ->limit(5)
+                                ->get(['id','title','slug','thumbnail','created_at']);
+            
+                return view('public.blog.post',[
+                    'title'         => $post->title,
+                    'post'          => $post,
+                    'kategori'      => $kategoriAll,
+                    'recentposts'   => $recentPosts
+                ]);
+
+            }else{
+                /* TAMPIL SEMUA POST (DEFAULT TAMPILAN HALAMAN BLOG)*/
+                $posts = Post::with('users')->latest('id')->paginate(3);
+                
+                return view('public.blog.posts',[
+                    'title'         => 'Blog '. env('APP_NAME'),
+                    'kategori'      => $kategoriAll,
+                    'posts'         => $posts,
+                    'recentposts'   => $recentPosts
+                ]);
+            }
+        }
     }
 }
