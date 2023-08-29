@@ -19,7 +19,8 @@ Route::prefix('blog')->group(function () {
             Route::patch('/{post}', 'update')->name('update');
             Route::delete('/destroy/{post}', 'destroy')->name('destroy');
 
-            Route::get('/getallposts', 'getAllPosts')->name('getallposts');
+            Route::get('/getallposts', 'getAllPosts')->name('getallposts'); // DATA TABLE
+            Route::get('/checkslug', 'checkSlug')->name('checkslug');
         });
     });
 
@@ -27,8 +28,12 @@ Route::prefix('blog')->group(function () {
     Route::prefix('kategori')->as('katpost.')->group(function () {
 
         Route::controller(KategoriPostController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::post('store', 'store')->name('store');
-            Route::get('destroy/{kategoriBlog}', 'destroy')->name('destroy');
+            Route::get('show/{kategori}', 'show')->name('show');
+
+            Route::put('update/{kategoriPost}', 'update')->name('update');
+            Route::get('destroy/{kategoriPost}', 'destroy')->name('destroy');
 
             Route::get('/getallkatpost', 'getAllKategoris')->name('getallkatposts');
         });
