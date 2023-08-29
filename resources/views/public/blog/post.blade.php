@@ -38,9 +38,9 @@
             <!-- RECENT POST & CATEGORIES -->
             <div class="col-lg-4">
                 <x-public.sidebarblog :recentposts="$recentposts" :kategori="$kategori"></x-public.sidebarblog>
-            </div><!-- Sidebar Col end -->
+            </div>
 
-        </div><!-- Main row end -->
+        </div>
 
     </div>
 </section>
