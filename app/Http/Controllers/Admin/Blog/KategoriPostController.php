@@ -9,70 +9,48 @@ use Illuminate\Http\Request;
 
 class KategoriPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        return 'hi';
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    /* FUNGSI TAMBAH DATA */
     public function store(KategoriRequest $request)
     {
         $data = KategoriPost::create($request->all());
         if ($data) {
-            return response()->json([
-                'message' => 'Data created successfully'
-            ]);
+            return $this->sendResponse([],'created',201);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(KategoriPost $kategoriPost)
+    /* FUNGSI MENAMPILKAN DATA BY ID */
+    public function show(KategoriPost $kategori)
     {
-        //
+        return response()->json([
+            'data' => $kategori
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(KategoriPost $kategoriPost)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    /* FUNGSI UPDATE DATA */
     public function update(Request $request, KategoriPost $kategoriPost)
     {
-        //
+        // if ($request->ajax()) {
+            $update = $kategoriPost->update([
+                'nama_kategori' => $request->nama_kategori
+            ]);
+            if ($update) {
+                return $this->sendResponse(['kat' => $update],'updated',201);
+            }
+        // }
+        // abort(404);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /* FUNGSI HAPUS DATA */
     public function destroy(KategoriPost $kategoriPost)
     {
         $data = $kategoriPost->delete();
         if ($data) {
-            return response()->json([
-                'message' => 'Data deleted successfully'
-                // 'message' => $kategoriBlog
-            ]);
+            return $this->sendResponse([],'deleted',201);
         }
     }
 }
