@@ -1,32 +1,16 @@
 @extends('layouts.admin.master')
 @push('assets')
-<link href="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-<!-- summernote -->
-<link href="{{ asset('plugins/summernote/summernote.min.css') }}" rel="stylesheet">
-<script src="{{ asset('plugins/summernote/summernote.min.js') }}"></script>
+    <link href="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/summernote/summernote-bs4.min.css') }}">
+    <link href="{{ asset('assets/summernote/summernote.min.css') }}" rel="stylesheet">
 
-    <style>
-        trix-editor {
-            min-height: 180px;
-        }
-
-        /* trix-toolbar [data-trix-button-group="file-tools"] {
-            display: none;
-        } */
-        input#penulis{
-            user-select: none;
-            -moz-user-select: none;
-        }
-    </style>
 @endpush
 @section('konten')
-    <x-admin.page-heading>{{ $title ?? 'eak'}}</x-admin.page-heading>
+    <x-admin.page-heading>{{ $title }}</x-admin.page-heading>
 
     <!-- Content Row -->
-
     <div class="row">
-
-        <!-- Form -->
+        <!-- Form Post -->
         <div class="col-xl-9 col-lg-6">
 
             <div class="card shadow mb-4">
@@ -34,13 +18,13 @@
                     <h6 class="m-0 font-weight-bold text-primary">Form Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-3 col">
                                 <div class="mb-3">
                                     <label for="thumbnail" class="form-label d-block"><strong>Thumbail Post</strong></label>
-                                    <img src="{{ asset('assets/images/projects/project1.jpg') }}" style="width: 100%" height="200" alt="thumbnail" srcset="">
+                                    <img id="thumbnail-post" src="{{ asset('assets/images/projects/project1.jpg') }}" style="width: 100%" height="200" alt="thumbnail" srcset="">
                                     <input type="file" class="form-control mt-2" name="thumbnail" id="thumbnail">
                                 </div>
                             </div>
@@ -48,25 +32,28 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="mb-3">
-                                            <label for="judul" class="form-label"><strong>Judul Post</strong></label>
-                                            <input type="text" class="form-control" name="judul" id="judul" placeholder="cth: Tutorial Desain AutoCAD" required>
+                                            <label for="title" class="form-label"><strong>Judul Post</strong></label>
+                                            <input type="text" class="form-control" name="title" id="title" placeholder="cth: Tutorial Desain AutoCAD" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
                                         <div class="mb-3">
                                             <label for="slug" class="form-label"><strong>Slug</strong></label>
-                                            <input type="text" class="form-control" name="slug" id="slug" readonly disabled>
+                                            <input type="text" class="form-control" name="slug" id="slug" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="kategori" class="form-label"><strong>Kategori</strong></label>
-                                    <input type="text" class="form-control" name="kategori" id="kategori" required>
+                                    <label for="kategoripost_id" class="form-label"><strong>Kategori</strong></label>
+                                    <select class="form-control" name="kategoripost_id" id="kategoripost_id">
+                                    @foreach ($kategori as $data)
+                                        <option value="{{ $data->id }}">{{ $data->nama_kategori }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="konten" class="form-label"><strong>Konten</strong></label>
-                                    <input id="konten" type="hidden" name="konten">
-                                    <trix-editor input="konten"></trix-editor>
+                                    <label for="content" class="form-label"><strong>Konten</strong></label>
+                                    <textarea id="editor" name="content"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
@@ -90,9 +77,8 @@
             </div>
 
         </div>
-        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit culpa praesentium consequuntur veniam fugit possimus delectus facere, exercitationem amet. Ipsa illum laborum tempora, natus molestias ab doloribus aspernatur maiores minima repudiandae, explicabo corrupti, dicta incidunt! Voluptate, aperiam aliquid hic sit, porro accusantium minima itaque expedita atque exercitationem vero ea adipisci!</p> --}}
 
-        <!-- Referensi -->
+        <!-- Tabel Kategori -->
         <div class="col-xl-3 col-lg-6">
 
             <div class="card shadow mb-4">
@@ -114,7 +100,7 @@
                                     <tr>
                                         <td>{{ $data->nama_kategori }}</td>
                                         <td class="d-flex flex-column" style="gap: 4px;">
-                                            <a href="#" id="btnEditKategori" class="btn btn-sm btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                            <a href="#" data-kat="{{ $data->id }}" id="btnEditKategori" class="btn btn-sm btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
                                             {{-- <a href="#" data-kat="{{ $data->id }}" id="btnHapusKategori" class="btn btn-sm btn-danger"><i class="fas fa-fw fa-edit"></i> Hapus</a> --}}
                                         </td>
                                     </tr>
@@ -154,13 +140,38 @@
         </div>
     </div>
 @endsection
+
 @push('scripts')
 <script src="{{ url('sb-admin') }}/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ url('sb-admin') }}/js/demo/datatables-demo.js"></script>
+    <script src="{{ asset('assets/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/summernote/summernote-bs4.min.js') }}"></script>
+
     <script>
-        document.addEventListener('trix-file-accept', function(e) {
-            e.preventDefault();
+        $('#modalKategori').on('hidden.bs.modal', function (e) {
+            $('#nama_kategori').val('')
+        })
+        $('#editor').summernote({
+            height: 300
+        });
+
+        /* EVENT DISPLAY GAMBAR */
+        $('#thumbnail').change(function() {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#thumbnail-post').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        // CHECK SLUG
+        $('#title').change(function(e) {
+            $.get(`{{ route('posts.checkslug') }}`, {
+                'title' : $(this).val()
+            }, function(res){
+                $('#slug').val(res.slug)
+            })
         });
 
         /* FUNGSI TAMBAH KATEGORI */
@@ -179,7 +190,6 @@
                         nama_kategori: $('#nama_kategori').val()
                     },
                     success:function(res){
-                        console.log(res);
                         $('#modalKategori').modal('hide');
                         $('#nama_kategori').val('')
                         Swal.fire({
@@ -189,10 +199,50 @@
                             showConfirmButton: false,
                             timer: 2000,
                         });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2500);
                     }
                 })
                 // console.log('ea');
             })
+        })
+
+        /* FUNGSI UPDATE KATEGORI */
+        $('body').on('click', '#btnEditKategori', function(e){
+            $('#modalKategori').modal('show');
+            let id = $(this).data('kat');
+
+            $.get(`{{ route('katpost.index') }}/show/${id}`, function(res){
+                $('#nama_kategori').val(res.data.nama_kategori)
+            })
+
+            $('#btnSimpanKategori').on('click', function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: '{{ route('katpost.index') }}/update/'+id,
+                    method: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        nama_kategori: $('#nama_kategori').val()
+                    },
+                    success: function(res){
+                        $('#modalKategori').modal('hide');
+                        $('#nama_kategori').val('')
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: res.message,
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2500);
+                    }
+                })
+            })
+            
         })
 
         // /* FUNGSI HAPUS KATEGORI */
@@ -237,8 +287,5 @@
         //             }
         //     })
         // })
-$('#editor').summernote({
-			  	height: 500
-			  });
     </script>
 @endpush
