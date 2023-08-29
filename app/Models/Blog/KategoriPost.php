@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriPost extends Model
 {
     use HasFactory;
+    protected $fillable = ['nama_kategori'];
     
     public function posts()
     {
