@@ -19,7 +19,6 @@ Route::controller(PublicController::class)->as('public.')->group(function () {
 
     // BLOG
     Route::get('/blog', 'posts')->name('post.all');
-    Route::get('/blog/kategori/{kategoriPost:nama_kategori}','kategoripost');
     Route::get('/blog/{post:slug}', 'posts')->name('post.detail');
 
 });
