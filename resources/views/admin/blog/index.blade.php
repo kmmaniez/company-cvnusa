@@ -59,17 +59,19 @@
             ajax: "{{ route('posts.getallposts') }}",
             columns: [{
                     data: 'DT_RowIndex',
-                    name: 'id'
+                    name: 'DT_RowIndex'
                 },
                 {
                     data: 'title',
-                    name: 'title'
+                    name: 'title',
+                    orderable: true,
+                    searchable: true,
                 },
                 {
                     data: 'slug',
                     name: 'slug',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
                 },
                 {
                     data: 'thumbnail',
@@ -78,12 +80,16 @@
                     searchable: false
                 },
                 {
-                    data: 'user_id',
-                    name: 'user'
+                    data: 'users.name',
+                    name: 'users.name',
+                    searchable: true,
+                    orderable: true,
                 },
                 {
-                    data: 'kategoripost_id',
-                    name: 'kategori'
+                    data: 'kategoris.nama_kategori',
+                    name: 'kategoris.nama_kategori',
+                    searchable: true,
+                    orderable: true,
                 },
                 {
                     data: 'updated_at',
