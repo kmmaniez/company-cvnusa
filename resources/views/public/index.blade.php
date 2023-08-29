@@ -8,6 +8,9 @@
             transform: translateY(-12px);
             cursor: pointer;
         }
+        .action-style-box{
+            box-shadow: 0px 0px 16px rgba(120, 120, 120, 0.515);
+        }
     </style>
 @endpush
 
@@ -16,7 +19,7 @@
 
     <section class="call-to-action-box no-padding">
         <div class="container">
-            <div class="action-style-box">
+            <div class="action-style-box ">
                 <div class="row align-items-center">
                     <div class="col-md-8 text-center text-md-left">
                         <div class="call-to-action-text">
@@ -25,7 +28,7 @@
                     </div><!-- Col end -->
                     <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
                         <div class="call-to-action-btn">
-                            <a class="btn btn-dark" href="#">Request Quote</a>
+                            <a class="btn btn-dark"  href="#project-area">See our projects</a>
                         </div>
                     </div><!-- col end -->
                 </div><!-- row end -->
@@ -164,11 +167,54 @@
         </div><!-- Container end -->
     </section><!-- Feature are end -->
 
-    <!-- Detail Project Company -->
-    <x-public.detail-project></x-public.detail-project>
+    <!-- Detail Project Company --> 
+    {{-- DONE --}}
+    {{-- <section id="facts" class="facts-area dark-bg">
+        <div class="container">
+            <div class="facts-wrapper">
+                <div class="row">
+                    
+                    <!-- TOTAL PROJECT -->
+                    <div class="col-md-4 col-sm-6 ts-facts">
+                        <div class="ts-facts-img">
+                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact1.png') }}" alt="facts-img">
+                        </div>
+                        <div class="ts-facts-content">
+                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalproject }}">0</span></h2>
+                            <h3 class="ts-facts-title">Total Projects</h3>
+                        </div>
+                    </div>
+
+                    <!-- TOTAL STAFF -->
+                    <div class="col-md-4 col-sm-6 ts-facts mt-5 mt-sm-0">
+                        <div class="ts-facts-img">
+                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact2.png') }}" alt="facts-img">
+                        </div>
+                        <div class="ts-facts-content">
+                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalstaff }}">0</span></h2>
+                            <h3 class="ts-facts-title">Staff Members</h3>
+                        </div>
+                    </div>
+
+                    <!-- TOTAL CLIENT -->
+                    <div class="col-md-4 col-sm-6 ts-facts mt-5 mt-md-0">
+                        <div class="ts-facts-img">
+                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact3.png') }}" alt="facts-img">
+                        </div>
+                        <div class="ts-facts-content">
+                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalclient }}">0</span></h2>
+                            <h3 class="ts-facts-title">Total Client</h3>
+                        </div>
+                    </div>
+
+                </div> 
+            </div>
+        </div>
+    </section> --}}
 
     <!-- Service -->
-    <section id="ts-service-area" class="ts-service-area pb-0">
+    {{-- DONE --}}
+    {{-- <section id="ts-service-area" class="ts-service-area pb-0">
         <div class="container">
             <div class="row text-center">
                 <div class="col-12">
@@ -193,72 +239,12 @@
                     </div><!-- Service 1 end -->
                 </div>
                 @endforeach
-                {{-- <div class="col-lg-4">
-                    <div class="ts-service-box d-flex">
-                        <div class="ts-service-box-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon2.png') }}"
-                                alt="service-icon">
-                        </div>
-                        <div class="ts-service-box-info">
-                            <h3 class="service-box-title"><a href="#">Building Remodels</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
-                        </div>
-                    </div><!-- Service 2 end -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="ts-service-box d-flex">
-                        <div class="ts-service-box-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon3.png') }}"
-                                alt="service-icon">
-                        </div>
-                        <div class="ts-service-box-info">
-                            <h3 class="service-box-title"><a href="#">Interior Design</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
-                        </div>
-                    </div><!-- Service 3 end -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="ts-service-box d-flex">
-                        <div class="ts-service-box-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon4.png') }}"
-                                alt="service-icon">
-                        </div>
-                        <div class="ts-service-box-info">
-                            <h3 class="service-box-title"><a href="#">Exterior Design</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
-                        </div>
-                    </div><!-- Service 4 end -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="ts-service-box d-flex">
-                        <div class="ts-service-box-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon5.png') }}"
-                                alt="service-icon">
-                        </div>
-                        <div class="ts-service-box-info">
-                            <h3 class="service-box-title"><a href="#">Renovation</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
-                        </div>
-                    </div><!-- Service 5 end -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="ts-service-box d-flex">
-                        <div class="ts-service-box-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon6.png') }}"
-                                alt="service-icon">
-                        </div>
-                        <div class="ts-service-box-info">
-                            <h3 class="service-box-title"><a href="#">Safety Management</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer adipiscing erat</p>
-                        </div>
-                    </div><!-- Service 6 end -->
-                </div> --}}
 
             </div><!-- Content row end -->
 
         </div>
         <!--/ Container end -->
-    </section>
+    </section> --}}
 
     <!-- List Project -->
     <section id="project-area" class="project-area solid-bg">
@@ -435,5 +421,49 @@
     </section><!-- Project area end -->
 
     <!-- Testimonial -->
-    <x-public.testimonial :dataclient="$client"></x-public.testimonial>
+    {{-- DONE --}}
+    {{-- <x-public.testimonial :dataclient="$client"></x-public.testimonial> --}}
+
+    <!-- SECTION BLOG -->
+    {{-- done --}}
+    {{-- <section id="news" class="news">
+        <div class="container">
+          <div class="row text-center">
+              <div class="col-12">
+                <h2 class="section-title">Work of Excellence</h2>
+                <h3 class="section-sub-title">Recent Posts</h3>
+              </div>
+        </div>
+
+        <div class="row">
+            @foreach ($posts as $post)
+                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="latest-post">
+                    <div class="latest-post-media">
+                        <a href="{{ route('public.post.detail', $post->slug) }}" class="latest-post-img">
+                            <img loading="lazy" class="img-fluid" src="{{ (isset($post->thumbnail) ? Storage::url($post->thumbnail) : asset('assets/images/news/news2.jpg')) }}" alt="img">
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <h4 class="post-title">
+                            <a href="{{ route('public.post.detail', $post->slug) }}" class="d-inline-block">{{ $post->title }}</a>
+                        </h4>
+                        <div class="latest-post-meta">
+                            <span class="post-item-date">
+                            <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::now('Asia/Jakarta')->parse($post->created_at)->translatedFormat('l, d F Y') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            @endforeach
+          </div>
+      
+          <div class="general-btn text-center mt-4">
+              <a class="btn btn-primary" href="{{ route('public.post.all') }}">See All Posts</a>
+          </div>
+      
+        </div>
+    </section> --}}
+
 @endsection
