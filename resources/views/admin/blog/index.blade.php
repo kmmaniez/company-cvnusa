@@ -7,8 +7,13 @@
 
     <!-- Content Row -->
     @if (Session::has('success'))
-        <p>sukses</p>
+    <div class="card border-left-success shadow w-50 mb-3" id="messageSuccess">
+        <div class="card-body">
+            <span>{{ Session::get('success') }}</span>
+        </div>
+    </div>
     @endif
+
     <div class="row">
 
         <div class="col-xl-12 col-lg-12">
@@ -43,7 +48,6 @@
 
         </div>
 
-
     </div>
 @endsection
 @push('scripts')
@@ -52,6 +56,13 @@
     <script src="{{ url('sb-admin') }}/js/demo/datatables-demo.js"></script>
 
     <script>
+        $(document).ready(function(){
+            setTimeout(() => {
+                $('#messageSuccess').css({
+                    display: 'none'
+                })
+            }, 2000);
+        })
         /* INISIALISASI DATATABLE */
         $('#DTPosts').DataTable({
             processing: true,
