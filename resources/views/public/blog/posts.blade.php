@@ -22,7 +22,7 @@
                                     <i class="far fa-user"></i><a href="{{ route('public.post.all') }}?penulis={{ $post->users->username }}"> {{ $post->users->name }}</a>
                                 </span>
                                 <span class="post-cat">
-                                    <i class="far fa-folder-open"></i><a href="#"> {{ $post->kategoris->nama_kategori }}</a>
+                                    <i class="far fa-folder-open"></i><a href="?kategori={{ $post->kategoris->nama_kategori }}"> {{ $post->kategoris->nama_kategori }}</a>
                                 </span>
                                 <span class="post-meta-date"><i class="far fa-calendar"></i> {{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('l, d F Y') }}</span>
                             </div>
@@ -47,7 +47,7 @@
                     <div class="post-body">
                         <div class="entry-header">
                             <h2 class="entry-title">
-                                <a href="">Kategori post tidak ditemukan</a>
+                                <span>Oops, postingan tidak ditemukan! <a href="{{ route('public.post.all') }}">kembali</a></span>
                             </h2>
                         </div>
                     </div>
