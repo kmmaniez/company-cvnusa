@@ -67,7 +67,7 @@
 
                             <li class="nav-item {{ (request()->routeIs('public.contact') ? 'active' : '') }}"><a class="nav-link" href="{{ route('public.contact') }}">Contact Us</a></li>
                             
-                            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" target="_blank" href="/login">Login</a></li>
                         </ul>
                     </div>
                 </nav>
