@@ -12,8 +12,9 @@ class KategoriPostController extends Controller
 
     public function index()
     {
-        return 'hi';
+        abort(404);
     }
+    
     /* FUNGSI TAMBAH DATA */
     public function store(KategoriRequest $request)
     {
@@ -34,15 +35,15 @@ class KategoriPostController extends Controller
     /* FUNGSI UPDATE DATA */
     public function update(Request $request, KategoriPost $kategoriPost)
     {
-        // if ($request->ajax()) {
+        if ($request->ajax()) {
             $update = $kategoriPost->update([
                 'nama_kategori' => $request->nama_kategori
             ]);
             if ($update) {
-                return $this->sendResponse(['kat' => $update],'updated',201);
+                return $this->sendResponse([],'updated',201);
             }
-        // }
-        // abort(404);
+        }
+        abort(404);
     }
 
     /* FUNGSI HAPUS DATA */
