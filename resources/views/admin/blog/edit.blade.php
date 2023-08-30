@@ -1,22 +1,12 @@
 @extends('layouts.admin.master')
 @push('assets')
     <link href="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <style>
-        trix-editor {
-            min-height: 180px;
-        }
+    <link rel="stylesheet" href="{{ asset('assets/summernote/summernote-bs4.min.css') }}">
+    <link href="{{ asset('assets/summernote/summernote.min.css') }}" rel="stylesheet">
 
-        /* trix-toolbar [data-trix-button-group="file-tools"] {
-                display: none;
-            } */
-        input#penulis {
-            user-select: none;
-            -moz-user-select: none;
-        }
-    </style>
 @endpush
 @section('konten')
-    <x-admin.page-heading>{{ $title ?? 'eak' }}</x-admin.page-heading>
+    <x-admin.page-heading>{{ $title }}</x-admin.page-heading>
 
     <!-- Content Row -->
 
@@ -30,9 +20,10 @@
                     <h6 class="m-0 font-weight-bold text-primary">Form Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    {{-- @dump($blog) --}}
-                    <form action="" method="post">
+
+                    <form action="{{ route('posts.update', $blog->slug) }}" enctype="multipart/form-data" method="post">
                         @csrf
+                        @method('PATCH')
                         <div class="row">
                             <div class="col-lg-3 col">
                                 <div class="mb-3">
@@ -46,8 +37,8 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="mb-3">
-                                            <label for="judul" class="form-label"><strong>Judul Post</strong></label>
-                                            <input type="text" class="form-control" name="judul" id="judul"
+                                            <label for="title" class="form-label"><strong>Judul Post</strong></label>
+                                            <input type="text" class="form-control" name="title" id="title"
                                                 placeholder="cth: Tutorial Desain AutoCAD"
                                                 value="{{ old('judul', $blog->title) }}">
                                         </div>
@@ -56,19 +47,21 @@
                                         <div class="mb-3">
                                             <label for="slug" class="form-label"><strong>Slug</strong></label>
                                             <input type="text" class="form-control" name="slug" id="slug"
-                                                value="{{ $blog->slug }}" disabled readonly>
+                                                value="{{ $blog->slug }}" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="kategori" class="form-label"><strong>Kategori</strong></label>
-                                    <input type="text" class="form-control" name="kategori" id="kategori"
-                                        value="{{ $blog->kategoris->nama_kategori }}">
+                                    <label for="kategoripost_id" class="form-label"><strong>Kategori</strong></label>
+                                    <select class="form-control" name="kategoripost_id" id="kategoripost_id">
+                                    @foreach ($kategori as $data)
+                                        <option value="{{ $data->id }}" {{ ($data->id === $blog->kategoripost_id) ? 'selected' : '' }}>{{ $data->nama_kategori }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="konten" class="form-label"><strong>Konten</strong></label>
-                                    <input id="konten" type="hidden" name="konten">
-                                    <trix-editor input="konten">{{ $blog->content }}</trix-editor>
+                                    <label for="content" class="form-label"><strong>Konten</strong></label>
+                                    <textarea id="editor" name="content">{{ $blog->content }}</textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4 col-12">
@@ -110,7 +103,6 @@
             </div>
 
         </div>
-        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit culpa praesentium consequuntur veniam fugit possimus delectus facere, exercitationem amet. Ipsa illum laborum tempora, natus molestias ab doloribus aspernatur maiores minima repudiandae, explicabo corrupti, dicta incidunt! Voluptate, aperiam aliquid hic sit, porro accusantium minima itaque expedita atque exercitationem vero ea adipisci!</p> --}}
 
         <!-- Referensi -->
         <div class="col-xl-3 col-lg-6">
@@ -180,9 +172,20 @@
     <script src="{{ url('sb-admin') }}/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ url('sb-admin') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ url('sb-admin') }}/js/demo/datatables-demo.js"></script>
+    <script src="{{ asset('assets/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/summernote/summernote-bs4.min.js') }}"></script>
+
     <script>
-        document.addEventListener('trix-file-accept', function(e) {
-            e.preventDefault();
+        $('#editor').summernote({
+            height: 300
+        });
+        // CHECK SLUG
+        $('#title').change(function(e) {
+            $.get(`{{ route('posts.checkslug') }}`, {
+                'title' : $(this).val()
+            }, function(res){
+                $('#slug').val(res.slug)
+            })
         });
         /* FUNGSI TAMBAH KATEGORI */
         $('body').on('click', '#btnTambahKategori', function(e) {
