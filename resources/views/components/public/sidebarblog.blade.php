@@ -3,7 +3,7 @@
 <div class="sidebar sidebar-right">
 
     <div class="widget recent-posts">
-        <h3 class="widget-title">Recent Posts</h3>
+        <h3 class="widget-title">Postingan Terbaru</h3>
         <ul class="list-unstyled">
         @foreach ($recentposts as $post)
             <li class="d-flex align-items-center">
