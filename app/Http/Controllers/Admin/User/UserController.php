@@ -14,6 +14,11 @@ use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(['can:manage-user']);
+    }
+
     public function index()
     {
         return view('admin.user.index',[
@@ -78,10 +83,7 @@ class UserController extends Controller
             $user = User::create($request->except('role'));
             $user->assignRole($request->role);
             if ($user) {
-                return $this->sendResponse([
-                    'data'      => $user,
-                    'user_id'   => auth()->user()->id,
-                ],'created',201);
+                return $this->sendResponse([],'created',201);
             }
         }
         abort(404);
@@ -97,21 +99,15 @@ class UserController extends Controller
                     ...$request->except('role'),
                     'password' => Hash::make($request->password)
                 ]);
-                return $this->sendResponse([
-                    'data'      => $user,
-                    'user_id'   => auth()->user()->id,
-                ],'updated',201);
+            }else{
+                $user->update([
+                    ...$request->except(['role']), 
+                    'password' => $user->password
+                ]);
+                $user->syncRoles($request->role);
             }
 
-            $user->update([
-                ...$request->except(['role']), 
-                'password' => $user->password
-            ]);
-            $user->syncRoles($request->role);
-            return $this->sendResponse([
-                'data'      => $user,
-                'user_id'   => auth()->user()->id,
-            ],'updated',201);
+            return $this->sendResponse([],'updated',201);
         }
         abort('404');
     }
