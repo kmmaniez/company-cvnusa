@@ -26,7 +26,7 @@
         <h3 class="widget-title">Kategori</h3>
         <ul class="arrow nav nav-tabs">
         @foreach ($kategori as $kat)
-            <li><a href="?kategori={{ $kat->nama_kategori }}">{{ $kat->nama_kategori }}</a></li>
+            <li><a href="{{ route('public.post.all') }}?kategori={{ $kat->nama_kategori }}">{{ $kat->nama_kategori }}</a></li>
         @endforeach
         </ul>
     </div>
