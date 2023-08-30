@@ -18,7 +18,10 @@
                         <div class="entry-header">
                             <div class="post-meta">
                                 <span class="post-author">
-                                    <i class="far fa-user"></i><a href="#"> {{ $post->users->name }}</a>
+                                    <i class="far fa-user"></i><a href="{{ route('public.post.all') }}?penulis={{ $post->users->username }}"> {{ $post->users->name }}</a>
+                                </span>
+                                <span class="post-cat">
+                                    <i class="far fa-folder-open"></i><a href="{{ route('public.post.all') }}?kategori={{ $post->kategoris->nama_kategori }}"> {{ $post->kategoris->nama_kategori }}</a>
                                 </span>
                                 <span class="post-meta-date"><i class="far fa-calendar"></i> {{ \Carbon\Carbon::now('Asia/Jakarta')->parse($post->created_at)->translatedFormat('l, d F Y') }}</span>
                             </div>
@@ -37,7 +40,7 @@
 
             <!-- RECENT POST & CATEGORIES -->
             <div class="col-lg-4">
-                <x-public.sidebarblog :recentposts="$recentposts" :kategori="$kategori"></x-public.sidebarblog>
+                <x-public.sidebarblog :recentposts="$recentposts" :$kategori></x-public.sidebarblog>
             </div>
 
         </div>
