@@ -34,7 +34,7 @@
                 </div><!-- row end -->
             </div><!-- Action style box -->
         </div><!-- Container end -->
-    </section><!-- Action end -->
+    </section>
 
     <section id="ts-features" class="ts-features">
         <div class="container">
@@ -165,11 +165,11 @@
                 </div><!-- Col end -->
             </div><!-- Row end -->
         </div><!-- Container end -->
-    </section><!-- Feature are end -->
+    </section>
 
     <!-- Detail Project Company --> 
     {{-- DONE --}}
-    {{-- <section id="facts" class="facts-area dark-bg">
+    <section id="facts" class="facts-area dark-bg">
         <div class="container">
             <div class="facts-wrapper">
                 <div class="row">
@@ -210,11 +210,11 @@
                 </div> 
             </div>
         </div>
-    </section> --}}
+    </section>
 
     <!-- Service -->
     {{-- DONE --}}
-    {{-- <section id="ts-service-area" class="ts-service-area pb-0">
+    <section id="ts-service-area" class="ts-service-area pb-0">
         <div class="container">
             <div class="row text-center">
                 <div class="col-12">
@@ -244,7 +244,7 @@
 
         </div>
         <!--/ Container end -->
-    </section> --}}
+    </section>
 
     <!-- List Project -->
     <section id="project-area" class="project-area solid-bg">
@@ -418,15 +418,15 @@
             </div><!-- Content row end -->
         </div>
         <!--/ Container end -->
-    </section><!-- Project area end -->
+    </section>
 
     <!-- Testimonial -->
     {{-- DONE --}}
-    {{-- <x-public.testimonial :dataclient="$client"></x-public.testimonial> --}}
+    <x-public.clients :dataclient="$client"></x-public.clients>
 
     <!-- SECTION BLOG -->
     {{-- done --}}
-    {{-- <section id="news" class="news">
+    <section id="news" class="news">
         <div class="container">
           <div class="row text-center">
               <div class="col-12">
@@ -464,6 +464,6 @@
           </div>
       
         </div>
-    </section> --}}
+    </section>
 
 @endsection
