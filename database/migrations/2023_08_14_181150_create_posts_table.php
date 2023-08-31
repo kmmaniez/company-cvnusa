@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('title');
             $table->string('slug')->unique();
+            $table->text('spoiler_text')->nullable();
             $table->string('thumbnail')->nullable();
             $table->longText('content')->nullable();
             $table->timestamps();
