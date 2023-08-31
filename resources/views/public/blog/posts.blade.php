@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="entry-content">
-                            <p>{{ Str::limit($post->spoiler_text, 100, '...')  }}</p>
+                            <p>{{ $post->spoiler_text }}</p>
                         </div>
 
                         <div class="post-footer">
