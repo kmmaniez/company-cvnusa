@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 class PublicController extends Controller
 {
 
+    /* VIEW DEFAULT */
     public function index()
     {
         return view('public.index',[
@@ -31,6 +32,7 @@ class PublicController extends Controller
         ]);
     }
     
+    /* VIEW MENU ABOUT */
     public function about()
     {
         return view('public.about',[
@@ -41,6 +43,7 @@ class PublicController extends Controller
         ]);
     }
 
+    /* VIEW MENU PRICING */
     public function pricing()
     {
         return view('public.pricing',[
@@ -50,6 +53,7 @@ class PublicController extends Controller
         ]);
     }
 
+    /* VIEW MENU SERVICES */
     public function services()
     {
         return view('public.services',[
@@ -59,6 +63,7 @@ class PublicController extends Controller
         ]);
     }
 
+    /* VIEW MENU CLIENTS */
     public function clients()
     {
         return view('public.clients',[
@@ -68,13 +73,16 @@ class PublicController extends Controller
         ]);
     }
 
+    /* VIEW MENU CONTACT */
     public function contact()
     {
         return view('public.contact',[
             'title' => 'Halaman Contact',
+            'wallpaper' => Wallpaper::where('section_name','LIKE','clients')->get('wallpaper_image'),
         ]);
     }
 
+    /* VIEW MENU PROJECTS */
     public function projects(Request $request)
     {
         $wallpaper = Wallpaper::where('section_name','LIKE','projects')->get('wallpaper_image');
@@ -89,18 +97,20 @@ class PublicController extends Controller
         ]);
     }
 
+    /* VIEW MENU PROJECT DETAIL */
     public function project_details()
     {
         return view('public.projects-single');
     }
 
+    /* VIEW MENU BLOG */
     /* FUNGSI TAMPIL SEMUA POST, POST BY KATEGORI & DETAIL POST */
     public function posts(Post $post = null)
     {
-        $kategoriParam = request('kategori');
-        $authorParam = request('penulis');
-        $kategoriAll = KategoriPost::all('nama_kategori');
-        $recentPosts = Post::with('users')->latest('id')->limit(5)->get(['id','title','slug','thumbnail','created_at']);
+        $kategoriParam  = request('kategori');
+        $authorParam    = request('penulis');
+        $kategoriAll    = KategoriPost::all('nama_kategori');
+        $recentPosts    = Post::with('users')->latest('id')->limit(5)->get(['id','title','slug','thumbnail','created_at']);
 
         if ($kategoriParam || $authorParam) {
 
@@ -125,7 +135,6 @@ class PublicController extends Controller
                     'recentposts'   => $recentPosts
                 ]);
             }
-
 
         }else{
             /* TAMPIL DETAIL POST & TAMPIL RECENT POST SELAIN POST YG DILIHAT */
