@@ -47,7 +47,7 @@
                     <div class="post-body">
                         <div class="entry-header">
                             <h2 class="entry-title">
-                                <span>Oops, postingan tidak ditemukan! <a href="{{ route('public.post.all') }}">kembali</a></span>
+                                <span>Oops, postingan tidak ditemukan!</span>
                             </h2>
                         </div>
                     </div>
