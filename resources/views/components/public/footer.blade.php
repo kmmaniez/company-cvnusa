@@ -2,11 +2,11 @@
     <div class="footer-main">
         <div class="container">
             <div class="row justify-content-between">
-                <div class="col-lg-4 col-md-6 footer-widget footer-about">
+                <div class="col-lg-9 col-md-6 footer-widget footer-about">
                     <h3 class="widget-title">Tentang Kami</h3>
-                    <img loading="lazy" width="200px" class="footer-logo" src="{{ url('assets/images/footer-logo.pn') }}"
+                    <img loading="lazy" width="200px" class="footer-logo" src="{{ url('assets/images/footer-logo.png') }}"
                         alt="Constra">
-                    <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
+                    {{-- <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
                         horrible vermin.</p>
                     <p>He lay on his armour-like back, and if he lifted. ultrices ultrices sapien, nec tincidunt
                         nunc posuere ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. If you are going
@@ -23,29 +23,17 @@
                             <li><a href="https://github.com/themefisher" aria-label="Github"><i
                                         class="fab fa-github"></i></a></li>
                         </ul>
-                    </div><!-- Footer social end -->
-                </div><!-- Col end -->
-
-                <div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
-                    <h3 class="widget-title">Jam Kerja</h3>
-                    <div class="working-hours">
-                        We work 7 days a week, every day excluding major holidays. Contact us if you have an
-                        emergency, with our
-                        Hotline and Contact form.
-                        <br><br> Monday - Friday: <span class="text-right">10:00 - 16:00 </span>
-                        <br> Saturday: <span class="text-right">12:00 - 15:00</span>
-                        <br> Sunday and holidays: <span class="text-right">09:00 - 12:00</span>
-                    </div>
+                    </div><!-- Footer social end --> --}}
                 </div><!-- Col end -->
 
                 <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
                     <h3 class="widget-title">Melayani Jasa</h3>
                     <ul class="list-arrow">
-                        <li><a href="service-single.html">Pre-Construction</a></li>
+                        {{-- <li><a href="service-single.html">Pre-Construction</a></li>
                         <li><a href="service-single.html">General Contracting</a></li>
                         <li><a href="service-single.html">Construction Management</a></li>
                         <li><a href="service-single.html">Design and Build</a></li>
-                        <li><a href="service-single.html">Self-Perform Construction</a></li>
+                        <li><a href="service-single.html">Self-Perform Construction</a></li> --}}
                     </ul>
                 </div><!-- Col end -->
             </div><!-- Row end -->
