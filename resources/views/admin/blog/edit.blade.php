@@ -13,8 +13,11 @@
     <div class="row">
 
         <!-- Form -->
+        @can('manage-website')
         <div class="col-xl-9 col-lg-6">
-
+        @else
+        <div class="col-xl-12 col-lg-6">
+        @endcan
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Form Data {{ $title }}</h6>
@@ -27,8 +30,8 @@
                         <div class="row">
                             <div class="col-lg-3 col">
                                 <div class="mb-3">
-                                    <label for="thumbnail" class="form-label d-block"><strong>Thumbail Post</strong></label>
-                                    <img src="{{ asset('assets/images/projects/project1.jpg') }}" style="width: 100%"
+                                    <label for="thumbnail" class="form-label d-block"><strong>Thumbnail Post</strong></label>
+                                    <img src="{{ (isset($blog->thumbnail) ? Storage::url($blog->thumbnail) : asset('assets/images/projects/project1.jpg')) }}" style="width: 100%"
                                         height="200" alt="thumbnail" srcset="">
                                     <input type="file" class="form-control mt-2" name="thumbnail" id="thumbnail">
                                 </div>
@@ -105,6 +108,7 @@
         </div>
 
         <!-- Referensi -->
+        @can('manage-website')
         <div class="col-xl-3 col-lg-6">
 
             <div class="card shadow mb-4">
@@ -141,6 +145,7 @@
             </div>
 
         </div>
+        @endcan
 
     </div>
 
