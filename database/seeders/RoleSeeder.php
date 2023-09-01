@@ -13,27 +13,29 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        // DATA PERMISSION LIST REFERENSI DARI PermissionSeeder
         $permission_lists = [
-            'manage-user',
-            'manage-project',
-            'manage-price',
-            'manage-service',
-            'manage-team',
-            'manage-website',
-            'manage-blog',
+            'manage-users',
+            'manage-blogs',
+            'manage-projects',
+            'manage-clients',
+            'manage-prices',
+            'manage-services',
+            'manage-teams',
+            'manage-websites',
         ];
         try {
             
-            // create writer role and assign the permissions
+            // WRITER HANYA BISA MANAGE BLOG,PROJECTS,CLIENTS,PRICES,SERVICES
             $role1 = Role::create(['name' => 'writer']);
             foreach ($permission_lists as $key => $value) {
-                if ($key == 0 || $key == 4 || $key == 5 ) {
+                if ($key == 0 || $key == 2 || $key == 4 || $key == 5 ) {
                     continue;
                 }
                 $role1->givePermissionTo([$value]);
             }
 
-            // create admin role and assign the permissions
+            // ADMIN HANYA BISA MANAGE BLOG,PROJECTS,CLIENTS,PRICES,SERVICES,TEAMS,WEBSITE
             $role2 = Role::create(['name' => 'admin']);
             foreach ($permission_lists as $key => $value) {
                 if ($key == 0) {
@@ -42,7 +44,7 @@ class RoleSeeder extends Seeder
                 $role2->givePermissionTo([$value]);
             }
 
-            // create super role and assign the permissions
+            // SUPER BISA MANAGE SEMUA
             $role3 = Role::create(['name' => 'super']);
             foreach ($permission_lists as $key) {
                 $role3->givePermissionTo([$key]);
