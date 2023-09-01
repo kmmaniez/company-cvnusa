@@ -63,6 +63,7 @@
                 })
             }, 2000);
         })
+        
         /* INISIALISASI DATATABLE */
         $('#DTPosts').DataTable({
             processing: true,
@@ -118,5 +119,42 @@
                 "processing": "<div class=\"spinner-border bg-transparent\" role=\"status\"></div>"
             }
         });
+
+        /* EVENT HAPUS POST */
+        $('body').on('click', '#btnHapusPost', function(e) {
+            e.preventDefault()
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Apakah anda ingin menghapus data ini ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus data!',
+                cancelButtonText: 'Tidak',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                    $.ajax({
+                        url: window.location.pathname+'/destroy/'+$(this).data('post'),
+                        method: 'DELETE',
+                        cache: false,
+                        data:{
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success:function(res){ 
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: res.message,
+                                showConfirmButton: false,
+                                timer: 2500,
+                            });
+                            $('#DTPosts').DataTable().ajax.reload();
+                        }
+                    });
+                    }
+            })
+        })
     </script>
 @endpush
