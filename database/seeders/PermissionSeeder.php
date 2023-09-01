@@ -17,13 +17,14 @@ class PermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permission_lists = [
-            'manage-user',
-            'manage-project',
-            'manage-price',
-            'manage-service',
-            'manage-team',
-            'manage-website',
-            'manage-blog',
+            'manage-users',
+            'manage-blogs',
+            'manage-projects',
+            'manage-clients',
+            'manage-prices',
+            'manage-services',
+            'manage-teams',
+            'manage-websites',
         ];
         try {
             foreach ($permission_lists as $key) {
