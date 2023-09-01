@@ -17,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Post::class => PostPolicy::class
+        // Post::class => PostPolicy::class
     ];
 
     /**
@@ -28,6 +28,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::after(function ($user, $ability){
             return $user->hasRole('super');
         });
-
     }
 }
