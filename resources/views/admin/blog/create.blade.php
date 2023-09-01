@@ -23,7 +23,7 @@
                         <div class="row">
                             <div class="col-lg-3 col">
                                 <div class="mb-3">
-                                    <label for="thumbnail" class="form-label d-block"><strong>Thumbail Post</strong></label>
+                                    <label for="thumbnail" class="form-label d-block"><strong>Thumbnail Post</strong></label>
                                     <img id="thumbnail-post" src="{{ asset('assets/images/projects/project1.jpg') }}" style="width: 100%" height="200" alt="thumbnail" srcset="">
                                     <input type="file" class="form-control mt-2" name="thumbnail" id="thumbnail">
                                 </div>
