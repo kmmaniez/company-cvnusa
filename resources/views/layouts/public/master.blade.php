@@ -10,7 +10,7 @@ AUTHOR: Themefisher
 
     <!-- Basic Page Needs  -->
     <meta charset="utf-8">
-    <title>{{ $title ?? 'Welcome to CV Nusa' }}</title>
+    <title>{{ $title ?? 'Welcome to '.env('APP_NAME') }}</title>
 
     <!-- Mobile Specific Metas -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
