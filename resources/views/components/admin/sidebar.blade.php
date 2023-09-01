@@ -9,11 +9,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    {{-- <li class="nav-item {{ (request()->routeIs('dashboard') ? 'active' : '') }}">
+    <li class="nav-item {{ (request()->routeIs('dashboard') ? 'active' : '') }}">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-desktop"></i>
             <span>Dashboard</span></a>
-    </li> --}}
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -23,97 +23,91 @@
         Menu Multiple
     </div>
 
-    <!-- Nav Item - Manage User Collapse Menu -->
-    {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageUser"
-            aria-expanded="true" aria-controls="manageUser">
-            <i class="fas fa-fw fa-user-plus"></i>
-            <span>Manage Users</span>
-        </a>
-        <div id="manageUser" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Users:</h6>
-                <a class="collapse-item" href="#"><i class="fas fa-fw fa-user-pen"></i> Writer/Editor</a>
-                <a class="collapse-item" href="#"><i class="fas fa-fw fa-user-tie"></i> Admin</a>
-                <a class="collapse-item" href="#"><i class="fas fa-fw fa-user-secret"></i> Super Admin</a>
-            </div>
-        </div>
-    </li> --}}
-
     <!-- Nav Item - Manage Users -->
-    {{-- <li class="nav-item {{ (request()->routeIs('users.index') ? 'active' : '') }}">
+    @can('manage-users')
+    <li class="nav-item {{ (request()->routeIs('users.index') ? 'active' : '') }}">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-fw fa-user-plus"></i>
             <span>Manage User</span></a>
-    </li> --}}
-    
+    </li>
+    @endcan
+
     <!-- Nav Item - Manage Blog -->
-    <li class="nav-item {{ (request()->routeIs('posts.index') ? 'active' : '') }}">
+    <li class="nav-item {{ request()->routeIs('posts.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('posts.index') }}">
             <i class="fas fa-fw fa-pen"></i>
             <span>Manage Blog</span></a>
     </li>
 
     <!-- Nav Item - Website Settings -->
-    <li class="nav-item {{ (request()->routeIs('categories.*') || request()->routeIs('clients.index') ? 'active' : '') }}">
+    @can('manage-projects')
+    <li class="nav-item {{ request()->routeIs('projects.*') || request()->routeIs('clients.index') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#projectCategory"
             aria-expanded="true" aria-controls="projectCategory">
             <i class="fas fa-fw fa-book"></i>
             <span>Projects & Client</span></a>
         </a>
-        <div id="projectCategory" class="collapse {{ (request()->routeIs('categories.index') || request()->routeIs('clients.index') ? 'show' : '') }}" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="projectCategory"
+            class="collapse {{ request()->routeIs('projects.index') || request()->routeIs('clients.index') ? 'show' : '' }}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Website:</h6>
-                <a class="collapse-item {{ (request()->routeIs('categories.index') ? 'bg-primary text-white active' : '') }} " href="{{ route('categories.index') }}"><i class="fas fa-fw fa-list"></i> Project & Category</a>
-                {{-- <a class="collapse-item {{ (request()->routeIs('projects.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('projects.index') }}"><i class="fas fa-fw fa-book"></i> Projects</a> --}}
-                <a class="collapse-item {{ (request()->routeIs('clients.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('clients.index') }}"><i class="fas fa-fw fa-book"></i> Clients</a>
+                <a class="collapse-item {{ (request()->routeIs('projects.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('projects.index') }}"><i class="fas fa-fw fa-book"></i> Projects</a>
+                <a class="collapse-item {{ request()->routeIs('clients.index') ? 'bg-primary text-white active' : '' }}" href="{{ route('clients.index') }}"><i class="fas fa-fw fa-user"></i> Clients</a>
             </div>
         </div>
     </li>
+    @endcan
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pricing -->
-    {{-- <li class="nav-item {{ (request()->routeIs('prices.index') ? 'active' : '') }}">
+    @can('manage-prices')
+    <li class="nav-item {{ (request()->routeIs('prices.index') ? 'active' : '') }}">
         <a class="nav-link" href="{{ route('prices.index') }}">
             <i class="fas fa-fw fa-dollar-sign"></i>
             <span>Pricing</span></a>
-    </li> --}}
+    </li>
+    @endcan
 
     <!-- Nav Item - Services -->
-    <li class="nav-item {{ (request()->routeIs('services.index') ? 'active' : '') }}">
+    @can('manage-services')
+    <li class="nav-item {{ request()->routeIs('services.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('services.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Services</span></a>
     </li>
-    
+    @endcan
+
     <!-- Nav Item - Teams -->
-    <li class="nav-item {{ (request()->routeIs('teams.index') ? 'active' : '') }}">
+    @can('manage-teams')
+    <li class="nav-item {{ request()->routeIs('teams.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('teams.index') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Teams</span></a>
     </li>
+    @endcan
 
-    <!-- Nav Item - Website Settings -->
-     <li class="nav-item {{ (request()->routeIs('website.*') ? 'active' : '') }}">
+    <!-- Nav Item - Landing Page Settings -->
+    @can('manage-websites')
+    <li class="nav-item {{ request()->routeIs('website.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageWebsite"
             aria-expanded="true" aria-controls="manageWebsite">
             <i class="fas fa-fw fa-globe"></i>
-            <span>Website Settings</span>
+            <span>Landing Page Settings</span>
         </a>
-        <div id="manageWebsite" class="collapse {{ (request()->routeIs('website.*') ? 'show' : '') }}" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="manageWebsite" class="collapse {{ request()->routeIs('website.*') ? 'show' : '' }}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Website:</h6>
-                {{-- <a class="collapse-item {{ (request()->routeIs('website.indexabout') ? 'bg-primary text-white active' : '') }} " href="{{ route('website.indexabout') }}"><i class="fas fa-fw fa-info"></i> About Us</a> --}}
-                <a class="collapse-item {{ (request()->routeIs('website.indexcarousel') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexcarousel') }}"><i class="fas fa-fw fa-image"></i> Carousel Image</a>
-                {{-- <a class="collapse-item {{ (request()->routeIs('website.indexwallpaper') ? 'bg-primary text-white active' : '') }}" href="{{ route('website.indexwallpaper') }}"><i class="fas fa-fw fa-images"></i> Wallpaper Menu</a> --}}
+                <a class="collapse-item {{ (request()->routeIs('about.index') ? 'bg-primary text-white active' : '') }} " href="{{ route('about.index') }}"><i class="fas fa-fw fa-info"></i> About Us</a>
+                <a class="collapse-item {{ request()->routeIs('carousels.index') ? 'bg-primary text-white active' : '' }}"href="{{ route('carousels.index') }}"><i class="fas fa-fw fa-image"></i> Carousel Image</a>
+                <a class="collapse-item {{ (request()->routeIs('wallpaper.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('wallpaper.index') }}"><i class="fas fa-fw fa-images"></i> Wallpaper Menu</a>
             </div>
         </div>
     </li>
+    @endcan
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
