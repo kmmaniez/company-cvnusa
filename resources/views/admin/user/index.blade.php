@@ -319,8 +319,8 @@
                             _token: '{{ csrf_token() }}',
                             id: $(this).data('user')
                         },
-                        success:function(response){ 
-                            displaySweetAlert('success','success', response.message, 2500)
+                        success:function(res){ 
+                            displaySweetAlert('success','success', res.message, 2500)
                             $('#DTUsers').DataTable().ajax.reload();
                         }
                     });
