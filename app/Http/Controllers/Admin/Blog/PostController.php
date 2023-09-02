@@ -12,6 +12,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -51,16 +52,16 @@ class PostController extends Controller
             })
             ->editColumn('updated_at', function ($row) {
                 return view('admin.blog.datedt', [
-                    'created' => Carbon::now('Asia/Jakarta')->parse($row->created_at)->translatedFormat('l, d F Y'),
-                    'updated' => Carbon::now('Asia/Jakarta')->parse($row->updated_at)->translatedFormat('l, d F Y'),
+                    'created' => $row->created_at,
+                    'updated' => $row->updated_at,
                 ]);
             })
             ->editColumn('action', function ($row) {
                 $url = route('public.post.all');
                 $btn = '
                     <a href="'. $url .'/'. $row->slug .'" target="_blank" class="btn btn-md btn-secondary"><i class="fas fa-fw fa-eye"></i> Lihat</a>
-                    <a href="posts/' . $row->slug . '/edit" id="btnEditUser" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                    <a href="#" id="btnHapusUser" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
+                    <a href="posts/' . $row->slug . '/edit" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                    <a href="#" data-post="'.$row->slug.'" id="btnHapusPost" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
                 ';
                 return $btn;
             })
@@ -88,14 +89,20 @@ class PostController extends Controller
             
             Post::create([
                 ...$request->all(),
-                'user_id' => $request->user()->id,
-                'thumbnail' => $pathName
+                'spoiler_text' => Str::limit(strip_tags($request->content),'200'),
+                'user_id'       => $request->user()->id,
+                'thumbnail'     => $pathName,
+                'created_at'    => Carbon::now(),
+                'updated_at'    => NULL,
             ]);
 
         }else{
             Post::create([
                 ...$request->all(),
-                'user_id' => $request->user()->id,
+                'user_id'       => $request->user()->id,
+                'spoiler_text' => Str::limit(strip_tags($request->content),'200'),
+                'created_at'    => Carbon::now(),
+                'updated_at'    => NULL,
             ]);
 
         }
@@ -106,7 +113,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // JIKA PENULIS TIDAK SAMA DENGAN USER LOGIN, AKSES DITUTUP
-        if (auth()->user()->id != $post->user_id) {
+        if (auth()->user()->id != $post->users->id && auth()->user()->roles[0]->name != "super" && auth()->user()->roles[0]->name != "admin") {
             abort(404);
         }
 
@@ -123,7 +130,7 @@ class PostController extends Controller
     {
         if ($request->has('thumbnail')) {
 
-            if ($post->logo != NULL) {
+            if ($post->thumbnail != NULL) {
                 Storage::delete($post->thumbnail); // HAPUS FOTO LAMA
             }
 
@@ -132,13 +139,19 @@ class PostController extends Controller
             
             $post->update([
                 ...$request->all(),
-                'user_id' => $request->user()->id,
-                'thumbnail' => $pathName
+                'user_id'       => $request->user()->id,
+                'spoiler_text' => Str::limit(strip_tags($request->content),'200'),
+                'thumbnail'     => $pathName,
+                'created_at'    => $post->created_at,
+                'updated_at'    => Carbon::now(),
             ]);
         }else{
             $post->update([
                 ...$request->all(),
-                'user_id' => $request->user()->id,
+                'user_id'       => $request->user()->id,
+                'spoiler_text' => Str::limit(strip_tags($request->content),'200'),
+                'created_at'    => $post->created_at,
+                'updated_at'    => Carbon::now(),
             ]);
         }
         return redirect()->to(route('posts.index'))->with('success','Data Updated Successfully!');
@@ -147,7 +160,16 @@ class PostController extends Controller
     /* FUNGSI HAPUS POST */
     public function destroy(Post $post)
     {
-        //
+        if (request()->ajax()) {
+            if ($post->thumbnail != NULL) {
+                Storage::delete($post->thumbnail); // HAPUS FOTO LAMA
+            }
+            $deleted = $post->delete();
+            if ($deleted) {
+                return $this->sendResponse([],'deleted',200);
+            }
+        }
+        abort(404);
     }
 
     /* FUNGSI CHECK SLUG POST */
