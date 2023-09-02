@@ -16,8 +16,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data Projects</h6>
                 </div>
                 <div class="card-body">
-                    <a href="" class="btn btn-md btn-primary mb-3" data-toggle="modal" data-target="#formCreate"><i
-                            class="fas fa-fw fa-plus"></i> Tambah Projects</a>
+                    <a href="" class="btn btn-md btn-primary mb-3" id="btnTambahProject"><i class="fas fa-fw fa-plus"></i> Tambah Projects</a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -115,7 +114,7 @@
     </div>
 
     <!-- CRUD Modal Projects -->
-    <div class="modal fade" id="formCreate" tabindex="-1" role="dialog" aria-labelledby="modalProject" aria-hidden="true">
+    <div class="modal fade" id="modalProject" tabindex="-1" role="dialog" aria-labelledby="modalProject" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -125,7 +124,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formCreate">
+                    <form id="formProject">
                         <div class="mb-3">
                             <label for="nama_project" class="form-label">Nama Project</label>
                             <input type="text" class="form-control" name="nama_project" id="nama_project"
@@ -166,7 +165,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="gambar_project" class="form-label">Gambar Project (bisa lebih dari 1)</label>
-                            <input class="form-control" type="file" id="gambar_project">
+                            <input class="form-control" type="file" name="gambar_project" id="gambar_project" multiple>
                         </div>
                         <button class="btn btn-md btn-primary" id="btnSimpanProject"><i class="fas fa-fw fa-save"></i>
                             Simpan</button>
@@ -218,34 +217,79 @@
             })
         });
 
-        $('#btnSimpanProject').click(function(e) {
+        /* EVENT TAMBAH CLIENT */
+        $('body').on('click', '#btnTambahProject', function(e) {
             e.preventDefault()
-            $.ajax({
-                url: '{{ route('projects.store') }}',
-                method: 'POST',
-                cache: 'false',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    nama: $('#nama_project').val(),
-                    keterangan_project: $('#keterangan_project').val(),
-                    kategori_project: $('#kategori_project').val(),
-                    lokasi_project: $('#lokasi_project').val(),
-                },
-                success: function(res) {
-                    console.log(res);
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            })
-            $.ajax({
-                url: '/datakategori',
-                method: 'GET',
-                success: function(res) {
-                    console.log(res);
-                },
-            })
-        })
+            $('#modalProject').modal('show');
+
+            $('#formProject').submit(function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+                const imgArr = formData.getAll('gambar_project')
+                formData.append('gambar', imgArr)
+                // console.log(imgArr);
+                console.log(formData);
+                // console.log(formData.getAll('gambar_project'));
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('projects.store') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: (res) => {
+                        if (res) {
+                            // this.reset();
+                            console.log(res);
+                        }
+                    },
+                    error: function(response) {
+                        const {
+                            errors
+                        } = response.responseJSON;
+                        if (errors.nama_client) {
+                            $('#nama-input-error').text(errors.nama_client[0]);
+                        }
+                        if (errors.nama_client) {
+                            $('#image-input-error').text(errors.logo[0]);
+                        }
+                    }
+                });
+            });
+
+        });
+
+        // $('#btnSimpanProject').click(function(e) {
+        //     e.preventDefault()
+        //     $.ajax({
+        //         url: '{{ route('projects.store') }}',
+        //         method: 'POST',
+        //         cache: 'false',
+        //         data: {
+        //             _token: '{{ csrf_token() }}',
+        //             nama: $('#nama_project').val(),
+        //             keterangan_project: $('#keterangan_project').val(),
+        //             kategori_project: $('#kategori_project').val(),
+        //             lokasi_project: $('#lokasi_project').val(),
+        //         },
+        //         success: function(res) {
+        //             console.log(res);
+        //         },
+        //         error: function(err) {
+        //             console.log(err);
+        //         }
+        //     })
+        //     $.ajax({
+        //         url: '/datakategori',
+        //         method: 'GET',
+        //         success: function(res) {
+        //             console.log(res);
+        //         },
+        //     })
+        // })
 
         /* FUNGSI UNTUK CREATE KATEGORI */
         $('body').on('click', '#btnKatCreate', function() {
