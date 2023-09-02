@@ -276,19 +276,6 @@
                                 $('#DTClients').DataTable().ajax.reload();
                             }
                         })
-                        // $.ajax({
-                        //     url: window.location.pathname+'/destroy/'+$(this).data('user'),
-                        //     method: 'DELETE',
-                        //     cache: false,
-                        //     data:{
-                        //         _token: '{{ csrf_token() }}',
-                        //         id: $(this).data('user')
-                        //     },
-                        //     success:function(response){ 
-                        //         displaySweetAlert('success','success', response.message, 2500)
-                        //         $('#DTUsers').DataTable().ajax.reload();
-                        //     }
-                        // });
                     }
                 })
         })
