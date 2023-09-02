@@ -5,22 +5,23 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\Blog\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware(['can:manage-user']);
-    }
-
     public function index()
     {
+        if (auth()->user()->roles[0]->name != "super") {
+            abort(404);
+        }
         return view('admin.user.index',[
             'title' => 'User',
         ]);
@@ -116,6 +117,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if (request()->ajax()) {
+            foreach ($user->posts()->get() as $key => $value) {
+                Storage::delete($value->thumbnail);
+            }
             $deleted = $user->delete();
             if ($deleted) {
                 return $this->sendResponse([],'deleted',200);
