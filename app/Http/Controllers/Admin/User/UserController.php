@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
-use App\Models\Blog\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -22,7 +20,7 @@ class UserController extends Controller
         if (auth()->user()->roles[0]->name != "super") {
             abort(404);
         }
-        return view('admin.user.index',[
+        return view('admin.user.index', [
             'title' => 'User',
         ]);
     }
@@ -34,44 +32,41 @@ class UserController extends Controller
             $model = User::with('roles')->get();
 
             return DataTables::of($model)
-                    ->only(['id','name','username','email','updated_at','role','action'])
-                    ->addIndexColumn()
-                    ->addColumn('role',function(User $user){
-                        return view('admin.user.userdt', [
-                            'name' => $user->roles[0]->name
-                        ]);
-                    })
-                    ->editColumn('updated_at', function($row){
-                        $created = Carbon::parse($row->created_at)->translatedFormat('l').', '.Carbon::now('Asia/Jakarta')->parse($row->created_at)->translatedFormat('d F Y');
-                        $updated = Carbon::parse($row->updated_at)->translatedFormat('l').', '.Carbon::now('Asia/Jakarta')->parse($row->updated_at)->translatedFormat('d F Y');
-                        $date = "$created | $updated";
-                        return $date;
-                    })
-                    ->editColumn('action', function($row){
-                        $btn = '
-                            <a href="#" data-user="'.$row->id.'" id="btnEditUser" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                            <a href="#" data-user="'.$row->id.'" id="btnHapusUser" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
+                ->only(['id', 'name', 'username', 'email', 'updated_at', 'role', 'action'])
+                ->addIndexColumn()
+                ->addColumn('role', function (User $user) {
+                    return view('admin.user.userdt', [
+                        'name' => $user->roles[0]->name
+                    ]);
+                })
+                ->editColumn('updated_at', function ($row) {
+                    $created = Carbon::parse($row->created_at)->translatedFormat('l') . ', ' . Carbon::parse($row->created_at)->translatedFormat('d F Y');
+                    $updated = Carbon::parse($row->updated_at)->translatedFormat('l') . ', ' . Carbon::parse($row->updated_at)->translatedFormat('d F Y');
+                    $date = "$created | $updated";
+                    return $date;
+                })
+                ->editColumn('action', function ($row) {
+                    $btn = '
+                            <a href="#" data-user="' . $row->id . '" id="btnEditUser" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                            <a href="#" data-user="' . $row->id . '" id="btnHapusUser" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
                         ';
-                        return $btn;
-                    })
-                    ->toJson();
+                    return $btn;
+                })
+                ->toJson();
         }
         return abort(404);
     }
 
     /* FUNGSI GET USER BY */
-    public function getUserById($id = null){
+    public function getUserById(User $user)
+    {
         if (request()->ajax()) {
-            $user = User::findOrfail($id)->toArray();
-            $userWithRole = User::with('roles')->find($id)->toArray();
-            $userRole = strtolower($userWithRole['roles'][0]['name']);
-
             $data = [
-                ...$user,
-                'roles' => $userRole
+                ...$user->toArray(),
+                'roles' => $user->roles[0]->name
             ];
             return response()->json([
-                'data' => $data,
+                'user' => $data,
             ]);
         }
         abort(404);
@@ -84,7 +79,7 @@ class UserController extends Controller
             $user = User::create($request->except('role'));
             $user->assignRole($request->role);
             if ($user) {
-                return $this->sendResponse([],'created',201);
+                return $this->successResponse(['user' => $user],'created',201);
             }
         }
         abort(404);
@@ -94,21 +89,22 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         if ($request->ajax()) {
+            // Jika ada input password
             if ($request->has('password') && isset($request->password)) {
-                $user->syncRoles($request->role);
+                $user->syncRoles($request->role); // sync ke roles baru
                 $user->update([
                     ...$request->except('role'),
                     'password' => Hash::make($request->password)
                 ]);
-            }else{
+            } else {
                 $user->update([
-                    ...$request->except(['role']), 
+                    ...$request->except(['role']),
                     'password' => $user->password
                 ]);
                 $user->syncRoles($request->role);
             }
 
-            return $this->sendResponse([],'updated',201);
+            return $this->successResponse(null, 'updated', 201);
         }
         abort('404');
     }
@@ -118,11 +114,14 @@ class UserController extends Controller
     {
         if (request()->ajax()) {
             foreach ($user->posts()->get() as $key => $value) {
-                Storage::delete($value->thumbnail);
+                // Hapus gambar post dari user yang akan dihapus
+                if (Storage::exists($value->thumbnail)) {
+                    Storage::delete($value->thumbnail);
+                }
             }
             $deleted = $user->delete();
             if ($deleted) {
-                return $this->sendResponse([],'deleted',200);
+                return $this->successResponse(null, 'deleted');
             }
         }
         abort(404);
@@ -143,7 +142,7 @@ class UserController extends Controller
 
                 if ($request->get('username')) {
 
-                    foreach ($dataAllUsername as $key ) {
+                    foreach ($dataAllUsername as $key) {
                         $listUsernameExists[] = $key['username'];
                     }
                     if ($userParams != $data->username) {
@@ -157,33 +156,32 @@ class UserController extends Controller
 
                 if ($request->get('email')) {
 
-                    foreach ($dataAllEmails as $key ) {
+                    foreach ($dataAllEmails as $key) {
                         $listEmailExists[] = $key['email'];
                     }
                     if ($emailParams != $data->email) {
                         if (in_array($emailParams, $listEmailExists)) {
                             return response()->json([
-                                'message' => 'Email sudah terdaftar, silahkan ganti username lainnya!',
+                                'message' => 'Email sudah terdaftar, silahkan ganti email lainnya!',
                             ]);
                         }
                     }
                 }
-
-            }else {
+            } else {
                 $emailExists = User::firstWhere('email', $request->email);
                 $usernameExists = User::firstWhere('username', $request->username);
-    
+
                 if ($emailExists) {
                     return response()->json([
                         'message' => 'Email sudah terdaftar, silahkan ganti email lainnya!',
                     ]);
                 }
-    
+
                 if ($usernameExists) {
                     return response()->json([
                         'message' => 'Username sudah terdaftar, silahkan ganti username lainnya!',
                     ]);
-                }            
+                }
             }
             exit;
         }
