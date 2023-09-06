@@ -22,13 +22,13 @@ class PublicController extends Controller
     public function index()
     {
         return view('public.index',[
-            'client' => Clients::all(),
-            'services' => Service::all('title','description'),
-            'carousels' => Carousel::all('slide_title','slide_subtitle','description','image'),
-            'totalproject' => Project::all()->count(),
-            'totalstaff' => Anggota::all()->count(),
-            'totalclient' => Clients::all()->count(),
-            'posts' => Post::latest('id')->limit(3)->get(['id','title','slug','thumbnail','created_at'])
+            'clients'       => Clients::all(),
+            'services'      => Service::all('title','description'),
+            'carousels'     => Carousel::all('slide_title','slide_subtitle','description','image'),
+            'totalproject'  => Project::all()->count(),
+            'totalstaff'    => Anggota::all()->count(),
+            'totalclient'   => Clients::all()->count(),
+            'posts'         => Post::latest('id')->limit(3)->get(['id','title','slug','thumbnail','created_at'])
         ]);
     }
     
@@ -36,10 +36,10 @@ class PublicController extends Controller
     public function about()
     {
         return view('public.about',[
-            'title' => 'Halaman About',
-            'data' => WebsiteSetting::all(),
+            'title'     => 'Halaman About',
+            'data'      => WebsiteSetting::all(),
             'wallpaper' => Wallpaper::where('section_name','LIKE','about')->get('wallpaper_image'),
-            'teams' => Anggota::all()
+            'teams'     => Anggota::all()
         ]);
     }
 
@@ -47,9 +47,9 @@ class PublicController extends Controller
     public function pricing()
     {
         return view('public.pricing',[
-            'title' => 'Halaman Harga',
+            'title'     => 'Halaman Harga',
             'wallpaper' => Wallpaper::where('section_name','LIKE','pricing')->get('wallpaper_image'),
-            'prices' => Price::all()
+            'prices'    => Price::all()
         ]);
     }
 
@@ -57,9 +57,9 @@ class PublicController extends Controller
     public function services()
     {
         return view('public.services',[
-            'title' => 'Halaman Service ',
+            'title'     => 'Halaman Service ',
             'wallpaper' => Wallpaper::where('section_name','LIKE','services')->get('wallpaper_image'),
-            'services' => Service::all()
+            'services'  => Service::all()
         ]);
     }
 
@@ -67,8 +67,8 @@ class PublicController extends Controller
     public function clients()
     {
         return view('public.clients',[
-            'title' => 'Halaman Client',
-            'data' => Clients::all(),
+            'title'     => 'Halaman Client',
+            'data'      => Clients::all(),
             'wallpaper' => Wallpaper::where('section_name','LIKE','clients')->get('wallpaper_image'),
         ]);
     }
@@ -77,7 +77,7 @@ class PublicController extends Controller
     public function contact()
     {
         return view('public.contact',[
-            'title' => 'Halaman Contact',
+            'title'     => 'Halaman Contact',
             'wallpaper' => Wallpaper::where('section_name','LIKE','clients')->get('wallpaper_image'),
         ]);
     }
@@ -123,6 +123,7 @@ class PublicController extends Controller
 
             if (isset($kategoriParam)) {
                 return view('public.blog.posts',[
+                    'title'         => 'Kategori '.$kategoriParam,
                     'posts'         => $postWithKategori,
                     'kategori'      => $kategoriAll,
                     'recentposts'   => $recentPosts
@@ -130,6 +131,7 @@ class PublicController extends Controller
             }
             if (isset($authorParam)) {
                 return view('public.blog.posts',[
+                    'title'         => 'Kategori '.$authorParam,
                     'posts'         => $postWithAuthor,
                     'kategori'      => $kategoriAll,
                     'recentposts'   => $recentPosts
