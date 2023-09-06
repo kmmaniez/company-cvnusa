@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('konten')
-    <x-admin.page-heading>Dashboards</x-admin.page-heading>
+    <x-admin.page-heading>Dashboard</x-admin.page-heading>
 
     <!-- Content Row -->
     <div class="row">
