@@ -422,7 +422,7 @@
 
     <!-- Testimonial -->
     {{-- DONE --}}
-    <x-public.clients :dataclient="$client"></x-public.clients>
+    <x-public.clients :dataclient="$clients"></x-public.clients>
 
     <!-- SECTION BLOG -->
     {{-- done --}}
