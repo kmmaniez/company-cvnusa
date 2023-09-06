@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -14,36 +13,23 @@ class Controller extends BaseController
     /* 
     * array $data, data yang akan dikirim
     * string $type, menandakan aksi yang terjadi
-    * int $code, kode response dari server
+    * int $code, kode response
     */
-    public function sendResponse(array $data, string $type = 'created', int $code = 200)
+    public function successResponse(array $data = null, string $type = 'created', int $code = 200)
     {
-        $response = [
-            ...$data,
-            'message'   => 'Data '.$type.' successfully!',
-            'code'      => $code,
-        ];
-
-        switch ($type) {
-            case 'created':
-                return response()->json([
-                    ...$response,
-                ]);
-                break;
-                
-            case 'updated':
-                return response()->json([
-                    ...$response,
-                ]);
-                break;
-
-            case 'deleted':
-                return response()->json([
-                    ...$response,
-                ]);
-                break;
-            default:
-                break;
+        $response = array(
+            'status'    => 'success',
+            'message'   => 'Data ' . $type . ' successfully!',
+            'code'      => $code
+        );
+        
+        // jika ada array data, maka menambah key data dengan value dari data parameter
+        if ($data) {
+            $response['data'] = $data;
         }
+
+        return response()->json([
+            ...$response
+        ]);
     }
 }
