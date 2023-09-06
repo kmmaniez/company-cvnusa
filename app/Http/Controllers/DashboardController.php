@@ -13,6 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         return view('admin.dashboard',[
+            'title'         => 'Dashboard',
             'totalpost'     => Post::all()->count(),
             'totalkatpost'  => KategoriPost::all()->count(),
             'totaluser'     => User::all()->count(),
