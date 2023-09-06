@@ -215,12 +215,13 @@
                         url: window.location.pathname+'/getuser/'+userId,
                         method: 'GET',
                         success: (res) => {
-                            const {data} = res
-                            $('#role').val(data.roles)
-                            $('#name').val(data.name);
-                            $('#username').val(data.username);
-                            $('#password').val(data.password);
-                            $('#email').val(data.email);
+                            console.log(res);
+                            const {user} = res
+                            $('#role').val(user.roles)
+                            $('#name').val(user.name);
+                            $('#username').val(user.username);
+                            $('#password').val(user.password);
+                            $('#email').val(user.email);
                         },
                         error: function(res) {
                             const {errors} = res.responseJSON;
