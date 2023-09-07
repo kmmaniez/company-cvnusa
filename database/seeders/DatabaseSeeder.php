@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // DELETE SEMUA FOLDER & FILE PENYIMPANAN
+        // DELETE SEMUA FOLDER & FILE PENYIMPANAN STORAGE
         $allDir = Storage::disk('public')->allDirectories();
         for ($i=0; $i < count($allDir); $i++) { 
             try {
