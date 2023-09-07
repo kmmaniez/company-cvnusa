@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('kategorijabatan', KategoriJabatanController::class);
         });
 
-        Route::resource('prices', PriceController::class)->middleware('can:manage-prices');
+        Route::resource('prices', PriceController::class)->except('edit')->middleware('can:manage-prices');
 
         Route::resource('services', ServiceController::class)->middleware('can:manage-services');
 
@@ -101,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/destroy/{user}', 'destroy')->name('destroy');
 
             Route::get('/getdatausers', 'getAllUsers')->name('getusers');
-            Route::get('/getuser/{id?}', 'getUserById')->name('getuserbyid');
+            Route::get('/getuser/{user?}', 'getUserById')->name('getuserbyid');
 
             Route::get('/checkmail/{id?}', 'checkEmailAndUsername')->name('checkmailusername');
             Route::get('/check', 'awewe');
