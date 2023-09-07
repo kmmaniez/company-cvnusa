@@ -5,6 +5,17 @@
 <section id="main-container" class="main-container">
     
     <div class="container">
+        @if (count($posts) > 0)
+            
+            @if (request()->has('penulis'))
+            <h3>Penulis : {{ $posts[0]->users->name }}</h3>
+            @endif
+
+            @if (request()->has('kategori'))
+            <h3>Kategori : {{ request()->get('kategori') }}</h3>
+            @endif
+            
+        @endif
         <div class="row">
 
             <!-- ALL POST & POST BY KATEGORI -->
