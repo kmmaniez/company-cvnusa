@@ -458,10 +458,12 @@
                 </div>
             @endforeach
           </div>
-      
+          
+          @if (count($posts) > 0)
           <div class="general-btn text-center mt-4">
               <a class="btn btn-primary" href="{{ route('public.post.all') }}">See All Posts</a>
           </div>
+          @endif
       
         </div>
     </section>
