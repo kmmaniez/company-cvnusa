@@ -12,23 +12,21 @@ class KategoriProjectController extends Controller
     
     public function index()
     {
-        //
+        abort(404);
     }
 
     public function create()
     {
-        // 
+        abort(404);
     }
 
     public function store(KategoriProjectRequest $request)
     {
         if ($request->ajax()) {
-            $res = KategoriProject::create($request->all());
-            if ($res) {
-                return response()->json([
-                    'message' => 'Data Created Successfully',
-                    'status' => 201
-                ]);
+            $created = KategoriProject::create($request->all());
+            
+            if ($created) {
+                return $this->successResponse(null,'created');
             }
         }
         abort(404);
@@ -56,9 +54,7 @@ class KategoriProjectController extends Controller
             $data = KategoriProject::findOrfail($kategoriProject);
             if ($data) {
                 $data->update($request->all());
-                return response()->json([
-                    'message' => 'Data Updated Successfully',
-                ]);
+                return $this->successResponse(null,'updated');
             }
         }
         abort(404);
@@ -69,10 +65,7 @@ class KategoriProjectController extends Controller
         $data = KategoriProject::findOrfail($kategoriProject);
         if ($data) {
             $data->delete();
-            return response()->json([
-                'message' => 'Data Deleted Successfully',
-                'status' => 200
-            ]);
+            return $this->successResponse(null,'deleted');
         }
     }
 }
