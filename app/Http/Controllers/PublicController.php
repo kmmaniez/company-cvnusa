@@ -131,7 +131,7 @@ class PublicController extends Controller
             }
             if (isset($authorParam)) {
                 return view('public.blog.posts',[
-                    'title'         => 'Kategori '.$authorParam,
+                    'title'         => 'Penulis '.$authorParam,
                     'posts'         => $postWithAuthor,
                     'kategori'      => $kategoriAll,
                     'recentposts'   => $recentPosts
