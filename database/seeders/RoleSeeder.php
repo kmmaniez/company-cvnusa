@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -14,16 +15,8 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         // DATA PERMISSION LIST REFERENSI DARI PermissionSeeder
-        $permission_lists = [
-            'manage-users',
-            'manage-blogs',
-            'manage-projects',
-            'manage-clients',
-            'manage-prices',
-            'manage-services',
-            'manage-teams',
-            'manage-websites',
-        ];
+        $permission_lists = Permission::all();
+
         try {
             
             // WRITER HANYA BISA MANAGE BLOG,PROJECTS,CLIENTS,PRICES,SERVICES
