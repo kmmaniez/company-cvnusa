@@ -48,11 +48,11 @@
             <span>Projects & Client</span></a>
         </a>
         <div id="projectCategory"
-            class="collapse {{ request()->routeIs('projects.index') || request()->routeIs('clients.index') ? 'show' : '' }}"
+            class="collapse {{ request()->routeIs('projects.*') || request()->routeIs('clients.index') ? 'show' : '' }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Website:</h6>
-                <a class="collapse-item {{ (request()->routeIs('projects.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('projects.index') }}"><i class="fas fa-fw fa-book"></i> Projects</a>
+                <h6 class="collapse-header">Project & Client:</h6>
+                <a class="collapse-item {{ (request()->routeIs('projects.*') ? 'bg-primary text-white active' : '') }}" href="{{ route('projects.index') }}"><i class="fas fa-fw fa-book"></i> Projects</a>
                 <a class="collapse-item {{ request()->routeIs('clients.index') ? 'bg-primary text-white active' : '' }}" href="{{ route('clients.index') }}"><i class="fas fa-fw fa-user"></i> Clients</a>
             </div>
         </div>
