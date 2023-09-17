@@ -15,7 +15,7 @@ Route::controller(PublicController::class)->as('public.')->group(function () {
 
     // PROJECT
     Route::get('/projects', 'projects')->name('projects');
-    Route::get('/projects/id', 'project_details')->name('project-single');
+    Route::get('/projects/{project:slug}', 'project_details')->name('project-single');
 
     // BLOG
     Route::get('/blog', 'posts')->name('post.all');
