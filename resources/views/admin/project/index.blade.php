@@ -16,15 +16,14 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data Projects</h6>
                 </div>
                 <div class="card-body">
-                    <a href="" class="btn btn-md btn-primary mb-3" id="btnTambahProject"><i class="fas fa-fw fa-plus"></i> Tambah Projects</a>
+                    <a href="{{ route('projects.create') }}" class="btn btn-md btn-primary mb-3" ><i class="fas fa-fw fa-plus"></i> Tambah Projects</a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Gambar</th>
+                                    <th>Gambar Thumbnail</th>
                                     <th>Nama Projects</th>
-                                    <th>Lokasi Projects</th>
                                     <th>Keterangan Projects</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -34,26 +33,19 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            @if (isset($project->gambar_project))
-                                                <img src="{{ asset('sb-admin/reference/user_profile.jpg') }}" width="124"
-                                                    height="96" alt="" srcset="">
-                                            @else
-                                                <p>kosong</p>
-                                            @endif
+                                            <img src="{{ Storage::url(json_decode($project->gambar_project)[0]) }}" width="124" height="96" alt="gambar project">
                                         </td>
                                         <td>{{ $project->nama_project }}</td>
-                                        <td>Jakarta</td>
                                         <td>{{ Str::limit($project->keterangan_project, 30, '...') }}</td>
-                                        {{-- <td>{{ $project->keterangan_project }}</td> --}}
                                         <td style="width: 240px;">
-                                            <a href="#" class="btn btn-sm btn-primary"><i
-                                                    class="fas fa-fw fa-eye"></i>
-                                                Detail</a>
-                                            <a href="#" class="btn btn-sm btn-info"><i class="fas fa-fw fa-edit"></i>
-                                                Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger"><i
-                                                    class="fas fa-fw fa-trash-alt"></i>
-                                                Delete</a>
+                                            <a target="_blank" href="{{ route('public.project-single', $project->nama_project) }}" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-eye"></i> Lihat</a>
+                                            <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-sm btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                            <form action="{{ route('projects.destroy', $project->slug) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -167,10 +159,8 @@
                             <label for="gambar_project" class="form-label">Gambar Project (bisa lebih dari 1)</label>
                             <input class="form-control" type="file" name="gambar_project" id="gambar_project" multiple>
                         </div>
-                        <button class="btn btn-md btn-primary" id="btnSimpanProject"><i class="fas fa-fw fa-save"></i>
-                            Simpan</button>
-                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i>
-                            Reset</button>
+                        <button class="btn btn-md btn-primary" id="btnSimpanProject"><i class="fas fa-fw fa-save"></i> Simpan</button>
+                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i> Reset</button>
                     </form>
                 </div>
             </div>
