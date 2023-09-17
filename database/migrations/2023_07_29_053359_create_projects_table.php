@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kategori_id');
             $table->string('nama_project');
+            $table->string('slug')->unique();
             $table->string('keterangan_project')->nullable();
-            $table->date('start_project')->nullable();
-            $table->date('finish_project');
-            $table->text('gambar_project')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('finish_date');
+            $table->json('gambar_project')->nullable();
             $table->timestamps();
         });
     }
