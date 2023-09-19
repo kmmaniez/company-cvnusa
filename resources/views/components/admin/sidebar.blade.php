@@ -90,27 +90,31 @@
     @endcan
 
     <!-- Nav Item - Landing Page Settings -->
+
     @can('manage-websites')
-    <li class="nav-item {{ request()->routeIs('website.*') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->routeIs('about.*') || request()->routeIs('carousels.*') || request()->routeIs('wallpaper.*') || request()->routeIs('informasi.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#manageWebsite"
             aria-expanded="true" aria-controls="manageWebsite">
             <i class="fas fa-fw fa-globe"></i>
             <span>Landing Page Settings</span>
         </a>
-        <div id="manageWebsite" class="collapse {{ request()->routeIs('website.*') ? 'show' : '' }}"
+        <div id="manageWebsite" class="collapse {{ request()->routeIs('about.*') || request()->routeIs('carousels.*') || request()->routeIs('wallpaper.*') || request()->routeIs('informasi.*') ? 'show' : '' }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Website:</h6>
                 <a class="collapse-item {{ (request()->routeIs('about.index') ? 'bg-primary text-white active' : '') }} " href="{{ route('about.index') }}"><i class="fas fa-fw fa-info"></i> About Us</a>
                 <a class="collapse-item {{ request()->routeIs('carousels.index') ? 'bg-primary text-white active' : '' }}"href="{{ route('carousels.index') }}"><i class="fas fa-fw fa-image"></i> Carousel Image</a>
                 <a class="collapse-item {{ (request()->routeIs('wallpaper.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('wallpaper.index') }}"><i class="fas fa-fw fa-images"></i> Wallpaper Menu</a>
+                <a class="collapse-item {{ (request()->routeIs('informasi.index') ? 'bg-primary text-white active' : '') }}" href="{{ route('informasi.index') }}"><i class="fas fa-fw fa-info-circle"></i> Informasi Website</a>
             </div>
         </div>
     </li>
-    @endcan
 
+    
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+    @endcan
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
