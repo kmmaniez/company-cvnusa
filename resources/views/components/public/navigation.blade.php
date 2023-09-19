@@ -1,10 +1,11 @@
+@props(['dataWeb'])
 <div class="bg-white">
     <div class="container">
         <div class="logo-area">
             <div class="row align-items-center">
                 <div class="logo col-lg-3 text-center text-lg-left mb-3 mb-md-5 mb-lg-0">
                     <a class="d-block" href="index.html">
-                        <img loading="lazy" src="{{ url('assets/images/logo.png') }}" alt="Constra">
+                        <img loading="lazy" src="{{ (isset($dataWeb[0]->logo)) ? Storage::url($dataWeb[0]->logo) : url('assets/images/logo.png') }}" alt="Constra">
                     </a>
                 </div><!-- logo end -->
 
@@ -14,7 +15,7 @@
                             <div class="info-box">
                                 <div class="info-box-content">
                                     <p class="info-box-title">Hubungi</p>
-                                    <p class="info-box-subtitle">(+62) 821-2291-4353</p>
+                                    <p class="info-box-subtitle">{{ $dataWeb[0]->telepon ?? 'Telepon Perusahaan'}}</p>
                                 </div>
                             </div>
                         </li>
@@ -22,7 +23,7 @@
                             <div class="info-box">
                                 <div class="info-box-content">
                                     <p class="info-box-title">Email</p>
-                                    <p class="info-box-subtitle">email@webmu.com</p>
+                                    <p class="info-box-subtitle">{{ $dataWeb[0]->email ?? 'email@perusahaan.com'}}</p>
                                 </div>
                             </div>
                         </li>
@@ -30,7 +31,7 @@
                             <div class="info-box last">
                                 <div class="info-box-content">
                                     <p class="info-box-title">Alamat</p>
-                                    <p class="info-box-subtitle">Jl. Soekarno-Hatta No. 19 Surabaya</p>
+                                    <p class="info-box-subtitle">{{ $dataWeb[0]->alamat ?? 'Alamat Perusahaan'}}</p>
                                 </div>
                             </div>
                         </li>
