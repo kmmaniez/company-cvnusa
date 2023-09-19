@@ -25,9 +25,10 @@ class ProjectSeeder extends Seeder
             Project::create([
                 'kategori_id' => rand(1,5),
                 'nama_project' => $faker->text('10'),
+                'slug' => str_replace(' ','-',fake()->text('20')),
                 'keterangan_project' => $faker->paragraph('2'),
-                'start_project' => $faker->date(),
-                'finish_project' => $faker->date(),
+                'start_date' => $faker->date(),
+                'finish_date' => $faker->date(),
             ]);
         }
     }
