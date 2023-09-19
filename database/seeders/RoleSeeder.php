@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
             // WRITER HANYA BISA MANAGE BLOG,PROJECTS,CLIENTS,PRICES,SERVICES
             $role1 = Role::create(['name' => 'writer']);
             foreach ($permission_lists as $key => $value) {
-                if ($key == 0 || $key == 2 || $key == 4 || $key == 5 ) {
+                if ($key == 0 || $key == 2 || $key == 3 || $key == 4 || $key == 5 || $key == 6 || $key == 7) {
                     continue;
                 }
                 $role1->givePermissionTo([$value]);
