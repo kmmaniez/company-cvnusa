@@ -46,7 +46,7 @@ AUTHOR: Themefisher
         <!-- Header start -->
         <header id="header" class="header-one">
             <!--/ Navigation start -->
-            <x-public.navigation></x-public.navigation>
+            <x-public.navigation :dataWeb="$dataweb"></x-public.navigation>
             <!--/ Navigation end -->
         </header>
         <!--/ Header end -->
@@ -55,7 +55,7 @@ AUTHOR: Themefisher
         <!-- Carousel -->
 
         <!-- Footer -->
-        <x-public.footer></x-public.footer>
+        <x-public.footer :dataWeb="$dataweb"></x-public.footer>
 
         @stack('javascript')
 
