@@ -17,7 +17,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totaluser }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -32,11 +32,16 @@
                         <div class="col mr-2">
                             <div class="text-lg font-weight-bold text-success text-uppercase mb-1">
                                 Blog</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalpost }} Postingan</div>
-                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalkatpost }} Kategori</div> --}}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                @role(['super','admin'])
+                                {{ $totalpost }} Postingan
+                                @else
+                                {{ auth()->user()->posts()->get()->count() }} Postingan Anda
+                                @endrole
+                            </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-pen fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -72,7 +77,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalproject }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-file fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
