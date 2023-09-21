@@ -17,6 +17,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Form Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
+
                     <div class="table-responsive">
                         <table class="table table-bordered" id="DTWallpapers" width="100%" cellspacing="0">
                             <thead>
