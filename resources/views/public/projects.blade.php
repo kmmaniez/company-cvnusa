@@ -41,8 +41,8 @@
                         @foreach ($data as $project)
                             <div class="col-lg-4 col-md-6 shuffle-item">
                                 <div class="project-img-container">
-                                    <a class="gallery-popup" href="{{ Storage::url(json_decode($project->gambar_project)[0]) }}">
-                                        <img class="img-fluid" src="{{ Storage::url(json_decode($project->gambar_project)[0]) }}"
+                                    <a class="gallery-popup" href="{{ Storage::url($project->thumbnail) }}">
+                                        <img class="img-fluid object-fit-cover" style="width: 300px; height: 300px;" src="{{ Storage::url($project->thumbnail) }}"
                                             alt="project-image">
                                         <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                     </a>
