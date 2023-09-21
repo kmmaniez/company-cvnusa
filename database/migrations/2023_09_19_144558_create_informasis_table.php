@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('telepon');
             $table->string('alamat');
+            $table->text('tentang_kami')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
             $table->string('logo')->nullable();
             $table->timestamps();
         });
