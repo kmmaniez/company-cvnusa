@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('keterangan_project')->nullable();
             $table->date('start_date')->nullable();
             $table->date('finish_date');
+            $table->string('thumbnail');
             $table->json('gambar_project')->nullable();
             $table->timestamps();
         });
