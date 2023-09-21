@@ -120,7 +120,6 @@
 
                 let formData = new FormData(this);
                 $('#image-input-error').text('');
-                console.log(formData);
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('clients.store') }}',
@@ -133,7 +132,6 @@
                     success: (res) => {
                         if (res) {
                             this.reset();
-                            console.log(res);
                             Swal.fire({
                                 type: 'success',
                                 icon: 'success',
@@ -148,14 +146,14 @@
                             $('#DTClients').DataTable().ajax.reload();
                         }
                     },
-                    error: function(response) {
+                    error: function(res) {
                         const {
                             errors
-                        } = response.responseJSON;
+                        } = res.responseJSON;
                         if (errors.nama_client) {
                             $('#nama-input-error').text(errors.nama_client[0]);
                         }
-                        if (errors.nama_client) {
+                        if (errors.logo) {
                             $('#image-input-error').text(errors.logo[0]);
                         }
                     }
@@ -265,7 +263,6 @@
                                 id: $(this).data('client')
                             },
                             success: (res) => {
-                                console.log(res);
                                 Swal.fire({
                                     type: 'success',
                                     icon: 'success',
@@ -284,7 +281,7 @@
         $('#DTClients').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('getdataclients') }}",
+            ajax: "{{ route('clients.getclients') }}",
             columns: [{
                     data: 'nama',
                     name: 'nama'
