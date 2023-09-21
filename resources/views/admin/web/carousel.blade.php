@@ -8,17 +8,14 @@
     <div class="row">
 
 
-        <div class="col-xl-12 col-lg-6">
+        <div class="col-xl-7 col-lg-6">
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Form Data {{ $title }}</h6>
                 </div>
                 <div class="card-body">
-                    <p>Lihat contoh carousel <a href="http://">disini</a> | Carousel maks 5 gambar & min 3 gambar untuk hasil
-                        terbaik.</p>
-                    <a href="" id="btnTambahCarousel" class="btn btn-md btn-primary mb-3"><i
-                            class="fas fa-fw fa-plus"></i> Tambah Data</a>
+                    <a href="#" id="btnTambahCarousel" class="btn btn-md btn-primary mb-3"><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -34,12 +31,7 @@
                                 @foreach ($carousels as $carousel)
                                     <tr>
                                         <td>
-                                            @if (isset($carousel->image))
-                                                <img src="{{ Storage::url($carousel->image) }}" width="300"
-                                                    height="150" alt="gambar-subtitle">
-                                            @else
-                                                <p>-</p>
-                                            @endif
+                                            <img src="{{ Storage::url($carousel->image) }}" width="200" height="100" alt="gambar-subtitle">
                                         </td>
                                         <td>{{ $carousel->slide_title }}</td>
                                         <td>{{ $carousel->slide_subtitle }}</td>
@@ -59,6 +51,21 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="col-xl-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Referensi Hasil</h6>
+                </div>
+                <div class="card-body">
+                    <figure class="text-center">
+                        <img src="{{ asset('sb-admin/reference/Carousel.png') }}" class="w-100" alt="" srcset="">
+                        <figcaption>*Settings akan berdampak ke <a href="{{ route('public.index') }}"
+                                target="_blank">sini</a></figcaption>
+                    </figure>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -120,7 +127,7 @@
 
                 let formData = new FormData(this);
                 $('#image-input-error').text('');
-                // console.log(formData);
+
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('carousels.store') }}',
@@ -133,7 +140,6 @@
                     success: (res) => {
                         if (res) {
                             this.reset();
-                            console.log(res);
                             Swal.fire({
                                 type: 'success',
                                 icon: 'success',
@@ -151,16 +157,12 @@
                         const {
                             errors
                         } = response.responseJSON;
-                        console.log(errors);
                         if (errors.slide_title) {
                             $('#title-input-error').text(errors.slide_title[0]);
                         }
                         if (errors.gambar_carousel) {
                             $('#image-input-error').text(errors.gambar_carousel[0]);
                         }
-                        // if (errors.nama_client) {
-                        //     $('#image-input-error').text(errors.gambar_carousel[0]);
-                        // }
                     }
                 });
             });
@@ -230,11 +232,10 @@
                                 }, 2500);
                             }
                         },
-                        error: function(response) {
+                        error: function(res) {
                             const {
                                 errors
-                            } = response.responseJSON;
-                            console.log(errors);
+                            } = res.responseJSON;
                             if (errors.slide_title) {
                                 $('#title-input-error').text(errors.slide_title[0]);
                             }
@@ -251,7 +252,6 @@
         /* FUNGSI HAPUS CAROUSEL */
         $('body').on('click', '#btnHapusCarousel', function(e) {
             const id = $(this).data('carousel')
-            console.log(id);
             e.preventDefault()
             Swal.fire({
                     title: 'Anda yakin?',
