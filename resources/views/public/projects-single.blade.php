@@ -25,7 +25,7 @@
 
                         @foreach (json_decode($data->gambar_project) as $gambar)
                         <div class="item">
-                            <img loading="lazy" class="img-fluid" src="{{ Storage::url($gambar) }}"
+                            <img loading="lazy" style="width: max-content; height: 600px;" class="img-fluid object-fit-cover" src="{{ Storage::url($gambar) }}"
                                 alt="project-image" />
                         </div>
                         @endforeach
@@ -45,7 +45,7 @@
                         </li>
                         <li>
                             <p class="project-info-label">Year Completed</p>
-                            <p class="project-info-content">{{ $data->finish_project }}</p>
+                            <p class="project-info-content">{{ $data->finish_date }}</p>
                         </li>
                         <li>
                             <p class="project-info-label">Categories</p>
