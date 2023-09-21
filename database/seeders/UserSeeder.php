@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'role'      => ['admin'],
             ],
             [
-                'username'  => 'Super Lorem',
+                'username'  => 'superlorem',
                 'name'      => 'Super Program',
                 'email'     => 'super@gmail.com',
                 'role'      => ['super'],
