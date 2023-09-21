@@ -420,7 +420,7 @@
               serverSide: true,
               ajax: "{{ route('users.getusers') }}",
               columns: [
-                  {data: 'DT_RowIndex', name: 'id'},
+                  {data: 'DT_RowIndex', name: 'id', orderable: false},
                   {data: 'name', name: 'name'},
                   {data: 'username', name: 'username'},
                   {data: 'email', name: 'email'},
