@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             try {
                 Storage::disk('public')->deleteDirectory($allDir[$i]);
             } catch (\Throwable $th) {
-                //throw $th;
+                throw $th;
             }
         }
 
@@ -32,7 +32,6 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             CarouselSeeder::class,
             BlogSeeder::class,
-            ProjectSeeder::class,
         ]);
     }
 }
