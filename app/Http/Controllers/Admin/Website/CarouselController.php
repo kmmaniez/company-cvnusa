@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\CarouselRequest;
-use App\Models\Carousel;
+use App\Models\Website\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
