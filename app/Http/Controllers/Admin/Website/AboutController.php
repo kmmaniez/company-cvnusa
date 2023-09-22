@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Website;
 
 use App\Http\Controllers\Controller;
-use App\Models\WebsiteSetting;
+use App\Models\Website\WebsiteSetting;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
