@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriJabatan extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+
+    protected $fillable = ['nama_jabatan'];
 
     public function anggotas()
     {
