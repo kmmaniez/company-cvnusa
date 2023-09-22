@@ -10,7 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory, Sluggable;
-    protected $guarded = ['id'];
+
+    protected $fillable = [
+        'kategoripost_id',
+        'title',
+        'slug',
+        'spoiler_text',
+        'thumbnail',
+        'content',
+    ];
     protected $with = ['kategoris'];
 
     public function kategoris()
