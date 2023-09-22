@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KategoriProjectRequest;
+use App\Http\Requests\Projects\KategoriProjectRequest;
 use App\Models\Project\KategoriProject;
 use Illuminate\Http\Request;
 
