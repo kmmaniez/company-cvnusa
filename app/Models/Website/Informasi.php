@@ -12,8 +12,14 @@ class Informasi extends Model
     protected $fillable = [
         'logo',
         'email',
+        'tentang_kami',
         'telepon',
         'alamat',
+        'facebook',
+        'twitter',
+        'instagram',
+        'linkedin',
+        
     ];
 
     public $timestamps = false;
