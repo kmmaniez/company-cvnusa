@@ -7,6 +7,7 @@ use App\Http\Requests\ClientRequest;
 use App\Models\Clients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class ClientsController extends Controller
 {
@@ -91,6 +92,7 @@ class ClientsController extends Controller
                 }
             }
         }
+        abort(404);
     }
 
     /* FUNGSI HAPUS CLIENTS */
@@ -105,5 +107,28 @@ class ClientsController extends Controller
                 'message' => 'sukses',
             ]);
         }
+    }
+
+    /* FUNGSI GET ALL CLIENTS DATATABLE*/
+    public function getAllClients(Request $request)
+    {
+        if ($request->ajax()) {
+            $model = Clients::all();
+            return DataTables::of($model)
+                ->editColumn('logo', function ($row) {
+                    return view('admin.client.clientdt', [
+                        'logo' => $row->logo
+                    ]);
+                })
+                ->editColumn('action', function ($row) {
+                    $btn = '
+                        <a href="#" data-client="' . $row->id . '" id="btnEditClient" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                        <a href="#" data-client="' . $row->id . '" id="btnHapusClient" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
+                    ';
+                    return $btn;
+                })
+                ->toJson();
+        }
+        abort(404);
     }
 }
