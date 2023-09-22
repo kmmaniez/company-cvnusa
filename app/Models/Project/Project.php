@@ -9,7 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory, Sluggable;
-    protected $guarded = ['id'];
+
+    protected $fillable = [
+        'kategori_id',
+        'nama_project',
+        'slug',
+        'keterangan_project',
+        'start_date',
+        'finish_date',
+        'thumbnail',
+        'gambar_project',
+    ];
 
     public function getRouteKeyName()
     {
