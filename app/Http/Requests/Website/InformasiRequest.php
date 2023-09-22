@@ -22,10 +22,14 @@ class InformasiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'telepon' => 'required|numeric',
-            'alamat' => 'required|string',
-            'logo' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
+            'email' => ['required','email'],
+            'telepon' => ['required','numeric'],
+            'alamat' => ['required','string'],
+            'logo' => ['nullable','image','mimes:png,jpg,jpeg','max:2048'],
+            'facebook' => ['nullable','url'],
+            'instagram' => ['nullable','url'],
+            'twitter' => ['nullable','url'],
+            'linkedin' => ['nullable','url'],
         ];
     }
 }
