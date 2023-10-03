@@ -1,41 +1,28 @@
+@props(['dataWeb'])
 <footer id="footer" class="footer bg-overlay">
     <div class="footer-main">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-9 col-md-6 footer-widget footer-about">
                     <h3 class="widget-title">Tentang Kami</h3>
-                    <img loading="lazy" width="200px" class="footer-logo" src="{{ url('assets/images/footer-logo.png') }}"
+                    <img loading="lazy" width="200px" class="footer-logo" src="{{ (isset($dataWeb[0]->logo)) ? Storage::url($dataWeb[0]->logo) : url('assets/images/footer-logo.png') }}"
                         alt="Constra">
-                    {{-- <p>when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
-                        horrible vermin.</p>
-                    <p>He lay on his armour-like back, and if he lifted. ultrices ultrices sapien, nec tincidunt
-                        nunc posuere ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. If you are going
-                        to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing.</p>
+                    <p>{!! $dataWeb[0]->tentang_kami ?? '' !!}</p>
                     <div class="footer-social">
                         <ul>
-                            <li><a href="https://facebook.com/themefisher" aria-label="Facebook"><i
+                            <li><a href="{{ $dataWeb[0]->facebook ?? '' }}" aria-label="Facebook"><i
                                         class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://twitter.com/themefisher" aria-label="Twitter"><i
+                            <li><a href="{{ $dataWeb[0]->twitter ?? '' }}" aria-label="Twitter"><i
                                         class="fab fa-twitter"></i></a>
                             </li>
-                            <li><a href="https://instagram.com/themefisher" aria-label="Instagram"><i
+                            <li><a href="{{ $dataWeb[0]->instagram ?? '' }}" aria-label="Instagram"><i
                                         class="fab fa-instagram"></i></a></li>
-                            <li><a href="https://github.com/themefisher" aria-label="Github"><i
-                                        class="fab fa-github"></i></a></li>
+                            <li><a href="{{ $dataWeb[0]->linkedin ?? '' }}" aria-label="LinkedIn"><i
+                                        class="fab fa-linkedin"></i></a></li>
                         </ul>
-                    </div><!-- Footer social end --> --}}
+                    </div><!-- Footer social end -->
                 </div><!-- Col end -->
 
-                <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
-                    <h3 class="widget-title">Melayani Jasa</h3>
-                    <ul class="list-arrow">
-                        {{-- <li><a href="service-single.html">Pre-Construction</a></li>
-                        <li><a href="service-single.html">General Contracting</a></li>
-                        <li><a href="service-single.html">Construction Management</a></li>
-                        <li><a href="service-single.html">Design and Build</a></li>
-                        <li><a href="service-single.html">Self-Perform Construction</a></li> --}}
-                    </ul>
-                </div><!-- Col end -->
             </div><!-- Row end -->
         </div><!-- Container end -->
     </div><!-- Footer main end -->
