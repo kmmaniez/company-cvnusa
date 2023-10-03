@@ -33,7 +33,7 @@
     @endcan
 
     <!-- Nav Item - Manage Blog -->
-    <li class="nav-item {{ request()->routeIs('posts.index') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->routeIs('posts.*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('posts.index') }}">
             <i class="fas fa-fw fa-pen"></i>
             <span>Manage Blog</span></a>
