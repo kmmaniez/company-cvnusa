@@ -76,16 +76,18 @@
                             <label for="nama_service" class="form-label">Nama Service</label>
                             <input type="text" class="form-control" name="nama_service" id="nama_service"
                                 placeholder="cth: Desain Arsitektur">
+                            <span class="text-danger" id="nama-error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="gambar_service" class="form-label">Gambar Service</label>
                             <img id="preview-image" alt="" srcset="">
                             <input type="file" class="form-control" name="gambar_service" id="gambar_service">
-                            <span class="text-danger" id="image-input-error"></span>
+                            <span class="text-danger" id="image-error"></span>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi</label>
-                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
+                            <label for="description_service" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" name="description_service" id="description_service" cols="30" rows="3"></textarea>
+                            <span class="text-danger" id="description-error"></span>
                         </div>
                         <button class="btn btn-md btn-primary" id="btnService"><i class="fas fa-fw fa-save"></i>
                             Simpan</button>
@@ -109,7 +111,9 @@
             $('#modalService').on('hidden.bs.modal', function(e) {
                 $('#nama_service').val('')
                 $('#description').val('')
-                // $('#preview-image').attr('src', '{{ url('assets/images/services/service1.jpg') }}')
+                $('#nama-error').text('')
+                $('#description-error').text('')
+                $('#preview-image').css('display', 'none');
             })
         });
 
@@ -121,7 +125,7 @@
                 $('#preview-image').css({
                     display: 'block',
                     width: '300px',
-                    height: '150px',
+                    height: '300px',
                     marginBottom: '8px',
                 })
             }
@@ -135,6 +139,7 @@
 
             $('#formService').submit(function(e) {
                 e.preventDefault();
+                e.stopImmediatePropagation();
                 let formData = new FormData(this);
                 $('#image-input-error').text('');
                 $.ajax({
@@ -163,9 +168,15 @@
 
                         }
                     },
-                    error: function(res) {
-                        // // console.log(response.responseJSON.errors.nama_client[0]);
-                        // $('#image-input-error').text(response.responseJSON.message);
+                    error: function(err) {
+                        const {errors} = err.responseJSON;
+
+                        if (errors.nama_service) {
+                            $('#nama-error').text(errors.nama_service[0])
+                        }
+                        if (errors.description_service) {
+                            $('#description-error').text(errors.description_service[0])
+                        }
                     }
                 });
             });
@@ -189,7 +200,22 @@
                             data
                         } = res
                         $('#nama_service').val(data.title)
-                        $('#description').val(data.description)
+                        $('#description_service').val(data.description)
+                        // $('#preview-image').attr('src', data.gambar);
+                        if (data.gambar) {
+                            let url = data.gambar
+                            let replaceUrl = url.replace('public/services', 'storage/services')
+    
+                            $('#nama_client').val(data.nama);
+                            $('#telepon_client').val(data.telepon);
+                            $('#preview-image').attr('src', `${window.location.origin}/${replaceUrl}`)
+                            $('#preview-image').css({
+                                display: 'block',
+                                width: '300px',
+                                height: '150px',
+                                marginBottom: '8px',
+                            })
+                        }
                     },
                     error: function(res) {
                         const {
@@ -233,18 +259,6 @@
                                 }, 2500);
                             }
                         },
-                        error: function(res) {
-                            // const {
-                            //     errors
-                            // } = response.responseJSON;
-                            console.log(res);
-                            // if (errors.slide_title) {
-                            //     $('#title-input-error').text(errors.slide_title[0]);
-                            // }
-                            // if (errors.gambar_carousel) {
-                            //     $('#image-input-error').text(errors.gambar_carousel[0]);
-                            // }
-                        }
                     });
                 });
             })
@@ -274,7 +288,6 @@
                                 id: $(this).data('serv')
                             },
                             success: (res) => {
-                                console.log(res);
                                 Swal.fire({
                                     type: 'success',
                                     icon: 'success',
@@ -296,20 +309,6 @@
             paging: false,
             searching: false,
         })
-        // SWEETALER
-        $(function() {
 
-            $('#tested').on('click', function(e) {
-                e.preventDefault()
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Do you want to continue',
-                    icon: 'error',
-                    timer: 2000,
-                    showConfirmButton: false,
-                    confirmButtonText: 'Cool'
-                })
-            })
-        })
     </script>
 @endpush
