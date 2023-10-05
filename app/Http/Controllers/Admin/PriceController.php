@@ -26,7 +26,7 @@ class PriceController extends Controller
 
         $createData = Price::create($data);
         if ($createData) {
-            return $this->successResponse(null,'created');
+            return $this->successResponse([],'created');
         }
     }
 
