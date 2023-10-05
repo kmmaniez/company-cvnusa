@@ -89,19 +89,23 @@
                         <div class="mb-3">
                             <label for="judul" class="form-label">Judul</label>
                             <input type="text" class="form-control" name="judul" id="judul" placeholder="">
+                            <span class="text-danger" id="judul-error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="harga" class="form-label">Harga</label>
                             <input type="number" class="form-control" name="harga" id="harga" placeholder="">
+                            <span class="text-danger" id="harga-error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="keterangan" class="form-label" id="labelket">Keterangan</label>
                             <input id="keterangan" type="hidden" name="keterangan">
                             <trix-editor input="keterangan"></trix-editor>
+                            <span class="text-danger" id="keterangan-error"></span>
                         </div>
                         <div class="mb-3">
-                            <label for="custom_text_button" class="form-label">Custom Text Button (lihat hasil)</label>
-                            <input type="text" class="form-control" name="custom_text_button" id="custom_text_button"
+                            <label for="custom_text_button" class="form-label">Custom Text Button <strong>(default: Order Now)</strong></label>
+                            <img src="{{ asset('sb-admin/reference/Custom-text.png') }}" class="d-block" width="148" height="148" alt="" srcset="">
+                            <input type="text" class="form-control mt-2" name="custom_text_button" id="custom_text_button"
                                 placeholder="">
                         </div>
                         <div class="mb-3">
@@ -110,6 +114,7 @@
                                     id="highlight_harga">
                                 <label class="custom-control-label" for="highlight_harga">Highlight Harga ?</label>
                             </div>
+                            <span class="text-primary">*Highlight harga untuk produk terbaik/referensi.</span>
                         </div>
                         <button class="btn btn-md btn-primary" id="btnSimpanHarga"><i
                                 class="fas fa-fw fa-save"></i>Simpan</button>
@@ -191,15 +196,36 @@
                         custom_text_button: $('#custom_text_button').val(),
                         is_featured: $('#highlight_harga').prop('checked') ?? false,
                     },
-                    success: function(data) {
+                    success: function(res) {
+                        console.log(res);
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: res.message,
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 2500);
                         $('#judul').val('')
                         $('#harga').val('')
-                        $('#keterangan').val('')
+                        $('trix-editor').val('')
                         $('#custom_text_button').val('')
                         $('#modal-create').modal('hide')
                     },
                     error: function(err) {
-                        console.log(err);
+                        const {errors} = err.responseJSON;
+
+                        if (errors.judul) {
+                            $('#judul-error').text(errors.judul[0])
+                        }
+                        if (errors.harga) {
+                            $('#harga-error').text(errors.harga[0])
+                        }
+                        if (errors.keterangan) {
+                            $('#keterangan-error').text(errors.keterangan[0])
+                        }
                     }
                 })
             })
@@ -258,20 +284,41 @@
                 e.preventDefault()
                 ids = $(this).data('id')
 
-                $.ajax({
-                    url: `${window.location.pathname}/${ids}`,
-                    method: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ids
-                    },
-                    success: function(res) {
-                        console.log(res);
-                    },
-                    error: function(err) {
-                        console.log(err);
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Apakah anda ingin menghapus data ini ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus data!',
+                    cancelButtonText: 'Tidak',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: window.location.pathname + '/' + ids,
+                            method: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: ids
+                            },
+                            success: (res) => {
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: res.message,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 2500);
+                            }
+                        })
                     }
                 })
+                
             })
         })
     </script>
