@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,16 +25,24 @@ class ServiceController extends Controller
     }
     
     /* FUNGSI TAMBAH SERVICE */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_service)).'.'.$request->gambar_service->extension();
-        $pathName = Storage::putFileAs('public/services', $request->file('gambar_service'), $imgName);
-
-        $data = Service::create([
-            'title' => $request->nama_service,
-            'gambar' => $pathName,
-            'description' => $request->description,
-        ]);
+        if ($request->hasFile('gambar_service')) {
+            $imgName = date('HisdmY').'_'.str_replace(' ','_',strtolower($request->nama_service)).'.'.$request->gambar_service->extension();
+            $pathName = Storage::putFileAs('public/services', $request->file('gambar_service'), $imgName);
+    
+            $data = Service::create([
+                'title' => $request->nama_service,
+                'gambar' => $pathName,
+                'description' => $request->description_service,
+            ]);
+            
+        }else{
+            $data = Service::create([
+                'title' => $request->nama_service,
+                'description' => $request->description_service,
+            ]);
+        }
         
 
         return response()->json([
@@ -65,19 +74,19 @@ class ServiceController extends Controller
                 $imgName = date('His_dmY').'_'.strtolower($request->nama_service).'.'.$request->gambar_service->extension();
                 $pathName = Storage::putFileAs('public/services', $request->file('gambar_service'), $imgName);
                 
-                $data = $service->update([
+                $service->update([
                     'title' => $request->nama_service,
                     'gambar' => $pathName,
-                    'description' => $request->description,
+                    'description' => $request->description_service,
                 ]);
 
-                if ($data) {
-                    return response()->json([
-                        'data' => $service,
-                        'message' => 'Data successfully changed',
-                        'req' => $request->all()
-                    ]);
-                }
+                return $this->successResponse([],'updated');
+            }else{
+                $service->update([
+                    'title' => $request->nama_service,
+                    'description' => $request->description_service,
+                ]);
+                return $this->successResponse([],'updated');
             }
         }
     }
@@ -87,13 +96,12 @@ class ServiceController extends Controller
     {
         $data = Service::findOrfail($service);
         if ($data) {
-            if ($data->logo) {
-                Storage::delete($data->logo);
+            if ($data->gambar) {
+                Storage::delete($data->gambar);
             }
             $data->delete();
-            return response()->json([
-                'message'   => 'Data Berhasil dihapus',
-            ]);
+
+            return $this->successResponse([],'deleted');
         }
     }
 }
