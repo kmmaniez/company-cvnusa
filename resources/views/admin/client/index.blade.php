@@ -28,6 +28,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($data as $client)
+                                    <tr>
+                                        <td>{{ $client->nama }}</td>
+                                        <td>
+                                            <img src="{{ Storage::url($client->logo) }}" style="object-fit: cover;" width="300" height="150" alt="client-logo">
+                                        </td>
+                                        <td>{{ $client->telepon }}</td>
+                                        <td>
+                                            <a href="#" data-client="{{ $client->id }}" id="btnEditClient" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                                            <a href="#" data-client="{{ $client->id }}" id="btnHapusClient" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -143,7 +156,9 @@
                             $('#telepon_client').val('')
                             $('#modalClient').modal('hide');
                             $('#nama-input-error').text('')
-                            $('#DTClients').DataTable().ajax.reload();
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 2500);
                         }
                     },
                     error: function(res) {
@@ -177,7 +192,6 @@
                     idClient = data.id
                     let url = data.logo
                     let replaceUrl = url.replace('public/clients', 'storage/clients')
-                    console.log(idClient);
 
                     $('#nama_client').val(data.nama);
                     $('#telepon_client').val(data.telepon);
@@ -222,7 +236,9 @@
                             $('#telepon_client').val('')
                             $('#modalClient').modal('hide');
                             $('#nama-input-error').text('')
-                            $('#DTClients').DataTable().ajax.reload();
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 2500);
                         }
                     },
                     error: function(response) {
@@ -263,6 +279,7 @@
                                 id: $(this).data('client')
                             },
                             success: (res) => {
+                                console.log(res);
                                 Swal.fire({
                                     type: 'success',
                                     icon: 'success',
@@ -270,7 +287,11 @@
                                     showConfirmButton: false,
                                     timer: 2000,
                                 });
-                                $('#DTClients').DataTable().ajax.reload();
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 2500);
+                            },error: (err) => {
+                                console.log(err);
                             }
                         })
                     }
@@ -279,31 +300,8 @@
 
         /* INISIALISASI DATATABLE */
         $('#DTClients').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('clients.getclients') }}",
-            columns: [{
-                    data: 'nama',
-                    name: 'nama'
-                },
-                {
-                    data: 'logo',
-                    name: 'logo'
-                },
-                {
-                    data: 'telepon',
-                    name: 'telepon'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ],
-            "language": {
-                "processing": "<div class=\"spinner-border bg-transparent\" role=\"status\"></div>"
-            }
+            orderable: false,
+            searchable: false
         })
     </script>
 @endpush
