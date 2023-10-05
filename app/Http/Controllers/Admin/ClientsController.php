@@ -23,7 +23,7 @@ class ClientsController extends Controller
     /* FUNGSI TAMBAH CLIENTS */
     public function store(ClientRequest $request)
     {
-        $imgName = date('HisdmY') . '_' . strtolower(str_replace(' ', '_', $request->nama_client)) . '.' . $request->logo->extension();
+        $imgName = date('HisdmY') . '-' . strtolower(str_replace(' ', '_', $request->nama_client)) . '.' . $request->logo->extension();
         $pathName = Storage::putFileAs('public/clients', $request->file('logo'), $imgName);
 
         Clients::create([
@@ -32,20 +32,18 @@ class ClientsController extends Controller
             'telepon' => $request->telepon_client,
         ]);
 
-        return response()->json([
-            'data' => $request->all(),
-            'path' => $pathName,
-            'message' => 'Data created successfully'
-        ]);
+        return $this->successResponse([],'created');
     }
 
     /* FUNGSI LIHAT DATA CLIENTS */
-    public function show($client)
+    public function show(Clients $client)
     {
-        $data = Clients::findOrfail($client);
-        return response()->json([
-            'data' => $data
-        ]);
+        if (request()->ajax()) {
+            return response()->json([
+                'data' => $client
+            ]);
+        }
+        abort(404);
     }
 
     /* FUNGSI UPDATE CLIENTS */
@@ -96,39 +94,11 @@ class ClientsController extends Controller
     }
 
     /* FUNGSI HAPUS CLIENTS */
-    public function destroy($client)
+    public function destroy(Clients $client)
     {
-        $data = Clients::findOrfail($client);
-        if ($data) {
-            Storage::delete($data->logo);
-            $data->delete();
-            return response()->json([
-                'data' => $data,
-                'message' => 'sukses',
-            ]);
-        }
-    }
+        Storage::delete($client->logo);
+        $client->delete();
 
-    /* FUNGSI GET ALL CLIENTS DATATABLE*/
-    public function getAllClients(Request $request)
-    {
-        if ($request->ajax()) {
-            $model = Clients::all();
-            return DataTables::of($model)
-                ->editColumn('logo', function ($row) {
-                    return view('admin.client.clientdt', [
-                        'logo' => $row->logo
-                    ]);
-                })
-                ->editColumn('action', function ($row) {
-                    $btn = '
-                        <a href="#" data-client="' . $row->id . '" id="btnEditClient" class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                        <a href="#" data-client="' . $row->id . '" id="btnHapusClient" class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</a>
-                    ';
-                    return $btn;
-                })
-                ->toJson();
-        }
-        abort(404);
+        return $this->successResponse([],'deleted');
     }
 }
