@@ -11,7 +11,7 @@
     <!-- Content Row -->
     <div class="row">
         <!-- Form Post -->
-        <div class="col-xl-9 col-lg-6">
+        <div class="@hasrole(['super','admin']) col-xl-9 @else col-xl-12 @endrole col-lg-6">
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -26,6 +26,7 @@
                                     <label for="thumbnail" class="form-label d-block"><strong>Thumbnail Post</strong></label>
                                     <img id="thumbnail-post" src="{{ asset('assets/images/projects/project1.jpg') }}" style="width: 100%" height="200" alt="thumbnail" srcset="">
                                     <input type="file" class="form-control mt-2" name="thumbnail" id="thumbnail">
+                                    @error('thumbnail') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
                             <div class="col-lg-9 col">
@@ -33,7 +34,8 @@
                                     <div class="col-lg-6 col-12">
                                         <div class="mb-3">
                                             <label for="title" class="form-label"><strong>Judul Post</strong></label>
-                                            <input type="text" class="form-control" name="title" id="title" placeholder="cth: Tutorial Desain AutoCAD" required>
+                                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="cth: Tutorial Desain AutoCAD">
+                                            @error('title') <small class="text-danger">{{ $message }}</small> @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -50,6 +52,7 @@
                                         <option value="{{ $data->id }}">{{ $data->nama_kategori }}</option>
                                         @endforeach
                                     </select>
+                                    @error('kategoripost_id') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="content" class="form-label"><strong>Konten</strong></label>
@@ -79,6 +82,7 @@
         </div>
 
         <!-- Tabel Kategori -->
+        @hasrole(['super','admin'])
         <div class="col-xl-3 col-lg-6">
 
             <div class="card shadow mb-4">
@@ -113,9 +117,11 @@
             </div>
 
         </div>
+        @endrole
 
     </div>
 
+    @hasrole(['super','admin'])
     <!-- Modal Kategori -->
     <div class="modal fade" id="modalKategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -139,6 +145,7 @@
             </div>
         </div>
     </div>
+    @endrole
 @endsection
 
 @push('scripts')
