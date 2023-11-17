@@ -16,7 +16,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Data Projects</h6>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('projects.create') }}" class="btn btn-md btn-primary mb-3" ><i class="fas fa-fw fa-plus"></i> Tambah Projects</a>
+                    <a href="{{ route('projects.create') }}" class="btn btn-md btn-primary mb-3"><i
+                            class="fas fa-fw fa-plus"></i> Tambah Projects</a>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -33,19 +34,29 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <img src="{{ Storage::url(json_decode($project->gambar_project)[0]) }}" width="124" height="96" alt="gambar project">
+                                            <img src="{{ Storage::url($project->thumbnail) }}"
+                                                class="w-100" height="96" alt="gambar project">
                                         </td>
                                         <td>{{ $project->nama_project }}</td>
                                         <td>{{ Str::limit($project->keterangan_project, 30, '...') }}</td>
-                                        <td style="width: 240px;">
-                                            <a target="_blank" href="{{ route('public.project-single', $project->nama_project) }}" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-eye"></i> Lihat</a>
-                                            <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-sm btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
-                                            <form action="{{ route('projects.destroy', $project->slug) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
 
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Delete</button>
-                                            </form>
+                                        <td class="d-flex flex-column" style="gap: 4px;">
+                                            <a href="{{ route('public.project-single', $project->slug) }}"
+                                                target="_blank" class="btn btn-md btn-outline-secondary"><i
+                                                    class="fas fa-fw fa-eye"></i> Lihat</a>
+                                                    
+                                            <a href="{{ route('projects.edit', $project->slug) }}"
+                                                class="btn btn-md btn-info"><i class="fas fa-fw fa-edit"></i> Edit</a>
+
+                                            <a href="#" id="btnHapusProject" data-project="{{ $project->slug }}"
+                                                class="btn btn-md btn-danger"><i class="fas fa-fw fa-trash-alt"></i> Hapus</a>
+                                            {{-- <form action="{{ route('projects.destroy', $project->slug) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-md btn-danger w-100"><i
+                                                        class="fas fa-fw fa-trash-alt"></i> Delete</button>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -106,7 +117,8 @@
     </div>
 
     <!-- CRUD Modal Projects -->
-    <div class="modal fade" id="modalProject" tabindex="-1" role="dialog" aria-labelledby="modalProject" aria-hidden="true">
+    <div class="modal fade" id="modalProject" tabindex="-1" role="dialog" aria-labelledby="modalProject"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -157,10 +169,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="gambar_project" class="form-label">Gambar Project (bisa lebih dari 1)</label>
-                            <input class="form-control" type="file" name="gambar_project" id="gambar_project" multiple>
+                            <input class="form-control" type="file" name="gambar_project" id="gambar_project"
+                                multiple>
                         </div>
-                        <button class="btn btn-md btn-primary" id="btnSimpanProject"><i class="fas fa-fw fa-save"></i> Simpan</button>
-                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i> Reset</button>
+                        <button class="btn btn-md btn-primary" id="btnSimpanProject"><i class="fas fa-fw fa-save"></i>
+                            Simpan</button>
+                        <button class="btn btn-md btn-secondary" type="reset"><i class="fas fa-fw fa-undo"></i>
+                            Reset</button>
                     </form>
                 </div>
             </div>
@@ -186,7 +201,8 @@
                                 placeholder="cth: Interior">
                             <span class="text-danger" id="name-error"></span>
                         </div>
-                        <button class="btn btn-md btn-primary" id="btnKategori"><i class="fas fa-fw fa-save"></i>Simpan</button>
+                        <button class="btn btn-md btn-primary" id="btnKategori"><i
+                                class="fas fa-fw fa-save"></i>Simpan</button>
                     </form>
                 </div>
             </div>
@@ -200,7 +216,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#DTKategori').DataTable({})
+            // $('#DTKategori').DataTable()
 
             $('#modalKategori').on('hidden.bs.modal', function(e) {
                 $('#nama_kategori').val('')
@@ -252,34 +268,46 @@
 
         });
 
-        // $('#btnSimpanProject').click(function(e) {
-        //     e.preventDefault()
-        //     $.ajax({
-        //         url: '{{ route('projects.store') }}',
-        //         method: 'POST',
-        //         cache: 'false',
-        //         data: {
-        //             _token: '{{ csrf_token() }}',
-        //             nama: $('#nama_project').val(),
-        //             keterangan_project: $('#keterangan_project').val(),
-        //             kategori_project: $('#kategori_project').val(),
-        //             lokasi_project: $('#lokasi_project').val(),
-        //         },
-        //         success: function(res) {
-        //             console.log(res);
-        //         },
-        //         error: function(err) {
-        //             console.log(err);
-        //         }
-        //     })
-        //     $.ajax({
-        //         url: '/datakategori',
-        //         method: 'GET',
-        //         success: function(res) {
-        //             console.log(res);
-        //         },
-        //     })
-        // })
+         /* HAPUS CLIENT */
+         $('body').on('click', '#btnHapusProject', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Apakah anda ingin menghapus data ini ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus data!',
+                    cancelButtonText: 'Tidak',
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: window.location.pathname + '/' + $(this).data('project'),
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                _method: 'DELETE',
+                                slug: $(this).data('project')
+                            },
+                            success: (res) => {
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: res.message,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 2500);
+                                // $('#DTClients').DataTable().ajax.reload();
+                            }
+                        })
+                    }
+                })
+        })
 
         /* FUNGSI UNTUK CREATE KATEGORI */
         $('body').on('click', '#btnKatCreate', function() {
@@ -311,7 +339,9 @@
                         }, 2000);
                     },
                     error: function(res) {
-                        const {errors} = res.responseJSON;
+                        const {
+                            errors
+                        } = res.responseJSON;
                         if (errors.nama_kategori) {
                             $('#name').addClass('is-invalid');
                             $('#name-error').text(errors.nama_kategori[0]);
@@ -342,7 +372,7 @@
             e.preventDefault()
             const id = $(this).data('kat')
             const url = window.location.pathname;
-            const urlReplace = url.replace('projects','kategoriproject');
+            const urlReplace = url.replace('projects', 'kategoriproject');
 
             $.ajax({
                 url: urlReplace + '/' + id,
@@ -376,45 +406,45 @@
             e.preventDefault()
             const id = $(this).data('kat')
             const url = window.location.pathname;
-            const urlReplace = url.replace('projects','kategoriproject');
-            
+            const urlReplace = url.replace('projects', 'kategoriproject');
+
             Swal.fire({
-                title: 'Anda yakin?',
-                text: "Apakah anda ingin menghapus data ini ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus data!',
-                cancelButtonText: 'Tidak',
+                    title: 'Anda yakin?',
+                    text: "Apakah anda ingin menghapus data ini ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus data!',
+                    cancelButtonText: 'Tidak',
                 })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: urlReplace+'/'+id,
-                        method: 'DELETE',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            id: id,
-                        },
-                        success: function(res) {
-                            Swal.fire({
-                                type: 'success',
-                                icon: 'success',
-                                title: res.message,
-                                showConfirmButton: false,
-                                timer: 1500,
-                            });
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 2000);
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-                    })
-                }
-            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: urlReplace + '/' + id,
+                            method: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: id,
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: res.message,
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 2000);
+                            },
+                            error: function(err) {
+                                console.log(err);
+                            }
+                        })
+                    }
+                })
         })
     </script>
 @endpush
