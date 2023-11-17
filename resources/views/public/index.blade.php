@@ -8,7 +8,8 @@
             transform: translateY(-12px);
             cursor: pointer;
         }
-        .action-style-box{
+
+        .action-style-box {
             box-shadow: 0px 0px 16px rgba(120, 120, 120, 0.515);
         }
     </style>
@@ -28,188 +29,12 @@
                     </div><!-- Col end -->
                     <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
                         <div class="call-to-action-btn">
-                            <a class="btn btn-dark"  href="#project-area">See our projects</a>
+                            <a class="btn btn-dark" href="#project-area">See our projects</a>
                         </div>
                     </div><!-- col end -->
                 </div><!-- row end -->
             </div><!-- Action style box -->
         </div><!-- Container end -->
-    </section>
-
-    <section id="ts-features" class="ts-features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="ts-intro">
-                        <h2 class="into-title">About Us</h2>
-                        <h3 class="into-sub-title">We deliver landmark projects</h3>
-                        <p>We are rethoric question ran over her cheek When she reached the first hills of the
-                            Italic Mountains,
-                            she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of
-                            Alphabet Village
-                            and the subline of her own road, the Line Lane.</p>
-                    </div><!-- Intro box end -->
-
-                    <div class="gap-20"></div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="ts-service-box">
-                                <span class="ts-service-icon">
-                                    <i class="fas fa-trophy"></i>
-                                </span>
-                                <div class="ts-service-box-content">
-                                    <h3 class="service-box-title">We've Repution for Excellence</h3>
-                                </div>
-                            </div><!-- Service 1 end -->
-                        </div><!-- col end -->
-
-                        <div class="col-md-6">
-                            <div class="ts-service-box">
-                                <span class="ts-service-icon">
-                                    <i class="fas fa-sliders-h"></i>
-                                </span>
-                                <div class="ts-service-box-content">
-                                    <h3 class="service-box-title">We Build Partnerships</h3>
-                                </div>
-                            </div><!-- Service 2 end -->
-                        </div><!-- col end -->
-                    </div><!-- Content row 1 end -->
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="ts-service-box">
-                                <span class="ts-service-icon">
-                                    <i class="fas fa-thumbs-up"></i>
-                                </span>
-                                <div class="ts-service-box-content">
-                                    <h3 class="service-box-title">Guided by Commitment</h3>
-                                </div>
-                            </div><!-- Service 1 end -->
-                        </div><!-- col end -->
-
-                        <div class="col-md-6">
-                            <div class="ts-service-box">
-                                <span class="ts-service-icon">
-                                    <i class="fas fa-users"></i>
-                                </span>
-                                <div class="ts-service-box-content">
-                                    <h3 class="service-box-title">A Team of Professionals</h3>
-                                </div>
-                            </div><!-- Service 2 end -->
-                        </div><!-- col end -->
-                    </div><!-- Content row 1 end -->
-                </div><!-- Col end -->
-
-                <div class="col-lg-6 mt-4 mt-lg-0">
-                    <h3 class="into-sub-title">Our Values</h3>
-                    <p>Minim Austin 3 wolf moon scenester aesthetic, umami odio pariatur bitters. Pop-up occaecat
-                        taxidermy street art, tattooed beard literally.</p>
-
-                    <div class="accordion accordion-group" id="our-values-accordion">
-                        <div class="card">
-                            <div class="card-header p-0 bg-transparent" id="headingOne">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-block text-left" type="button" data-toggle="collapse"
-                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Safety
-                                    </button>
-                                </h2>
-                            </div>
-
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                data-parent="#our-values-accordion">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                    richardson ad squid. 3 wolf moon officia aute, non cupidata
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header p-0 bg-transparent" id="headingTwo">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse"
-                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Customer Service
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                data-parent="#our-values-accordion">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                    richardson ad squid. 3 wolf moon officia aute, non cupidata
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header p-0 bg-transparent" id="headingThree">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse"
-                                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Integrity
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                data-parent="#our-values-accordion">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                    richardson ad squid. 3 wolf moon officia aute, non cupidata
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ Accordion end -->
-
-                </div><!-- Col end -->
-            </div><!-- Row end -->
-        </div><!-- Container end -->
-    </section>
-
-    <!-- Detail Project Company --> 
-    {{-- DONE --}}
-    <section id="facts" class="facts-area dark-bg">
-        <div class="container">
-            <div class="facts-wrapper">
-                <div class="row">
-                    
-                    <!-- TOTAL PROJECT -->
-                    <div class="col-md-4 col-sm-6 ts-facts">
-                        <div class="ts-facts-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact1.png') }}" alt="facts-img">
-                        </div>
-                        <div class="ts-facts-content">
-                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalproject }}">0</span></h2>
-                            <h3 class="ts-facts-title">Total Projects</h3>
-                        </div>
-                    </div>
-
-                    <!-- TOTAL STAFF -->
-                    <div class="col-md-4 col-sm-6 ts-facts mt-5 mt-sm-0">
-                        <div class="ts-facts-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact2.png') }}" alt="facts-img">
-                        </div>
-                        <div class="ts-facts-content">
-                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalstaff }}">0</span></h2>
-                            <h3 class="ts-facts-title">Staff Members</h3>
-                        </div>
-                    </div>
-
-                    <!-- TOTAL CLIENT -->
-                    <div class="col-md-4 col-sm-6 ts-facts mt-5 mt-md-0">
-                        <div class="ts-facts-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact3.png') }}" alt="facts-img">
-                        </div>
-                        <div class="ts-facts-content">
-                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalclient }}">0</span></h2>
-                            <h3 class="ts-facts-title">Total Client</h3>
-                        </div>
-                    </div>
-
-                </div> 
-            </div>
-        </div>
     </section>
 
     <!-- Service -->
@@ -226,18 +51,18 @@
             <div class="row">
 
                 @foreach ($services as $service)
-                <div class="col-lg-4">
-                    <div class="ts-service-box d-flex">
-                        <div class="ts-service-box-img">
-                            <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon1.png') }}"
-                                alt="service-icon">
-                        </div>
-                        <div class="ts-service-box-info">
-                            <h3 class="service-box-title">{{ $service->title }}</h3>
-                            <p>{{ $service->description }}</p>
-                        </div>
-                    </div><!-- Service 1 end -->
-                </div>
+                    <div class="col-lg-4">
+                        <div class="ts-service-box d-flex">
+                            <div class="ts-service-box-img">
+                                <img loading="lazy" src="{{ url('assets/images/icon-image/service-icon1.png') }}"
+                                    alt="service-icon">
+                            </div>
+                            <div class="ts-service-box-info">
+                                <h3 class="service-box-title">{{ $service->title }}</h3>
+                                <p>{{ $service->description }}</p>
+                            </div>
+                        </div><!-- Service 1 end -->
+                    </div>
                 @endforeach
 
             </div><!-- Content row end -->
@@ -245,6 +70,55 @@
         </div>
         <!--/ Container end -->
     </section>
+
+    <!-- Detail Project Company -->
+    {{-- DONE --}}
+    <section id="facts" class="facts-area dark-bg">
+        <div class="container">
+            <div class="facts-wrapper">
+                <div class="row">
+
+                    <!-- TOTAL PROJECT -->
+                    <div class="col-md-4 col-sm-6 ts-facts">
+                        <div class="ts-facts-img">
+                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact1.png') }}" alt="facts-img">
+                        </div>
+                        <div class="ts-facts-content">
+                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalproject }}">0</span>
+                            </h2>
+                            <h3 class="ts-facts-title">Total Projects</h3>
+                        </div>
+                    </div>
+
+                    <!-- TOTAL STAFF -->
+                    <div class="col-md-4 col-sm-6 ts-facts mt-5 mt-sm-0">
+                        <div class="ts-facts-img">
+                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact2.png') }}" alt="facts-img">
+                        </div>
+                        <div class="ts-facts-content">
+                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalstaff }}">0</span>
+                            </h2>
+                            <h3 class="ts-facts-title">Staff Members</h3>
+                        </div>
+                    </div>
+
+                    <!-- TOTAL CLIENT -->
+                    <div class="col-md-4 col-sm-6 ts-facts mt-5 mt-md-0">
+                        <div class="ts-facts-img">
+                            <img loading="lazy" src="{{ url('assets/images/icon-image/fact3.png') }}" alt="facts-img">
+                        </div>
+                        <div class="ts-facts-content">
+                            <h2 class="ts-facts-num"><span class="counterUp" data-count="{{ $totalclient }}">0</span>
+                            </h2>
+                            <h3 class="ts-facts-title">Total Client</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- List Project -->
     <section id="project-area" class="project-area solid-bg">
@@ -259,161 +133,42 @@
 
             <div class="row">
                 <div class="col-12">
-                    <div class="shuffle-btn-group">
-                        <label class="active" for="all">
-                            <input type="radio" name="shuffle-filter" id="all" value="all"
-                                checked="checked">Show All
-                        </label>
-                        <label for="commercial">
-                            <input type="radio" name="shuffle-filter" id="commercial" value="commercial">Commercial
-                        </label>
-                        <label for="education">
-                            <input type="radio" name="shuffle-filter" id="education" value="education">Education
-                        </label>
-                        <label for="government">
-                            <input type="radio" name="shuffle-filter" id="government" value="government">Government
-                        </label>
-                        <label for="infrastructure">
-                            <input type="radio" name="shuffle-filter" id="infrastructure"
-                                value="infrastructure">Infrastructure
-                        </label>
-                        <label for="residential">
-                            <input type="radio" name="shuffle-filter" id="residential" value="residential">Residential
-                        </label>
-                        <label for="healthcare">
-                            <input type="radio" name="shuffle-filter" id="healthcare" value="healthcare">Healthcare
-                        </label>
-                    </div><!-- project filter end -->
-
 
                     <div class="row shuffle-wrapper">
                         <div class="col-1 shuffle-sizer"></div>
-
-                        <div class="col-lg-4 col-md-6 shuffle-item"
-                            data-groups="[&quot;government&quot;,&quot;healthcare&quot;]">
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ url('assets/images/projects/project1.jpg') }}"
-                                    aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project1.jpg') }}"
-                                        alt="project-img">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a href="{{ url('/project/id') }}">Capital Teltway Building</a>
-                                        </h3>
-                                        <p class="project-cat">Jakarta</p>
+                        @foreach ($projects as $project)
+                            <div class="col-lg-4 col-md-6 shuffle-item">
+                                <div class="project-img-container">
+                                    <a class="gallery-popup"
+                                        href="{{ Storage::url($project->thumbnail) }}">
+                                        <img class="img-fluid object-fit-cover" style="width: 200px;height:300px;"
+                                            src="{{ Storage::url($project->thumbnail) }}"
+                                            alt="project-image">
+                                        <span class="gallery-icon"><i class="fa fa-plus"></i></span>
+                                    </a>
+                                    <div class="project-item-info">
+                                        <div class="project-item-info-content">
+                                            <h3 class="project-item-title">
+                                                <a
+                                                    href="{{ route('public.project-single', $project->slug) }}">{{ $project->nama_project }}</a>
+                                            </h3>
+                                            <p class="project-cat">Commercial, Interiors</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+                    </div>
 
-                        <div class="col-lg-4 col-md-6 shuffle-item" data-groups="[&quot;healthcare&quot;]">
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ url('assets/images/projects/project2.jpg') }}"
-                                    aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project2.jpg') }}"
-                                        alt="project-img">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a href="{{ url('/project/id') }}">Ghum Touch Hospital</a>
-                                        </h3>
-                                        <p class="project-cat">Healthcare</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 shuffle-item"
-                            data-groups="[&quot;infrastructure&quot;,&quot;commercial&quot;]">
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ url('assets/images/projects/project3.jpg') }}"
-                                    aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project3.jpg') }}"
-                                        alt="project-img">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a href="{{ url('/project/id') }}">TNT East Facility</a>
-                                        </h3>
-                                        <p class="project-cat">Government</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 shuffle-item"
-                            data-groups="[&quot;education&quot;,&quot;infrastructure&quot;]">
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ url('assets/images/projects/project4.jpg') }}"
-                                    aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project4.jpg') }}"
-                                        alt="project-img">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a href="{{ url('/project/id') }}">Narriot Headquarters</a>
-                                        </h3>
-                                        <p class="project-cat">Infrastructure</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 shuffle-item"
-                            data-groups="[&quot;infrastructure&quot;,&quot;education&quot;]">
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ url('assets/images/projects/project5.jpg') }}"
-                                    aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project5.jpg') }}"
-                                        alt="project-img">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a href="{{ url('/project/id') }}">Kalas Metrorail</a>
-                                        </h3>
-                                        <p class="project-cat">Infrastructure</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 shuffle-item" data-groups="[&quot;residential&quot;]">
-                            <div class="project-img-container">
-                                <a class="gallery-popup" href="{{ url('assets/images/projects/project6.jpg') }}"
-                                    aria-label="project-img">
-                                    <img class="img-fluid" src="{{ url('assets/images/projects/project6.jpg') }}"
-                                        alt="project-img">
-                                    <span class="gallery-icon"><i class="fa fa-plus"></i></span>
-                                </a>
-                                <div class="project-item-info">
-                                    <div class="project-item-info-content">
-                                        <h3 class="project-item-title">
-                                            <a href="{{ url('/project/id') }}">Ancraft Avenue House</a>
-                                        </h3>
-                                        <p class="project-cat">Residential</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- shuffle end -->
                 </div>
 
+                @if (count($projects) > 0)
                 <div class="col-12">
                     <div class="general-btn text-center">
                         <a class="btn btn-primary" href="{{ route('public.projects') }}">View All Projects</a>
                     </div>
                 </div>
+                @endif
 
             </div>
         </div>
@@ -428,44 +183,47 @@
     {{-- done --}}
     <section id="news" class="news">
         <div class="container">
-          <div class="row text-center">
-              <div class="col-12">
-                <h2 class="section-title">Work of Excellence</h2>
-                <h3 class="section-sub-title">Recent Posts</h3>
-              </div>
-        </div>
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="section-title">Work of Excellence</h2>
+                    <h3 class="section-sub-title">Recent Posts</h3>
+                </div>
+            </div>
 
-        <div class="row">
-            @foreach ($posts as $post)
-                <div class="col-lg-4 col-md-6 mb-4">
-                <div class="latest-post">
-                    <div class="latest-post-media">
-                        <a href="{{ route('public.post.detail', $post->slug) }}" class="latest-post-img">
-                            <img loading="lazy" class="img-fluid" src="{{ (isset($post->thumbnail) ? Storage::url($post->thumbnail) : asset('assets/images/news/news2.jpg')) }}" alt="img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4 class="post-title">
-                            <a href="{{ route('public.post.detail', $post->slug) }}" class="d-inline-block">{{ $post->title }}</a>
-                        </h4>
-                        <div class="latest-post-meta">
-                            <span class="post-item-date">
-                            <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::now('Asia/Jakarta')->parse($post->created_at)->translatedFormat('l, d F Y') }}
-                            </span>
+            <div class="row">
+                @foreach ($posts as $post)
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="latest-post">
+                            <div class="latest-post-media">
+                                <a href="{{ route('public.post.detail', $post->slug) }}" class="latest-post-img">
+                                    <img loading="lazy" class="img-fluid"
+                                        src="{{ isset($post->thumbnail) ? Storage::url($post->thumbnail) : asset('assets/images/news/news2.jpg') }}"
+                                        alt="img">
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <h4 class="post-title">
+                                    <a href="{{ route('public.post.detail', $post->slug) }}"
+                                        class="d-inline-block">{{ $post->title }}</a>
+                                </h4>
+                                <div class="latest-post-meta">
+                                    <span class="post-item-date">
+                                        <i class="fa fa-clock-o"></i>
+                                        {{ \Carbon\Carbon::now('Asia/Jakarta')->parse($post->created_at)->translatedFormat('l, d F Y') }}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                @endforeach
+            </div>
+
+            @if (count($posts) > 0)
+                <div class="general-btn text-center mt-4">
+                    <a class="btn btn-primary" href="{{ route('public.post.all') }}">See All Posts</a>
                 </div>
-                </div>
-            @endforeach
-          </div>
-          
-          @if (count($posts) > 0)
-          <div class="general-btn text-center mt-4">
-              <a class="btn btn-primary" href="{{ route('public.post.all') }}">See All Posts</a>
-          </div>
-          @endif
-      
+            @endif
+
         </div>
     </section>
-
 @endsection
