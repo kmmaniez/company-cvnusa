@@ -18,7 +18,6 @@
                 <div class="card-body">
                     <a href="" id="btnTambahTeam" class="btn btn-md btn-primary mb-3"><i class="fas fa-fw fa-plus"></i>
                         Tambah Data</a>
-                    <p>Lihat contoh teams <a href="http://">disini</a></p>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="DTAnggota" width="100%" cellspacing="0">
                             <thead>
@@ -135,6 +134,7 @@
                             <label for="nama_anggota" class="form-label">Nama Anggota</label>
                             <input type="text" class="form-control" name="nama_anggota" id="nama_anggota"
                                 placeholder="Nama Lengkap">
+                            <span class="text-danger" id="nama-error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="jabatan_id" class="form-label">Jabatan</label>
@@ -144,6 +144,7 @@
                                     <option value="{{ $jabatan->id }}">{{ $jabatan->nama_jabatan }}</option>
                                 @endforeach
                             </select>
+                            <span class="text-danger" id="jabatan-error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="foto_anggota" class="form-label">Foto</label>
@@ -207,6 +208,7 @@
                             <label for="nama_jabatan" class="form-label">Nama Jabatan</label>
                             <input type="text" class="form-control" name="nama_jabatan" id="nama_jabatan"
                                 placeholder="cth: Manager">
+                            <span class="text-danger" id="namajabatan-error"></span>
                         </div>
                         <button class="btn btn-md btn-primary" id="btnSimpanJabatan"><i class="fas fa-fw fa-save"></i>
                             Simpan</button>
@@ -237,6 +239,9 @@
                 $('#preview-foto').css({
                     display: 'none',
                 })
+                $('#nama-error').text('')
+                $('#jabatan-error').text('')
+                $('#namajabatan-error').text('')
             })
         });
 
@@ -289,7 +294,17 @@
                                 window.location.reload()
                             }, 2500);
                         }
-                    },
+                    },error: (res) => {
+                        const {
+                            errors
+                        } = res.responseJSON;
+                        if (errors.nama_anggota) {
+                            $('#nama-error').text(errors.nama_anggota[0]);
+                        }
+                        if (errors.jabatan_id) {
+                            $('#jabatan-error').text(errors.jabatan_id[0]);
+                        }
+                    }
                 });
             })
 
@@ -439,8 +454,13 @@
                             window.location.reload()
                         }, 2500);
                     },
-                    error: (err) => {
-                        console.log(err);
+                    error: (res) => {
+                        const {
+                            errors
+                        } = res.responseJSON;
+                        if (errors.nama_jabatan) {
+                            $('#namajabatan-error').text(errors.nama_jabatan[0]);
+                        }
                     }
                 })
             })
