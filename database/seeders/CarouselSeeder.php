@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Carousel;
+use App\Models\Website\Carousel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
